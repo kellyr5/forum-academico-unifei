@@ -1,7 +1,6 @@
 # REGISTRO DE BUGS - FORUM ACADEMICO UNIFEI
 
 **Projeto:** Forum Academico UNIFEI  
-**Desenvolvedor:** Kelly Reis (2023000490)  
 **Periodo:** Outubro - Novembro 2025  
 **Total de bugs:** 5  
 **Bugs resolvidos:** 5 (100%)
@@ -226,7 +225,5 @@ Os bugs foram registrados nos seguintes formatos:
 - **Markdown:** REGISTRO_DE_BUGS.md (este arquivo)
 
 ---
-
-**Desenvolvedor:** Kelly Reis  
 **Data:** 12/11/2025  
 **Versao:** 1.0
