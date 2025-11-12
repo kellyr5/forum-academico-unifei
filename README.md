@@ -261,26 +261,9 @@ Os bugs deste projeto foram registrados e rastreados usando os formatos padrao:
 
 ---
 
-## Desenvolvedor
-
-**Kelly Reis**  
-Estudante de Engenharia de Computacao  
-Universidade Federal de Itajuba (UNIFEI)  
-Matricula: 2023000490
-
----
-
 ## Licenca
 
 Este projeto foi desenvolvido para fins academicos como parte da disciplina de Gerencia de Projeto de Software.
-
----
-
-## Agradecimentos
-
-- Professor orientador da disciplina
-- UNIFEI - Infraestrutura
-- Colegas de turma - Feedback e testes
 
 ---
 
