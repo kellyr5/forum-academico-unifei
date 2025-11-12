@@ -13,16 +13,16 @@ Sistema web completo de fórum acadêmico para a Universidade Federal de Itajub�
 
 O Fórum Acadêmico UNIFEI é uma plataforma web que facilita a comunicação e colaboração entre alunos, professores e monitores. O sistema permite:
 
-- 📌 Mural de recados institucional
-- 👥 Gerenciamento de usuários (alunos, professores, monitores)
-- 📚 Cadastro de disciplinas por curso
-- 💬 Criação de tópicos de discussão
-- 💭 Sistema de respostas com votação
-- 🏆 Marcação de melhores respostas
+- Mural de recados institucional
+- Gerenciamento de usuários (alunos, professores, monitores)
+- Cadastro de disciplinas por curso
+- Criação de tópicos de discussão
+- Sistema de respostas com votação
+- Marcação de melhores respostas
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 ### Backend
 - **Node.js** v18+
@@ -42,7 +42,7 @@ O Fórum Acadêmico UNIFEI é uma plataforma web que facilita a comunicação e 
 
 ---
 
-## 📦 Estrutura do Projeto
+## Estrutura do Projeto
 ```
 forum-academico/
 ├── backend/
@@ -76,7 +76,7 @@ forum-academico/
 
 ---
 
-## 🔧 Instalação e Configuração
+##  Instalação e Configuração
 
 ### Pré-requisitos
 
@@ -114,7 +114,7 @@ PORT=3000
 
 ---
 
-## ▶️ Como Executar
+## Como Executar
 
 ### Opção 1: Script Automático (Recomendado)
 ```bash
@@ -139,7 +139,7 @@ python3 -m http.server 8000
 
 ---
 
-## 🧪 Executar Testes
+## Executar Testes
 
 ### Testes de API
 ```bash
@@ -151,33 +151,33 @@ python3 test_api.py
 
 ---
 
-## 📊 Funcionalidades Implementadas
+## Funcionalidades Implementadas
 
-### ✅ CRUD 1: Mural de Recados
+### CRUD 1: Mural de Recados
 - Create: Publicar recados
 - Read: Visualizar todos os recados
 - Update: Editar recados (backend)
 - Delete: Excluir recados
 
-### ✅ CRUD 2: Usuários
+### CRUD 2: Usuários
 - Create: Cadastrar usuários com validação
 - Read: Buscar e listar usuários
 - Update: Editar perfil
 - Delete: Exclusão lógica
 
-### ✅ CRUD 3: Disciplinas
+### CRUD 3: Disciplinas
 - Create: Cadastrar disciplinas
 - Read: Listar por curso/professor
 - Update: Editar informações
 - Delete: Remover disciplinas
 
-### ✅ CRUD 4: Tópicos
+### CRUD 4: Tópicos
 - Create: Criar tópicos de discussão
 - Read: Visualizar com filtros
 - Update: Editar conteúdo
 - Delete: Remover tópicos
 
-### ✅ CRUD 5: Respostas (BÔNUS)
+### CRUD 5: Respostas (BÔNUS)
 - Create: Responder tópicos
 - Read: Ver respostas ordenadas
 - Update: Editar respostas
@@ -185,17 +185,17 @@ python3 test_api.py
 
 ---
 
-## 🔐 Segurança
+## Segurança
 
-- ✅ Senhas criptografadas com bcrypt
-- ✅ Validação de entrada no backend
-- ✅ Proteção contra SQL Injection
-- ✅ Proteção contra XSS
-- ✅ E-mail institucional obrigatório (@unifei.edu.br)
+- Senhas criptografadas com bcrypt
+- Validação de entrada no backend
+- Proteção contra SQL Injection
+- Proteção contra XSS
+- E-mail institucional obrigatório (@unifei.edu.br)
 
 ---
 
-## 📈 Estatísticas do Projeto
+## Estatísticas do Projeto
 
 - **Linhas de código:** ~4,500
 - **Arquivos:** 25+
@@ -206,7 +206,7 @@ python3 test_api.py
 
 ---
 
-## 📝 Documentação
+## Documentação
 
 - **Status Report:** `docs/STATUS_REPORT.md`
 - **Registro de Bugs:** `docs/REGISTRO_DE_BUGS.md`
@@ -214,13 +214,13 @@ python3 test_api.py
 
 ---
 
-## 🐛 Bugs Conhecidos
+## Bugs Conhecidos
 
 Nenhum bug crítico no momento. Veja `docs/REGISTRO_DE_BUGS.md` para histórico.
 
 ---
 
-## 🚧 Melhorias Futuras
+## Melhorias Futuras
 
 1. Sistema de autenticação JWT
 2. Notificações em tempo real (WebSockets)
@@ -231,7 +231,7 @@ Nenhum bug crítico no momento. Veja `docs/REGISTRO_DE_BUGS.md` para histórico.
 
 ---
 
-## 👨‍💻 Desenvolvedor
+## Desenvolvedor
 
 **Kelly Reis**  
 Estudante de Engenharia de Computação  
@@ -240,17 +240,9 @@ Matrícula: 2023000490
 
 ---
 
-## 📄 Licença
+## Licença
 
 Este projeto foi desenvolvido para fins acadêmicos como parte da disciplina de Engenharia de Software.
-
----
-
-## 🙏 Agradecimentos
-
-- Prof. [Nome do Professor] - Orientação
-- UNIFEI - Infraestrutura
-- Colegas de turma - Feedback e testes
 
 ---
 
