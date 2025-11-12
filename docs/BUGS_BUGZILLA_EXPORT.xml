@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE bugzilla SYSTEM "https://bugzilla.mozilla.org/bugzilla.dtd">
+<bugzilla version="5.0" urlbase="https://bugs.unifei.edu.br/" maintainer="kelly.reis@unifei.edu.br">
+  
+  <bug>
+    <bug_id>1</bug_id>
+    <creation_ts>2025-11-12 09:30:00</creation_ts>
+    <short_desc>Porta 3000 já em uso</short_desc>
+    <delta_ts>2025-11-12 10:00:00</delta_ts>
+    <reporter_accessible>1</reporter_accessible>
+    <cclist_accessible>1</cclist_accessible>
+    <classification_id>1</classification_id>
+    <classification>Forum Academico</classification>
+    <product>Forum UNIFEI</product>
+    <component>Backend</component>
+    <version>1.0</version>
+    <rep_platform>Linux</rep_platform>
+    <op_sys>Ubuntu 24</op_sys>
+    <bug_status>RESOLVED</bug_status>
+    <resolution>FIXED</resolution>
+    <bug_file_loc></bug_file_loc>
+    <status_whiteboard></status_whiteboard>
+    <priority>P1</priority>
+    <bug_severity>major</bug_severity>
+    <target_milestone>Release 1</target_milestone>
+    <reporter name="Kelly Reis">kelly.reis@unifei.edu.br</reporter>
+    <assigned_to name="Kelly Reis">kelly.reis@unifei.edu.br</assigned_to>
+    <long_desc isprivate="0">
+      <commentid>1</commentid>
+      <who name="Kelly Reis">kelly.reis@unifei.edu.br</who>
+      <bug_when>2025-11-12 09:30:00</bug_when>
+      <thetext>Erro EADDRINUSE: address already in use na porta 3000. Processos não sendo encerrados corretamente.</thetext>
+    </long_desc>
+    <long_desc isprivate="0">
+      <commentid>2</commentid>
+      <who name="Kelly Reis">kelly.reis@unifei.edu.br</who>
+      <bug_when>2025-11-12 10:00:00</bug_when>
+      <thetext>FIXED: Adicionado comando fuser -k 3000/tcp no script de inicialização. Criado script start.sh que verifica e mata processos antes de iniciar.</thetext>
+    </long_desc>
+  </bug>
+
+  <bug>
+    <bug_id>2</bug_id>
+    <creation_ts>2025-11-12 10:15:00</creation_ts>
+    <short_desc>Formulário não cadastra dados</short_desc>
+    <delta_ts>2025-11-12 11:00:00</delta_ts>
+    <reporter_accessible>1</reporter_accessible>
+    <cclist_accessible>1</cclist_accessible>
+    <classification_id>1</classification_id>
+    <classification>Forum Academico</classification>
+    <product>Forum UNIFEI</product>
+    <component>Backend</component>
+    <version>1.0</version>
+    <rep_platform>Linux</rep_platform>
+    <op_sys>Ubuntu 24</op_sys>
+    <bug_status>RESOLVED</bug_status>
+    <resolution>FIXED</resolution>
+    <priority>P1</priority>
+    <bug_severity>critical</bug_severity>
+    <target_milestone>Release 1</target_milestone>
+    <reporter name="Kelly Reis">kelly.reis@unifei.edu.br</reporter>
+    <assigned_to name="Kelly Reis">kelly.reis@unifei.edu.br</assigned_to>
+    <long_desc isprivate="0">
+      <commentid>3</commentid>
+      <who name="Kelly Reis">kelly.reis@unifei.edu.br</who>
+      <bug_when>2025-11-12 10:15:00</bug_when>
+      <thetext>Formulários de cadastro não salvam dados. Validações muito restritivas. Erro na query SQL.</thetext>
+    </long_desc>
+    <long_desc isprivate="0">
+      <commentid>4</commentid>
+      <who name="Kelly Reis">kelly.reis@unifei.edu.br</who>
+      <bug_when>2025-11-12 11:00:00</bug_when>
+      <thetext>FIXED: Simplificadas validações, adicionados logs detalhados, corrigida query SQL de inserção.</thetext>
+    </long_desc>
+  </bug>
+
+  <bug>
+    <bug_id>3</bug_id>
+    <creation_ts>2025-11-12 11:15:00</creation_ts>
+    <short_desc>Logo da UNIFEI não carrega</short_desc>
+    <delta_ts>2025-11-12 11:20:00</delta_ts>
+    <reporter_accessible>1</reporter_accessible>
+    <cclist_accessible>1</cclist_accessible>
+    <classification_id>1</classification_id>
+    <classification>Forum Academico</classification>
+    <product>Forum UNIFEI</product>
+    <component>Frontend</component>
+    <version>1.0</version>
+    <rep_platform>Linux</rep_platform>
+    <op_sys>All</op_sys>
+    <bug_status>RESOLVED</bug_status>
+    <resolution>FIXED</resolution>
+    <priority>P3</priority>
+    <bug_severity>minor</bug_severity>
+    <target_milestone>Release 1</target_milestone>
+    <reporter name="Kelly Reis">kelly.reis@unifei.edu.br</reporter>
+    <assigned_to name="Kelly Reis">kelly.reis@unifei.edu.br</assigned_to>
+    <long_desc isprivate="0">
+      <commentid>5</commentid>
+      <who name="Kelly Reis">kelly.reis@unifei.edu.br</who>
+      <bug_when>2025-11-12 11:15:00</bug_when>
+      <thetext>Logo externa não carrega no header.</thetext>
+    </long_desc>
+    <long_desc isprivate="0">
+      <commentid>6</commentid>
+      <who name="Kelly Reis">kelly.reis@unifei.edu.br</who>
+      <bug_when>2025-11-12 11:20:00</bug_when>
+      <thetext>FIXED: Adicionado fallback para imagem local.</thetext>
+    </long_desc>
+  </bug>
+
+  <bug>
+    <bug_id>4</bug_id>
+    <creation_ts>2025-11-12 11:25:00</creation_ts>
+    <short_desc>CSS não carrega (404)</short_desc>
+    <delta_ts>2025-11-12 11:35:00</delta_ts>
+    <reporter_accessible>1</reporter_accessible>
+    <cclist_accessible>1</cclist_accessible>
+    <classification_id>1</classification_id>
+    <classification>Forum Academico</classification>
+    <product>Forum UNIFEI</product>
+    <component>Frontend</component>
+    <version>1.0</version>
+    <rep_platform>Linux</rep_platform>
+    <op_sys>All</op_sys>
+    <bug_status>RESOLVED</bug_status>
+    <resolution>FIXED</resolution>
+    <priority>P1</priority>
+    <bug_severity>major</bug_severity>
+    <target_milestone>Release 1</target_milestone>
+    <reporter name="Kelly Reis">kelly.reis@unifei.edu.br</reporter>
+    <assigned_to name="Kelly Reis">kelly.reis@unifei.edu.br</assigned_to>
+    <long_desc isprivate="0">
+      <commentid>7</commentid>
+      <who name="Kelly Reis">kelly.reis@unifei.edu.br</who>
+      <bug_when>2025-11-12 11:25:00</bug_when>
+      <thetext>Arquivo style.css retorna 404. Estrutura de diretórios incorreta.</thetext>
+    </long_desc>
+    <long_desc isprivate="0">
+      <commentid>8</commentid>
+      <who name="Kelly Reis">kelly.reis@unifei.edu.br</who>
+      <bug_when>2025-11-12 11:35:00</bug_when>
+      <thetext>FIXED: Recriada estrutura de diretórios, corrigidas permissões (chmod 644), verificado caminho relativo.</thetext>
+    </long_desc>
+  </bug>
+
+  <bug>
+    <bug_id>5</bug_id>
+    <creation_ts>2025-11-12 11:40:00</creation_ts>
+    <short_desc>Busca não encontra palavras com acento</short_desc>
+    <delta_ts>2025-11-12 12:00:00</delta_ts>
+    <reporter_accessible>1</reporter_accessible>
+    <cclist_accessible>1</cclist_accessible>
+    <classification_id>1</classification_id>
+    <classification>Forum Academico</classification>
+    <product>Forum UNIFEI</product>
+    <component>Backend</component>
+    <version>1.0</version>
+    <rep_platform>Linux</rep_platform>
+    <op_sys>All</op_sys>
+    <bug_status>RESOLVED</bug_status>
+    <resolution>FIXED</resolution>
+    <priority>P2</priority>
+    <bug_severity>normal</bug_severity>
+    <target_milestone>Release 1</target_milestone>
+    <reporter name="Kelly Reis">kelly.reis@unifei.edu.br</reporter>
+    <assigned_to name="Kelly Reis">kelly.reis@unifei.edu.br</assigned_to>
+    <long_desc isprivate="0">
+      <commentid>9</commentid>
+      <who name="Kelly Reis">kelly.reis@unifei.edu.br</who>
+      <bug_when>2025-11-12 11:40:00</bug_when>
+      <thetext>Busca case-sensitive e não ignora acentuação. Exemplo: buscar 'fisica' não encontra 'Física'.</thetext>
+    </long_desc>
+    <long_desc isprivate="0">
+      <commentid>10</commentid>
+      <who name="Kelly Reis">kelly.reis@unifei.edu.br</who>
+      <bug_when>2025-11-12 12:00:00</bug_when>
+      <thetext>FIXED: Criada função MySQL remover_acentos(), query atualizada com LOWER() e normalização. Busca agora é case-insensitive.</thetext>
+    </long_desc>
+  </bug>
+
+</bugzilla>

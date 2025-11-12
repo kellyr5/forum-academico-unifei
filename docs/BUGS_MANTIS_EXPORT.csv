@@ -1,0 +1,17 @@
+"ID","Categoria","Severidade","Prioridade","Status","Resumo","Descrição","Passos para Reproduzir","Informações Adicionais","Reportado por","Atribuído a","Data Reportada","Data Atualizada","Data Resolvida"
+"0001","Backend","Alta","Alta","Resolvido","Porta 3000 já em uso","Ao tentar iniciar o servidor frontend, o sistema retornava erro 'Address already in use' na porta 8000","1. Executar python3 -m http.server 8000
+2. Tentar executar novamente sem parar o processo anterior
+3. Observar erro EADDRINUSE","Processos anteriores não estavam sendo encerrados corretamente ao reiniciar o sistema. Solução: Adicionado comando fuser -k 8000/tcp no script de inicialização","Kelly Reis","Kelly Reis","2025-11-12 09:30:00","2025-11-12 10:00:00","2025-11-12 10:00:00"
+"0002","Backend","Crítica","Urgente","Resolvido","Formulário não cadastra dados","Ao preencher formulários de cadastro (usuários, disciplinas), o sistema não salvava os dados e retornava erro genérico","1. Acessar http://localhost:8000
+2. Preencher formulário de usuário
+3. Clicar em Cadastrar
+4. Mensagem de erro aparece","Validações muito restritivas no backend. Campos obrigatórios não estavam sendo verificados corretamente. Erro na conexão com banco de dados. Solução: Simplificadas validações no backend, adicionados logs de erro detalhados, corrigida query SQL","Kelly Reis","Kelly Reis","2025-11-12 10:15:00","2025-11-12 11:00:00","2025-11-12 11:00:00"
+"0003","Frontend","Baixa","Normal","Resolvido","Logo da UNIFEI não carrega","Logo da UNIFEI não era exibida no header do sistema","1. Acessar http://localhost:8000
+2. Observar header
+3. Logo não aparece","URL da imagem externa estava incorreta ou indisponível. Solução: Adicionado fallback para quando imagem externa não carregar","Kelly Reis","Kelly Reis","2025-11-12 11:15:00","2025-11-12 11:20:00","2025-11-12 11:20:00"
+"0004","Frontend","Alta","Alta","Resolvido","CSS não carrega (404)","Arquivo CSS retornava erro 404 ao acessar a página","1. Acessar http://localhost:8000
+2. Verificar console do navegador (F12)
+3. Erro 404 em style.css","Estrutura de diretórios incorreta ou permissões inadequadas. Solução: Recriada estrutura correta de diretórios, ajustadas permissões com chmod 644, verificado caminho relativo no HTML","Kelly Reis","Kelly Reis","2025-11-12 11:25:00","2025-11-12 11:35:00","2025-11-12 11:35:00"
+"0005","Backend","Média","Normal","Resolvido","Busca não encontra palavras com acento","Sistema não encontrava resultados ao buscar palavras com acentuação (ex: Física)","1. Cadastrar disciplina Física
+2. Buscar por fisica (sem acento)
+3. Nenhum resultado aparece","Busca era case-sensitive e não ignorava acentuação. Solução: Criada função MySQL remover_acentos(), atualizada query de busca para usar LOWER() e remover acentos, busca agora é case-insensitive","Kelly Reis","Kelly Reis","2025-11-12 11:40:00","2025-11-12 12:00:00","2025-11-12 12:00:00"

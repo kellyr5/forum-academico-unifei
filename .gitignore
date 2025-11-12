@@ -1,3 +1,14 @@
+# Processos e PIDs
+*.pid
+.backend.pid
+.frontend.pid
+
+# Logs
+*.log
+logs/
+backend.log
+frontend.log
+
 # Dependências
 node_modules/
 npm-debug.log*
@@ -6,11 +17,11 @@ npm-debug.log*
 .env
 .env.local
 
-# Logs
-*.log
-logs/
-backend.log
-frontend.log
+# Temporários
+*.tmp
+tmp/
+temp/
+LEIA-ME-PRIMEIRO.txt
 
 # Sistema
 .DS_Store
@@ -21,13 +32,8 @@ Thumbs.db
 .idea/
 *.swp
 
-# Temporários
-tmp/
-temp/
-*.tmp
-
-# PIDs
-*.pid
-
 # Banco de dados
 *.sql.backup
+
+# Screenshots de teste
+tests/*.png
