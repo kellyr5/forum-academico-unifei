@@ -1,6 +1,30 @@
 // Configuração da API
 const API_URL = 'http://localhost:3000/api';
 
+// Verificar se usuário está logado
+let usuarioLogado = null;
+
+function verificarLogin() {
+    const usuario = localStorage.getItem('usuario');
+    if (!usuario) {
+        window.location.href = 'login.html';
+        return;
+    }
+    usuarioLogado = JSON.parse(usuario);
+    
+    // Atualizar interface com dados do usuário
+    document.getElementById('user-info').textContent = `${usuarioLogado.nome_completo} (${usuarioLogado.tipo_usuario})`;
+    document.getElementById('welcome-message').textContent = 
+        `Olá, ${usuarioLogado.nome_completo}! Você está logado como ${usuarioLogado.tipo_usuario} no curso de ${usuarioLogado.curso}.`;
+}
+
+function logout() {
+    if (confirm('Deseja realmente sair?')) {
+        localStorage.removeItem('usuario');
+        window.location.href = 'login.html';
+    }
+}
+
 // Utilitários
 function mostrarMensagem(texto, tipo = 'sucesso') {
     const mensagem = document.getElementById('mensagem');
@@ -16,42 +40,22 @@ function formatarData(data) {
     return new Date(data).toLocaleString('pt-BR');
 }
 
-// ========== USUÁRIOS ==========
-
-// Carregar universidades
-async function carregarUniversidades() {
+// ========== CARREGAR CURSOS DA UNIFEI ==========
+async function carregarCursos() {
     try {
-        const response = await fetch(`${API_URL}/usuarios/aux/universidades`);
+        const response = await fetch(`${API_URL}/usuarios/aux/cursos/1`);
         const resultado = await response.json();
         
         if (resultado.success) {
-            const selects = ['universidade_id', 'disc_universidade'];
+            const selects = ['curso_id', 'disc_curso'];
             selects.forEach(selectId => {
                 const select = document.getElementById(selectId);
                 if (select) {
                     select.innerHTML = '<option value="">Selecione...</option>';
-                    resultado.data.forEach(uni => {
-                        select.innerHTML += `<option value="${uni.id}">${uni.nome}</option>`;
+                    resultado.data.forEach(curso => {
+                        select.innerHTML += `<option value="${curso.id}">${curso.nome}</option>`;
                     });
                 }
-            });
-        }
-    } catch (error) {
-        console.error('Erro ao carregar universidades:', error);
-    }
-}
-
-// Carregar cursos por universidade
-async function carregarCursos(universidadeId, selectId) {
-    try {
-        const response = await fetch(`${API_URL}/usuarios/aux/cursos/${universidadeId}`);
-        const resultado = await response.json();
-        
-        if (resultado.success) {
-            const select = document.getElementById(selectId);
-            select.innerHTML = '<option value="">Selecione...</option>';
-            resultado.data.forEach(curso => {
-                select.innerHTML += `<option value="${curso.id}">${curso.nome}</option>`;
             });
         }
     } catch (error) {
@@ -59,18 +63,7 @@ async function carregarCursos(universidadeId, selectId) {
     }
 }
 
-// Event listeners para mudança de universidade
-document.getElementById('universidade_id')?.addEventListener('change', function() {
-    if (this.value) {
-        carregarCursos(this.value, 'curso_id');
-    }
-});
-
-document.getElementById('disc_universidade')?.addEventListener('change', function() {
-    if (this.value) {
-        carregarCursos(this.value, 'disc_curso');
-    }
-});
+// ========== USUÁRIOS ==========
 
 // Cadastrar usuário
 document.getElementById('form-usuario')?.addEventListener('submit', async function(e) {
@@ -81,7 +74,7 @@ document.getElementById('form-usuario')?.addEventListener('submit', async functi
         email: document.getElementById('email').value,
         senha: document.getElementById('senha').value,
         confirmar_senha: document.getElementById('confirmar_senha').value,
-        universidade_id: parseInt(document.getElementById('universidade_id').value),
+        universidade_id: 1, // UNIFEI
         curso_id: parseInt(document.getElementById('curso_id').value),
         periodo: parseInt(document.getElementById('periodo').value),
         tipo_usuario: document.getElementById('tipo_usuario').value
@@ -134,7 +127,7 @@ document.getElementById('form-buscar-usuario')?.addEventListener('submit', async
                         <p><strong>ID:</strong> ${usuario.id} | <strong>Nome:</strong> ${usuario.nome_completo}</p>
                         <p><strong>E-mail:</strong> ${usuario.email}</p>
                         <p><strong>Tipo:</strong> ${usuario.tipo_usuario} | <strong>Período:</strong> ${usuario.periodo}º</p>
-                        <p><strong>Curso:</strong> ${usuario.curso} | <strong>Universidade:</strong> ${usuario.universidade}</p>
+                        <p><strong>Curso:</strong> ${usuario.curso}</p>
                         <div class="resultado-acoes">
                             <button class="btn btn-danger" onclick="excluirUsuario(${usuario.id})">Excluir</button>
                         </div>
@@ -150,17 +143,11 @@ document.getElementById('form-buscar-usuario')?.addEventListener('submit', async
     }
 });
 
-// Excluir usuário
 async function excluirUsuario(id) {
-    if (!confirm('Tem certeza que deseja excluir este usuário? A conta será marcada para exclusão em 30 dias.')) {
-        return;
-    }
+    if (!confirm('Tem certeza que deseja excluir este usuário?')) return;
     
     try {
-        const response = await fetch(`${API_URL}/usuarios/${id}`, {
-            method: 'DELETE'
-        });
-        
+        const response = await fetch(`${API_URL}/usuarios/${id}`, { method: 'DELETE' });
         const resultado = await response.json();
         
         if (resultado.success) {
@@ -170,23 +157,21 @@ async function excluirUsuario(id) {
             mostrarMensagem(resultado.message, 'erro');
         }
     } catch (error) {
-        console.error('Erro:', error);
         mostrarMensagem('Erro ao excluir usuário', 'erro');
     }
 }
 
 // ========== DISCIPLINAS ==========
 
-// Cadastrar disciplina
 document.getElementById('form-disciplina')?.addEventListener('submit', async function(e) {
     e.preventDefault();
     
     const formData = {
         nome: document.getElementById('disc_nome').value,
         codigo: document.getElementById('disc_codigo').value,
-        universidade_id: parseInt(document.getElementById('disc_universidade').value),
+        universidade_id: 1, // UNIFEI
         curso_id: parseInt(document.getElementById('disc_curso').value),
-        professor_id: parseInt(document.getElementById('disc_professor').value),
+        professor_id: usuarioLogado.id,
         periodo_letivo: document.getElementById('disc_periodo').value,
         descricao: document.getElementById('disc_descricao').value
     };
@@ -201,18 +186,16 @@ document.getElementById('form-disciplina')?.addEventListener('submit', async fun
         const resultado = await response.json();
         
         if (resultado.success) {
-            mostrarMensagem(`Disciplina cadastrada com sucesso! ID: ${resultado.disciplina_id}`, 'sucesso');
+            mostrarMensagem(`Disciplina cadastrada! ID: ${resultado.disciplina_id}`, 'sucesso');
             this.reset();
         } else {
             mostrarMensagem(resultado.message || 'Erro ao cadastrar disciplina', 'erro');
         }
     } catch (error) {
-        console.error('Erro:', error);
         mostrarMensagem('Erro ao conectar com o servidor', 'erro');
     }
 });
 
-// Buscar disciplinas
 document.getElementById('form-buscar-disciplina')?.addEventListener('submit', async function(e) {
     e.preventDefault();
     
@@ -230,7 +213,7 @@ document.getElementById('form-buscar-disciplina')?.addEventListener('submit', as
         const lista = document.getElementById('lista-disciplinas');
         
         if (resultado.success && resultado.data.length > 0) {
-            lista.innerHTML = `<p><strong>Total encontrado:</strong> ${resultado.total}</p>`;
+            lista.innerHTML = `<p><strong>Total:</strong> ${resultado.total}</p>`;
             
             resultado.data.forEach(disc => {
                 lista.innerHTML += `
@@ -238,7 +221,7 @@ document.getElementById('form-buscar-disciplina')?.addEventListener('submit', as
                         <p><strong>ID:</strong> ${disc.id} | <strong>Nome:</strong> ${disc.nome}</p>
                         <p><strong>Código:</strong> ${disc.codigo} | <strong>Período:</strong> ${disc.periodo_letivo}</p>
                         <p><strong>Professor:</strong> ${disc.professor}</p>
-                        <p><strong>Curso:</strong> ${disc.curso} | <strong>Universidade:</strong> ${disc.universidade}</p>
+                        <p><strong>Curso:</strong> ${disc.curso}</p>
                         ${disc.descricao ? `<p><strong>Descrição:</strong> ${disc.descricao}</p>` : ''}
                         <div class="resultado-acoes">
                             <button class="btn btn-danger" onclick="excluirDisciplina(${disc.id})">Excluir</button>
@@ -250,22 +233,15 @@ document.getElementById('form-buscar-disciplina')?.addEventListener('submit', as
             lista.innerHTML = '<p class="loading">Nenhuma disciplina encontrada.</p>';
         }
     } catch (error) {
-        console.error('Erro:', error);
         mostrarMensagem('Erro ao buscar disciplinas', 'erro');
     }
 });
 
-// Excluir disciplina
 async function excluirDisciplina(id) {
-    if (!confirm('Tem certeza que deseja excluir esta disciplina? Todos os tópicos relacionados também serão excluídos.')) {
-        return;
-    }
+    if (!confirm('Tem certeza? Todos os tópicos relacionados serão excluídos.')) return;
     
     try {
-        const response = await fetch(`${API_URL}/disciplinas/${id}`, {
-            method: 'DELETE'
-        });
-        
+        const response = await fetch(`${API_URL}/disciplinas/${id}`, { method: 'DELETE' });
         const resultado = await response.json();
         
         if (resultado.success) {
@@ -275,14 +251,12 @@ async function excluirDisciplina(id) {
             mostrarMensagem(resultado.message, 'erro');
         }
     } catch (error) {
-        console.error('Erro:', error);
         mostrarMensagem('Erro ao excluir disciplina', 'erro');
     }
 }
 
 // ========== TÓPICOS ==========
 
-// Cadastrar tópico
 document.getElementById('form-topico')?.addEventListener('submit', async function(e) {
     e.preventDefault();
     
@@ -290,7 +264,7 @@ document.getElementById('form-topico')?.addEventListener('submit', async functio
         titulo: document.getElementById('top_titulo').value,
         conteudo: document.getElementById('top_conteudo').value,
         disciplina_id: parseInt(document.getElementById('top_disciplina').value),
-        usuario_id: parseInt(document.getElementById('top_usuario').value),
+        usuario_id: usuarioLogado.id,
         categoria: document.getElementById('top_categoria').value,
         tags: document.getElementById('top_tags').value
     };
@@ -305,18 +279,16 @@ document.getElementById('form-topico')?.addEventListener('submit', async functio
         const resultado = await response.json();
         
         if (resultado.success) {
-            mostrarMensagem(`Tópico criado com sucesso! ID: ${resultado.topico_id}`, 'sucesso');
+            mostrarMensagem(`Tópico criado! ID: ${resultado.topico_id}`, 'sucesso');
             this.reset();
         } else {
             mostrarMensagem(resultado.message || 'Erro ao criar tópico', 'erro');
         }
     } catch (error) {
-        console.error('Erro:', error);
         mostrarMensagem('Erro ao conectar com o servidor', 'erro');
     }
 });
 
-// Buscar tópicos
 document.getElementById('form-buscar-topico')?.addEventListener('submit', async function(e) {
     e.preventDefault();
     
@@ -334,7 +306,7 @@ document.getElementById('form-buscar-topico')?.addEventListener('submit', async 
         const lista = document.getElementById('lista-topicos');
         
         if (resultado.success && resultado.data.length > 0) {
-            lista.innerHTML = `<p><strong>Total encontrado:</strong> ${resultado.total}</p>`;
+            lista.innerHTML = `<p><strong>Total:</strong> ${resultado.total}</p>`;
             
             resultado.data.forEach(topico => {
                 const classeFixo = topico.fixo ? 'topico-fixo' : '';
@@ -342,11 +314,9 @@ document.getElementById('form-buscar-topico')?.addEventListener('submit', async 
                     <div class="resultado-item ${classeFixo}">
                         <p><strong>ID:</strong> ${topico.id} | <strong>Título:</strong> ${topico.titulo}</p>
                         <p><strong>Autor:</strong> ${topico.autor} | <strong>Disciplina:</strong> ${topico.disciplina}</p>
-                        <p>
-                            <strong>Categoria:</strong> ${topico.categoria} | 
-                            <strong>Status:</strong> <span class="status status-${topico.status.toLowerCase()}">${topico.status}</span>
-                        </p>
-                        <p><strong>Criado em:</strong> ${formatarData(topico.criado_em)}</p>
+                        <p><strong>Categoria:</strong> ${topico.categoria} | 
+                           <strong>Status:</strong> <span class="status status-${topico.status.toLowerCase()}">${topico.status}</span></p>
+                        <p><strong>Criado:</strong> ${formatarData(topico.criado_em)}</p>
                         <div class="resultado-acoes">
                             <button class="btn btn-danger" onclick="excluirTopico(${topico.id})">Excluir</button>
                         </div>
@@ -357,22 +327,15 @@ document.getElementById('form-buscar-topico')?.addEventListener('submit', async 
             lista.innerHTML = '<p class="loading">Nenhum tópico encontrado.</p>';
         }
     } catch (error) {
-        console.error('Erro:', error);
         mostrarMensagem('Erro ao buscar tópicos', 'erro');
     }
 });
 
-// Excluir tópico
 async function excluirTopico(id) {
-    if (!confirm('Tem certeza que deseja excluir este tópico? Todas as respostas também serão excluídas.')) {
-        return;
-    }
+    if (!confirm('Tem certeza? Todas as respostas serão excluídas.')) return;
     
     try {
-        const response = await fetch(`${API_URL}/topicos/${id}`, {
-            method: 'DELETE'
-        });
-        
+        const response = await fetch(`${API_URL}/topicos/${id}`, { method: 'DELETE' });
         const resultado = await response.json();
         
         if (resultado.success) {
@@ -382,21 +345,19 @@ async function excluirTopico(id) {
             mostrarMensagem(resultado.message, 'erro');
         }
     } catch (error) {
-        console.error('Erro:', error);
         mostrarMensagem('Erro ao excluir tópico', 'erro');
     }
 }
 
 // ========== RESPOSTAS ==========
 
-// Cadastrar resposta
 document.getElementById('form-resposta')?.addEventListener('submit', async function(e) {
     e.preventDefault();
     
     const formData = {
         conteudo: document.getElementById('resp_conteudo').value,
         topico_id: parseInt(document.getElementById('resp_topico').value),
-        usuario_id: parseInt(document.getElementById('resp_usuario').value),
+        usuario_id: usuarioLogado.id,
     };
     
     const respostaPaiId = document.getElementById('resp_pai').value;
@@ -414,18 +375,16 @@ document.getElementById('form-resposta')?.addEventListener('submit', async funct
         const resultado = await response.json();
         
         if (resultado.success) {
-            mostrarMensagem(`Resposta criada com sucesso! ID: ${resultado.resposta_id}`, 'sucesso');
+            mostrarMensagem(`Resposta criada! ID: ${resultado.resposta_id}`, 'sucesso');
             this.reset();
         } else {
             mostrarMensagem(resultado.message || 'Erro ao criar resposta', 'erro');
         }
     } catch (error) {
-        console.error('Erro:', error);
         mostrarMensagem('Erro ao conectar com o servidor', 'erro');
     }
 });
 
-// Buscar respostas
 document.getElementById('form-buscar-resposta')?.addEventListener('submit', async function(e) {
     e.preventDefault();
     
@@ -438,7 +397,7 @@ document.getElementById('form-buscar-resposta')?.addEventListener('submit', asyn
         const lista = document.getElementById('lista-respostas');
         
         if (resultado.success && resultado.data.length > 0) {
-            lista.innerHTML = `<p><strong>Total de respostas:</strong> ${resultado.total}</p>`;
+            lista.innerHTML = `<p><strong>Total:</strong> ${resultado.total}</p>`;
             
             function renderizarResposta(resposta, nivel = 0) {
                 const classes = ['resultado-item'];
@@ -453,7 +412,7 @@ document.getElementById('form-buscar-resposta')?.addEventListener('submit', asyn
                         <p>${resposta.conteudo}</p>
                         <p><strong>Votos:</strong> ${resposta.votos} | <strong>Data:</strong> ${formatarData(resposta.criado_em)}</p>
                         <div class="resultado-acoes">
-                            <button class="btn btn-success" onclick="votar(${resposta.id}, 1)">Votar</button>
+                            <button class="btn btn-success" onclick="votar(${resposta.id}, ${usuarioLogado.id})">Votar</button>
                             <button class="btn btn-danger" onclick="excluirResposta(${resposta.id})">Excluir</button>
                         </div>
                 `;
@@ -475,12 +434,10 @@ document.getElementById('form-buscar-resposta')?.addEventListener('submit', asyn
             lista.innerHTML = '<p class="loading">Nenhuma resposta encontrada.</p>';
         }
     } catch (error) {
-        console.error('Erro:', error);
         mostrarMensagem('Erro ao buscar respostas', 'erro');
     }
 });
 
-// Votar em resposta
 async function votar(respostaId, usuarioId) {
     try {
         const response = await fetch(`${API_URL}/respostas/${respostaId}/votar`, {
@@ -498,22 +455,15 @@ async function votar(respostaId, usuarioId) {
             mostrarMensagem(resultado.message, 'erro');
         }
     } catch (error) {
-        console.error('Erro:', error);
         mostrarMensagem('Erro ao votar', 'erro');
     }
 }
 
-// Excluir resposta
 async function excluirResposta(id) {
-    if (!confirm('Tem certeza que deseja excluir esta resposta?')) {
-        return;
-    }
+    if (!confirm('Tem certeza que deseja excluir esta resposta?')) return;
     
     try {
-        const response = await fetch(`${API_URL}/respostas/${id}`, {
-            method: 'DELETE'
-        });
-        
+        const response = await fetch(`${API_URL}/respostas/${id}`, { method: 'DELETE' });
         const resultado = await response.json();
         
         if (resultado.success) {
@@ -523,13 +473,13 @@ async function excluirResposta(id) {
             mostrarMensagem(resultado.message, 'erro');
         }
     } catch (error) {
-        console.error('Erro:', error);
         mostrarMensagem('Erro ao excluir resposta', 'erro');
     }
 }
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
-    carregarUniversidades();
+    verificarLogin();
+    carregarCursos();
     mostrarMensagem('Sistema carregado com sucesso!', 'info');
 });
