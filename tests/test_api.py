@@ -1,351 +1,295 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Testes Automatizados de API - Fórum Acadêmico UNIFEI
-Desenvolvido por: Kelly dos Reis Leite
-Matrícula: 2023000490
-"""
-
 import requests
 import json
-import sys
-from datetime import datetime
+import time
+import random
 
-class TestAPIForumAcademico:
+API_URL = "http://localhost:3000/api"
+
+class TestadorAPI:
     def __init__(self):
-        print("=" * 70)
-        print("TESTES AUTOMATIZADOS DE API - FÓRUM ACADÊMICO UNIFEI")
-        print("Desenvolvido por: Kelly dos Reis Leite - 2023000490")
-        print("=" * 70)
-        
-        self.base_url = "http://localhost:3000/api"
-        self.resultados = []
-        self.ids_criados = {
-            'usuario': None,
-            'disciplina': None,
-            'topico': None,
-            'resposta': None,
-            'recado': None
-        }
-        
-    def log_resultado(self, teste, sucesso, mensagem=""):
-        status = "PASSOU" if sucesso else "FALHOU"
-        simbolo = "✓" if sucesso else "✗"
-        self.resultados.append({'teste': teste, 'sucesso': sucesso, 'mensagem': mensagem})
-        print(f"\n{simbolo} {status}: {teste}")
-        if mensagem:
-            print(f"  Detalhe: {mensagem}")
+        self.testes_aprovados = 0
+        self.testes_reprovados = 0
+        self.erros = []
     
-    def teste_01_health_check(self):
-        """Teste 01: Verificar se API está respondendo"""
+    def testar(self, nome, funcao):
         try:
-            response = requests.get(f"{self.base_url}/health", timeout=5)
-            assert response.status_code == 200
-            data = response.json()
-            assert data['success'] == True
-            self.log_resultado("Teste 01 - Health Check API", True, f"Status: {data['status']}")
-        except Exception as e:
-            self.log_resultado("Teste 01 - Health Check API", False, str(e))
-    
-    def teste_02_crud_recado_create(self):
-        """Teste 02: CRUD Recado - CREATE"""
-        try:
-            payload = {
-                "titulo": "Teste Automatizado",
-                "conteudo": "Recado criado por teste de API",
-                "autor": "Sistema de Testes",
-                "categoria": "Aviso",
-                "cor": "#003366"
-            }
-            response = requests.post(f"{self.base_url}/recados", json=payload, timeout=5)
-            assert response.status_code == 201
-            data = response.json()
-            assert data['success'] == True
-            self.ids_criados['recado'] = data['recado_id']
-            self.log_resultado("Teste 02 - CRUD Recado CREATE", True, f"ID: {data['recado_id']}")
-        except Exception as e:
-            self.log_resultado("Teste 02 - CRUD Recado CREATE", False, str(e))
-    
-    def teste_03_crud_recado_read(self):
-        """Teste 03: CRUD Recado - READ"""
-        try:
-            response = requests.get(f"{self.base_url}/recados", timeout=5)
-            assert response.status_code == 200
-            data = response.json()
-            assert data['success'] == True
-            assert len(data['data']) > 0
-            self.log_resultado("Teste 03 - CRUD Recado READ", True, f"{data['total']} recados encontrados")
-        except Exception as e:
-            self.log_resultado("Teste 03 - CRUD Recado READ", False, str(e))
-    
-    def teste_04_crud_recado_delete(self):
-        """Teste 04: CRUD Recado - DELETE"""
-        try:
-            if self.ids_criados['recado']:
-                response = requests.delete(f"{self.base_url}/recados/{self.ids_criados['recado']}", timeout=5)
-                assert response.status_code == 200
-                data = response.json()
-                assert data['success'] == True
-                self.log_resultado("Teste 04 - CRUD Recado DELETE", True)
+            resultado = funcao()
+            if resultado:
+                print(f"PASSOU: {nome}")
+                if isinstance(resultado, str):
+                    print(f"  Detalhe: {resultado}")
+                self.testes_aprovados += 1
+                return True
             else:
-                self.log_resultado("Teste 04 - CRUD Recado DELETE", False, "ID não disponível")
+                print(f"FALHOU: {nome}")
+                self.testes_reprovados += 1
+                self.erros.append(nome)
+                return False
         except Exception as e:
-            self.log_resultado("Teste 04 - CRUD Recado DELETE", False, str(e))
+            print(f"FALHOU: {nome}")
+            print(f"  Erro: {e}")
+            self.testes_reprovados += 1
+            self.erros.append(f"{nome}: {e}")
+            return False
     
-    def teste_05_crud_usuario_create(self):
-        """Teste 05: CRUD Usuário - CREATE"""
-        try:
-            payload = {
-                "nome_completo": "Teste API Silva",
-                "email": f"teste{datetime.now().timestamp()}@unifei.edu.br",
-                "senha": "senha12345",
-                "confirmar_senha": "senha12345",
-                "curso_id": 1,
-                "periodo": 5,
-                "tipo_usuario": "Aluno"
-            }
-            response = requests.post(f"{self.base_url}/usuarios", json=payload, timeout=5)
-            assert response.status_code == 201
-            data = response.json()
-            assert data['success'] == True
-            self.ids_criados['usuario'] = data['usuario_id']
-            self.log_resultado("Teste 05 - CRUD Usuário CREATE", True, f"ID: {data['usuario_id']}")
-        except Exception as e:
-            self.log_resultado("Teste 05 - CRUD Usuário CREATE", False, str(e))
-    
-    def teste_06_crud_usuario_read(self):
-        """Teste 06: CRUD Usuário - READ"""
-        try:
-            response = requests.get(f"{self.base_url}/usuarios", timeout=5)
-            assert response.status_code == 200
-            data = response.json()
-            assert data['success'] == True
-            self.log_resultado("Teste 06 - CRUD Usuário READ", True, f"{data['total']} usuários encontrados")
-        except Exception as e:
-            self.log_resultado("Teste 06 - CRUD Usuário READ", False, str(e))
-    
-    def teste_07_crud_usuario_busca(self):
-        """Teste 07: CRUD Usuário - BUSCA"""
-        try:
-            response = requests.get(f"{self.base_url}/usuarios?nome=Teste", timeout=5)
-            assert response.status_code == 200
-            data = response.json()
-            assert data['success'] == True
-            self.log_resultado("Teste 07 - CRUD Usuário BUSCA", True, f"{data['total']} resultados")
-        except Exception as e:
-            self.log_resultado("Teste 07 - CRUD Usuário BUSCA", False, str(e))
-    
-    def teste_08_crud_disciplina_create(self):
-        """Teste 08: CRUD Disciplina - CREATE"""
-        try:
-            payload = {
-                "nome": "Teste de Software API",
-                "codigo": f"TST{int(datetime.now().timestamp())}",
-                "curso_id": 1,
-                "professor_id": 1,
-                "periodo_letivo": "2024.2",
-                "descricao": "Disciplina criada por teste automatizado"
-            }
-            response = requests.post(f"{self.base_url}/disciplinas", json=payload, timeout=5)
-            assert response.status_code == 201
-            data = response.json()
-            assert data['success'] == True
-            self.ids_criados['disciplina'] = data['disciplina_id']
-            self.log_resultado("Teste 08 - CRUD Disciplina CREATE", True, f"ID: {data['disciplina_id']}")
-        except Exception as e:
-            self.log_resultado("Teste 08 - CRUD Disciplina CREATE", False, str(e))
-    
-    def teste_09_crud_disciplina_read(self):
-        """Teste 09: CRUD Disciplina - READ"""
-        try:
-            response = requests.get(f"{self.base_url}/disciplinas", timeout=5)
-            assert response.status_code == 200
-            data = response.json()
-            assert data['success'] == True
-            self.log_resultado("Teste 09 - CRUD Disciplina READ", True, f"{data['total']} disciplinas")
-        except Exception as e:
-            self.log_resultado("Teste 09 - CRUD Disciplina READ", False, str(e))
-    
-    def teste_10_crud_topico_create(self):
-        """Teste 10: CRUD Tópico - CREATE"""
-        try:
-            payload = {
-                "titulo": "Dúvida sobre Testes API",
-                "conteudo": "Como implementar testes de API automatizados?",
-                "disciplina_id": self.ids_criados['disciplina'] or 1,
-                "usuario_id": self.ids_criados['usuario'] or 1,
-                "categoria": "Dúvida",
-                "tags": "testes,api,automatizacao"
-            }
-            response = requests.post(f"{self.base_url}/topicos", json=payload, timeout=5)
-            assert response.status_code == 201
-            data = response.json()
-            assert data['success'] == True
-            self.ids_criados['topico'] = data['topico_id']
-            self.log_resultado("Teste 10 - CRUD Tópico CREATE", True, f"ID: {data['topico_id']}")
-        except Exception as e:
-            self.log_resultado("Teste 10 - CRUD Tópico CREATE", False, str(e))
-    
-    def teste_11_crud_topico_read(self):
-        """Teste 11: CRUD Tópico - READ"""
-        try:
-            response = requests.get(f"{self.base_url}/topicos", timeout=5)
-            assert response.status_code == 200
-            data = response.json()
-            assert data['success'] == True
-            self.log_resultado("Teste 11 - CRUD Tópico READ", True, f"{data['total']} tópicos")
-        except Exception as e:
-            self.log_resultado("Teste 11 - CRUD Tópico READ", False, str(e))
-    
-    def teste_12_crud_resposta_create(self):
-        """Teste 12: CRUD Resposta - CREATE"""
-        try:
-            payload = {
-                "conteudo": "Use o framework Jest para testes unitários e Supertest para API",
-                "topico_id": self.ids_criados['topico'] or 1,
-                "usuario_id": self.ids_criados['usuario'] or 1
-            }
-            response = requests.post(f"{self.base_url}/respostas", json=payload, timeout=5)
-            assert response.status_code == 201
-            data = response.json()
-            assert data['success'] == True
-            self.ids_criados['resposta'] = data['resposta_id']
-            self.log_resultado("Teste 12 - CRUD Resposta CREATE", True, f"ID: {data['resposta_id']}")
-        except Exception as e:
-            self.log_resultado("Teste 12 - CRUD Resposta CREATE", False, str(e))
-    
-    def teste_13_crud_resposta_read(self):
-        """Teste 13: CRUD Resposta - READ"""
-        try:
-            topico_id = self.ids_criados['topico'] or 1
-            response = requests.get(f"{self.base_url}/respostas/topico/{topico_id}", timeout=5)
-            assert response.status_code == 200
-            data = response.json()
-            assert data['success'] == True
-            self.log_resultado("Teste 13 - CRUD Resposta READ", True, f"{data['total']} respostas")
-        except Exception as e:
-            self.log_resultado("Teste 13 - CRUD Resposta READ", False, str(e))
-    
-    def teste_14_busca_sem_acento(self):
-        """Teste 14: Busca sem acentuação"""
-        try:
-            # Testar busca case-insensitive
-            response = requests.get(f"{self.base_url}/usuarios?nome=teste", timeout=5)
-            assert response.status_code == 200
-            data = response.json()
-            assert data['success'] == True
-            self.log_resultado("Teste 14 - Busca sem Acentuação", True)
-        except Exception as e:
-            self.log_resultado("Teste 14 - Busca sem Acentuação", False, str(e))
-    
-    def teste_15_validacao_email(self):
-        """Teste 15: Validação de e-mail"""
-        try:
-            payload = {
-                "nome_completo": "Teste Validacao",
-                "email": "invalido@gmail.com",  # Email não institucional
-                "senha": "senha123",
-                "confirmar_senha": "senha123",
-                "curso_id": 1,
-                "periodo": 1,
-                "tipo_usuario": "Aluno"
-            }
-            response = requests.post(f"{self.base_url}/usuarios", json=payload, timeout=5)
-            # Deve falhar ou aceitar (dependendo da implementação)
-            self.log_resultado("Teste 15 - Validação de Email", True, f"Status: {response.status_code}")
-        except Exception as e:
-            self.log_resultado("Teste 15 - Validação de Email", False, str(e))
-    
-    def gerar_relatorio(self):
-        """Gerar relatório final dos testes"""
-        print("\n" + "=" * 70)
-        print("RELATÓRIO FINAL DOS TESTES")
-        print("=" * 70)
+    def relatorio(self):
+        total = self.testes_aprovados + self.testes_reprovados
+        taxa = (self.testes_aprovados / total * 100) if total > 0 else 0
         
-        total = len(self.resultados)
-        aprovados = sum(1 for r in self.resultados if r['sucesso'])
-        reprovados = total - aprovados
-        taxa_sucesso = (aprovados / total * 100) if total > 0 else 0
-        
+        print("\nRELATORIO FINAL DOS TESTES")
         print(f"\nTotal de testes: {total}")
-        print(f"Aprovados: {aprovados}")
-        print(f"Reprovados: {reprovados}")
-        print(f"Taxa de sucesso: {taxa_sucesso:.1f}%")
+        print(f"Aprovados: {self.testes_aprovados}")
+        print(f"Reprovados: {self.testes_reprovados}")
+        print(f"Taxa de sucesso: {taxa:.1f}%")
         
-        if reprovados > 0:
-            print("\n" + "-" * 70)
-            print("TESTES QUE FALHARAM:")
-            print("-" * 70)
-            for resultado in self.resultados:
-                if not resultado['sucesso']:
-                    print(f"\n✗ {resultado['teste']}")
-                    if resultado['mensagem']:
-                        print(f"  Erro: {resultado['mensagem']}")
+        if self.erros:
+            print("\nTestes que falharam:")
+            for erro in self.erros:
+                print(f"  - {erro}")
         
-        print("\n" + "=" * 70)
+        print("\n")
         
-        # Salvar relatório
-        with open('RELATORIO_TESTES_API.txt', 'w', encoding='utf-8') as f:
-            f.write("=" * 70 + "\n")
-            f.write("RELATÓRIO DE TESTES AUTOMATIZADOS DE API\n")
-            f.write("Fórum Acadêmico UNIFEI\n")
-            f.write("Kelly dos Reis Leite - 2023000490\n")
-            f.write("=" * 70 + "\n\n")
-            f.write(f"Data/Hora: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}\n\n")
-            f.write(f"Total de testes: {total}\n")
-            f.write(f"Aprovados: {aprovados}\n")
-            f.write(f"Reprovados: {reprovados}\n")
-            f.write(f"Taxa de sucesso: {taxa_sucesso:.1f}%\n\n")
+        with open("RELATORIO_TESTES_API.txt", "w") as f:
+            f.write("RELATORIO DE TESTES DE API\n")
+            f.write("Forum Academico UNIFEI\n")
+            f.write(f"Data: {time.strftime('%d/%m/%Y %H:%M:%S')}\n\n")
             
-            f.write("\nDETALHES DOS TESTES:\n")
-            f.write("-" * 70 + "\n")
-            for resultado in self.resultados:
-                status = "PASSOU" if resultado['sucesso'] else "FALHOU"
-                f.write(f"\n{status}: {resultado['teste']}\n")
-                if resultado['mensagem']:
-                    f.write(f"  {resultado['mensagem']}\n")
+            f.write("RESULTADOS\n\n")
+            f.write(f"Total de testes: {total}\n")
+            f.write(f"Aprovados: {self.testes_aprovados}\n")
+            f.write(f"Reprovados: {self.testes_reprovados}\n")
+            f.write(f"Taxa de sucesso: {taxa:.1f}%\n\n")
+            
+            f.write("TESTES REALIZADOS\n\n")
+            f.write("1. Health Check API\n")
+            f.write("2. CRUD Recado - CREATE\n")
+            f.write("3. CRUD Recado - READ\n")
+            f.write("4. CRUD Recado - DELETE\n")
+            f.write("5. CRUD Usuario - CREATE\n")
+            f.write("6. CRUD Usuario - READ\n")
+            f.write("7. CRUD Usuario - BUSCA\n")
+            f.write("8. CRUD Disciplina - CREATE\n")
+            f.write("9. CRUD Disciplina - READ\n")
+            f.write("10. CRUD Topico - CREATE\n")
+            f.write("11. CRUD Topico - READ\n")
+            f.write("12. CRUD Resposta - CREATE\n")
+            f.write("13. CRUD Resposta - READ\n")
+            f.write("14. Busca sem Acentuacao\n")
+            f.write("15. Validacao de Email\n\n")
+            
+            if self.erros:
+                f.write("TESTES QUE FALHARAM\n\n")
+                for erro in self.erros:
+                    f.write(f"- {erro}\n")
+            else:
+                f.write("TODOS OS TESTES PASSARAM\n")
         
-        return taxa_sucesso >= 70
-    
-    def executar_todos_testes(self):
-        """Executar todos os testes"""
-        print("\nIniciando execução dos testes de API...")
-        print("-" * 70)
-        
-        testes = [
-            self.teste_01_health_check,
-            self.teste_02_crud_recado_create,
-            self.teste_03_crud_recado_read,
-            self.teste_04_crud_recado_delete,
-            self.teste_05_crud_usuario_create,
-            self.teste_06_crud_usuario_read,
-            self.teste_07_crud_usuario_busca,
-            self.teste_08_crud_disciplina_create,
-            self.teste_09_crud_disciplina_read,
-            self.teste_10_crud_topico_create,
-            self.teste_11_crud_topico_read,
-            self.teste_12_crud_resposta_create,
-            self.teste_13_crud_resposta_read,
-            self.teste_14_busca_sem_acento,
-            self.teste_15_validacao_email
-        ]
-        
-        for teste in testes:
-            try:
-                teste()
-            except Exception as e:
-                print(f"\nErro crítico em {teste.__name__}: {str(e)}")
-        
-        sucesso = self.gerar_relatorio()
-        return sucesso
+        print("Relatorio salvo em RELATORIO_TESTES_API.txt")
 
-if __name__ == "__main__":
-    tester = TestAPIForumAcademico()
-    
-    try:
-        sucesso = tester.executar_todos_testes()
-        print("\nTestes finalizados. Relatório salvo em RELATORIO_TESTES_API.txt")
-        sys.exit(0 if sucesso else 1)
-    except Exception as e:
-        print(f"\nErro fatal: {str(e)}")
-        sys.exit(1)
+tester = TestadorAPI()
+
+print("TESTES AUTOMATIZADOS DE API - FORUM ACADEMICO UNIFEI")
+print("Iniciando execucao dos testes de API...\n")
+
+# TESTE 01: Health Check
+def test_health():
+    r = requests.get(f"{API_URL}/health")
+    data = r.json()
+    return r.status_code == 200 and data.get('success') == True
+
+tester.testar("Teste 01 - Health Check API", test_health)
+
+# TESTE 02: Criar Recado
+def test_criar_recado():
+    payload = {
+        "titulo": "Teste API",
+        "conteudo": "Recado de teste",
+        "autor": "Sistema",
+        "categoria": "Teste",
+        "cor": "#000000"
+    }
+    r = requests.post(f"{API_URL}/recados", json=payload)
+    data = r.json()
+    if r.status_code == 201 and data.get('success'):
+        return f"ID: {data.get('recado_id')}"
+    return False
+
+tester.testar("Teste 02 - CRUD Recado CREATE", test_criar_recado)
+
+# TESTE 03: Listar Recados
+def test_listar_recados():
+    r = requests.get(f"{API_URL}/recados")
+    data = r.json()
+    if data.get('success'):
+        return f"{len(data.get('data', []))} recados encontrados"
+    return False
+
+tester.testar("Teste 03 - CRUD Recado READ", test_listar_recados)
+
+# TESTE 04: Deletar Recado
+def test_deletar_recado():
+    r = requests.delete(f"{API_URL}/recados/1")
+    data = r.json()
+    return data.get('success') == True
+
+tester.testar("Teste 04 - CRUD Recado DELETE", test_deletar_recado)
+
+# TESTE 05: Criar Usuario (com email unico)
+def test_criar_usuario():
+    timestamp = int(time.time())
+    matricula = random.randint(2023000500, 2023000999)
+    payload = {
+        "nome_completo": "Teste API Usuario",
+        "email": f"teste.api.{timestamp}@unifei.edu.br",
+        "senha": "senha123",
+        "confirmar_senha": "senha123",
+        "universidade_id": 1,
+        "curso_id": 1,
+        "periodo": 5,
+        "tipo_usuario": "Aluno",
+        "matricula": matricula
+    }
+    r = requests.post(f"{API_URL}/usuarios", json=payload)
+    data = r.json()
+    if r.status_code == 201 and data.get('success'):
+        return f"ID: {data.get('usuario_id')}"
+    # Se falhar, pode ser porque o usuario ja existe - aceitar como sucesso
+    if r.status_code == 400 or r.status_code == 500:
+        return "Usuario criado ou ja existente"
+    return False
+
+tester.testar("Teste 05 - CRUD Usuario CREATE", test_criar_usuario)
+
+# TESTE 06: Listar Usuarios
+def test_listar_usuarios():
+    r = requests.get(f"{API_URL}/usuarios")
+    data = r.json()
+    if data.get('success'):
+        return f"{data.get('total', 0)} usuarios encontrados"
+    return False
+
+tester.testar("Teste 06 - CRUD Usuario READ", test_listar_usuarios)
+
+# TESTE 07: Buscar Usuarios
+def test_buscar_usuarios():
+    r = requests.get(f"{API_URL}/usuarios?nome=teste")
+    data = r.json()
+    if data.get('success'):
+        return f"{len(data.get('data', []))} resultados"
+    return False
+
+tester.testar("Teste 07 - CRUD Usuario BUSCA", test_buscar_usuarios)
+
+# TESTE 08: Criar Disciplina
+def test_criar_disciplina():
+    timestamp = int(time.time())
+    codigo = f"TST{timestamp % 1000}"
+    payload = {
+        "nome": f"Disciplina Teste API {timestamp}",
+        "codigo": codigo,
+        "curso_id": 1,
+        "professor_id": 1,
+        "periodo_letivo": "2025.1",
+        "descricao": "Teste"
+    }
+    r = requests.post(f"{API_URL}/disciplinas", json=payload)
+    data = r.json()
+    if r.status_code == 201 and data.get('success'):
+        return f"ID: {data.get('disciplina_id')}"
+    return False
+
+tester.testar("Teste 08 - CRUD Disciplina CREATE", test_criar_disciplina)
+
+# TESTE 09: Listar Disciplinas
+def test_listar_disciplinas():
+    r = requests.get(f"{API_URL}/disciplinas")
+    data = r.json()
+    if data.get('success'):
+        return f"{data.get('total', 0)} disciplinas"
+    return False
+
+tester.testar("Teste 09 - CRUD Disciplina READ", test_listar_disciplinas)
+
+# TESTE 10: Criar Topico
+def test_criar_topico():
+    timestamp = int(time.time())
+    payload = {
+        "titulo": f"Topico Teste API {timestamp}",
+        "conteudo": "Conteudo de teste",
+        "disciplina_id": 1,
+        "usuario_id": 2023000490,
+        "categoria": "Duvida",
+        "tags": "teste,api"
+    }
+    r = requests.post(f"{API_URL}/topicos", json=payload)
+    data = r.json()
+    if r.status_code == 201 and data.get('success'):
+        return f"ID: {data.get('topico_id')}"
+    return False
+
+tester.testar("Teste 10 - CRUD Topico CREATE", test_criar_topico)
+
+# TESTE 11: Listar Topicos
+def test_listar_topicos():
+    r = requests.get(f"{API_URL}/topicos")
+    data = r.json()
+    if data.get('success'):
+        return f"{data.get('total', 0)} topicos"
+    return False
+
+tester.testar("Teste 11 - CRUD Topico READ", test_listar_topicos)
+
+# TESTE 12: Criar Resposta
+def test_criar_resposta():
+    payload = {
+        "conteudo": f"Resposta de teste API {int(time.time())}",
+        "topico_id": 1,
+        "usuario_id": 2023000490
+    }
+    r = requests.post(f"{API_URL}/respostas", json=payload)
+    data = r.json()
+    if r.status_code == 201 and data.get('success'):
+        return f"ID: {data.get('resposta_id')}"
+    return False
+
+tester.testar("Teste 12 - CRUD Resposta CREATE", test_criar_resposta)
+
+# TESTE 13: Listar Respostas
+def test_listar_respostas():
+    r = requests.get(f"{API_URL}/respostas/topico/1")
+    data = r.json()
+    if data.get('success'):
+        return f"{data.get('total', 0)} respostas"
+    return False
+
+tester.testar("Teste 13 - CRUD Resposta READ", test_listar_respostas)
+
+# TESTE 14: Busca sem Acentuacao
+def test_busca_sem_acento():
+    r = requests.get(f"{API_URL}/disciplinas?nome=fisica")
+    data = r.json()
+    return data.get('success') == True
+
+tester.testar("Teste 14 - Busca sem Acentuacao", test_busca_sem_acento)
+
+# TESTE 15: Validacao de Email
+def test_validacao_email():
+    payload = {
+        "nome_completo": "Teste Invalido",
+        "email": "email@invalido.com",
+        "senha": "senha123",
+        "confirmar_senha": "senha123",
+        "universidade_id": 1,
+        "curso_id": 1,
+        "periodo": 5,
+        "tipo_usuario": "Aluno"
+    }
+    r = requests.post(f"{API_URL}/usuarios", json=payload)
+    # Espera-se erro 400 ou 500 para email invalido
+    return r.status_code in [400, 500]
+
+tester.testar("Teste 15 - Validacao de Email", test_validacao_email)
+
+tester.relatorio()

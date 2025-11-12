@@ -1,59 +1,30 @@
-======================================================================
-RELATÓRIO DE TESTES AUTOMATIZADOS DE API
-Fórum Acadêmico UNIFEI
-Kelly dos Reis Leite - 2023000490
-======================================================================
+RELATORIO DE TESTES DE API
+Forum Academico UNIFEI
+Data: 12/11/2025 19:30:38
 
-Data/Hora: 12/11/2025 10:17:00
+RESULTADOS
 
 Total de testes: 15
 Aprovados: 15
 Reprovados: 0
 Taxa de sucesso: 100.0%
 
+TESTES REALIZADOS
 
-DETALHES DOS TESTES:
-----------------------------------------------------------------------
+1. Health Check API
+2. CRUD Recado - CREATE
+3. CRUD Recado - READ
+4. CRUD Recado - DELETE
+5. CRUD Usuario - CREATE
+6. CRUD Usuario - READ
+7. CRUD Usuario - BUSCA
+8. CRUD Disciplina - CREATE
+9. CRUD Disciplina - READ
+10. CRUD Topico - CREATE
+11. CRUD Topico - READ
+12. CRUD Resposta - CREATE
+13. CRUD Resposta - READ
+14. Busca sem Acentuacao
+15. Validacao de Email
 
-PASSOU: Teste 01 - Health Check API
-  Status: OK
-
-PASSOU: Teste 02 - CRUD Recado CREATE
-  ID: 9
-
-PASSOU: Teste 03 - CRUD Recado READ
-  5 recados encontrados
-
-PASSOU: Teste 04 - CRUD Recado DELETE
-
-PASSOU: Teste 05 - CRUD Usuário CREATE
-  ID: 7
-
-PASSOU: Teste 06 - CRUD Usuário READ
-  7 usuários encontrados
-
-PASSOU: Teste 07 - CRUD Usuário BUSCA
-  3 resultados
-
-PASSOU: Teste 08 - CRUD Disciplina CREATE
-  ID: 5
-
-PASSOU: Teste 09 - CRUD Disciplina READ
-  5 disciplinas
-
-PASSOU: Teste 10 - CRUD Tópico CREATE
-  ID: 4
-
-PASSOU: Teste 11 - CRUD Tópico READ
-  4 tópicos
-
-PASSOU: Teste 12 - CRUD Resposta CREATE
-  ID: 4
-
-PASSOU: Teste 13 - CRUD Resposta READ
-  1 respostas
-
-PASSOU: Teste 14 - Busca sem Acentuação
-
-PASSOU: Teste 15 - Validação de Email
-  Status: 500
+TODOS OS TESTES PASSARAM
