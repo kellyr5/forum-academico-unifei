@@ -9,8 +9,10 @@ npm-debug.log*
 # Logs
 *.log
 logs/
+backend.log
+frontend.log
 
-# Sistema Operacional
+# Sistema
 .DS_Store
 Thumbs.db
 
@@ -19,22 +21,10 @@ Thumbs.db
 .idea/
 *.swp
 
-# Build
-dist/
-build/
-
-# Testes
-coverage/
-__pycache__/
-*.pyc
-
 # Temporários
 tmp/
 temp/
 *.tmp
 
-# Uploads
-uploads/
-
-# Banco
-*.sql.backup
+# PIDs
+*.pid
