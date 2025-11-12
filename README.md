@@ -25,20 +25,21 @@ O Fórum Acadêmico UNIFEI é uma plataforma web que facilita a comunicação e 
 ## Tecnologias Utilizadas
 
 ### Backend
-- **Node.js** v18+
-- **Express.js** 4.18
-- **MySQL** 8.0
-- **bcryptjs** (criptografia de senhas)
+- Node.js v18+
+- Express.js 4.18
+- MySQL 8.0
+- bcryptjs (criptografia de senhas)
 
 ### Frontend
-- **HTML5** (estrutura semântica)
-- **CSS3** (design responsivo)
-- **JavaScript ES6+** (Fetch API)
-- **Material Icons** (Google)
+- HTML5 (estrutura semântica)
+- CSS3 (design responsivo)
+- JavaScript ES6+ (Fetch API)
+- Material Icons (Google)
 
 ### Testes
-- **Python** 3.10+
-- **Requests** (testes de API)
+- Python 3.10+
+- Requests (testes de API)
+- Selenium (testes E2E)
 
 ---
 
@@ -65,18 +66,20 @@ forum-academico/
 │   │   └── script.js
 │   └── index.html
 ├── tests/
-│   └── test_api.py
+│   ├── test_api.py
+│   └── test_selenium.py
 ├── docs/
 │   ├── STATUS_REPORT.md
 │   ├── REGISTRO_DE_BUGS.md
-│   └── TROUBLESHOOTING.md
+│   ├── BUGS_MANTIS_EXPORT.csv
+│   └── BUGS_BUGZILLA_EXPORT.xml
 ├── start.sh
 └── README.md
 ```
 
 ---
 
-##  Instalação e Configuração
+## Instalação e Configuração
 
 ### Pré-requisitos
 
@@ -86,7 +89,7 @@ forum-academico/
 
 ### Passo 1: Clonar o Repositório
 ```bash
-git clone https://github.com/SEU_USUARIO/forum-academico-unifei.git
+git clone https://github.com/kellyr5/forum-academico-unifei.git
 cd forum-academico-unifei
 ```
 
@@ -147,7 +150,13 @@ cd tests
 python3 test_api.py
 ```
 
-**Resultado esperado:** 15 testes, taxa de sucesso 100%
+### Testes E2E com Selenium
+```bash
+cd tests
+python3 test_selenium.py
+```
+
+**Resultado esperado:** 30 testes, taxa de sucesso 100%
 
 ---
 
@@ -177,7 +186,7 @@ python3 test_api.py
 - Update: Editar conteúdo
 - Delete: Remover tópicos
 
-### CRUD 5: Respostas (BÔNUS)
+### CRUD 5: Respostas (BONUS)
 - Create: Responder tópicos
 - Read: Ver respostas ordenadas
 - Update: Editar respostas
@@ -198,9 +207,9 @@ python3 test_api.py
 ## Estatísticas do Projeto
 
 - **Linhas de código:** ~4,500
-- **Arquivos:** 25+
+- **Arquivos:** 28
 - **Tabelas no BD:** 10
-- **Testes automatizados:** 15
+- **Testes automatizados:** 30
 - **Taxa de sucesso:** 100%
 - **Bugs corrigidos:** 5
 
@@ -210,13 +219,36 @@ python3 test_api.py
 
 - **Status Report:** `docs/STATUS_REPORT.md`
 - **Registro de Bugs:** `docs/REGISTRO_DE_BUGS.md`
-- **Troubleshooting:** `docs/TROUBLESHOOTING.md`
+- **Bugs Mantis:** `docs/BUGS_MANTIS_EXPORT.csv`
+- **Bugs Bugzilla:** `docs/BUGS_BUGZILLA_EXPORT.xml`
 
 ---
 
-## Bugs Conhecidos
+## Rastreamento de Bugs
 
-Nenhum bug crítico no momento. Veja `docs/REGISTRO_DE_BUGS.md` para histórico.
+Os bugs deste projeto foram registrados e rastreados usando os formatos padrão:
+
+### Mantis Bug Tracker
+**Arquivo:** `docs/BUGS_MANTIS_EXPORT.csv`
+- Formato: CSV (compatível com Mantis)
+- Total de bugs: 5
+- Status: Todos resolvidos
+
+### Bugzilla
+**Arquivo:** `docs/BUGS_BUGZILLA_EXPORT.xml`
+- Formato: XML (formato padrão Bugzilla)
+- Total de bugs: 5
+- Status: Todos resolvidos (FIXED)
+
+### Estatísticas de Bugs
+
+| Severidade | Quantidade | Resolvidos |
+|------------|------------|------------|
+| Crítica    | 1          | 1 (100%)   |
+| Alta       | 2          | 2 (100%)   |
+| Média      | 1          | 1 (100%)   |
+| Baixa      | 1          | 1 (100%)   |
+| **TOTAL**  | **5**      | **5 (100%)**|
 
 ---
 
@@ -246,4 +278,12 @@ Este projeto foi desenvolvido para fins acadêmicos como parte da disciplina de 
 
 ---
 
-**© 2025 Kelly Reis - Todos os direitos reservados**
+## Agradecimentos
+
+- Prof. Orientador da disciplina - Orientação
+- UNIFEI - Infraestrutura
+- Colegas de turma - Feedback e testes
+
+---
+
+**Copyright 2025 Kelly Reis - Todos os direitos reservados**

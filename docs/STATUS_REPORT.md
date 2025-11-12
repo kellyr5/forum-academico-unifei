@@ -1,4 +1,4 @@
-# FÓRUM ACADÊMICO UNIFEI
+# FORUM ACADEMICO UNIFEI
 **Cliente:** Universidade Federal de Itajubá (UNIFEI)
 
 ---
@@ -18,7 +18,7 @@ www.unifei.edu.br
 
 ---
 
-## 1. INTRODUÇÃO
+## 1. INTRODUCAO
 
 Este documento registra os resultados do monitoramento e controle do projeto com relação ao Plano do Projeto e ao escopo do projeto. Este documento está dividido nas seguintes seções:
 
@@ -30,7 +30,7 @@ Este documento registra os resultados do monitoramento e controle do projeto com
 
 ---
 
-## 2. REVISÃO DE MARCO
+## 2. REVISAO DE MARCO
 
 Esta seção contém informações sobre quais artefatos devem ser revisados, sobre os resultados dessa revisão, a indicação de desvios sobre os artefatos revisados, os impactos dos eventuais desvios e as ações corretivas recomendadas para sanar os desvios.
 
@@ -47,8 +47,8 @@ Esta seção contém os artefatos que deverão ser revisados em marcos determina
 | **Plano de comunicação** | Todas as reuniões planejadas foram realizadas. Relatórios de acompanhamento foram gerados (Status Reports, documentação de bugs). Comunicação via e-mail e Git funcionou perfeitamente. | Nenhuma falha de comunicação identificada. | Documentar melhor as decisões técnicas em projetos futuros. |
 | **Riscos do projeto** | Principais riscos identificados e mitigados: (1) Incompatibilidade de versões - MITIGADO com documentação clara de versões; (2) Perda de dados - MITIGADO com versionamento Git; (3) Problemas de performance - MITIGADO com otimizações no banco; (4) Bugs críticos - MITIGADO com testes automatizados. | Risco residual baixo. Todos os riscos críticos foram endereçados adequadamente. | Manter plano de backup e versionamento em produção. |
 | **Escopo do projeto** | Escopo original: 4 CRUDs obrigatórios. Escopo entregue: 5 CRUDs completos (1 CRUD extra). Funcionalidades implementadas: Mural de Recados, Usuários, Disciplinas, Tópicos e Respostas. | Escopo expandido positivamente. Entrega superou expectativas. | Nenhuma ação necessária. |
-| **Qualidade do código** | Código estruturado seguindo padrões de mercado. Backend com arquitetura MVC. Frontend responsivo e acessível. 15 testes automatizados de API + 15 testes E2E com Selenium. Taxa de sucesso: 100%. | Alta qualidade de código. Boa cobertura de testes. | Aumentar cobertura de testes unitários em projetos futuros. |
-| **Documentação** | Documentação completa: README.md detalhado, Status Report, Registro de Bugs (Mantis e Bugzilla), Troubleshooting, guias de instalação. | Documentação de alta qualidade e completa. | Nenhuma ação necessária. |
+| **Qualidade do código** | Código estruturado seguindo padrões de mercado. Backend com arquitetura MVC. Frontend responsivo e acessível. 30 testes automatizados (15 API + 15 E2E Selenium). Taxa de sucesso: 100%. | Alta qualidade de código. Boa cobertura de testes. | Aumentar cobertura de testes unitários em projetos futuros. |
+| **Documentação** | Documentação completa: README.md detalhado, Status Report, Registro de Bugs (Mantis e Bugzilla), guias de instalação. | Documentação de alta qualidade e completa. | Nenhuma ação necessária. |
 | **Baseline (Git)** | Repositório GitHub criado e atualizado: https://github.com/kellyr5/forum-academico-unifei. Múltiplos commits organizados. Histórico completo de desenvolvimento. | Baseline bem mantido e documentado. | Manter padrão de commits descritivos. |
 
 **Tabela 1 - Itens Revisados**
@@ -61,18 +61,18 @@ Esta seção contém o resultado do acompanhamento das ações corretivas de per
 
 | Ação corretiva | Objetivo da ação corretiva | Resultado | Requer nova Ação? |
 |----------------|---------------------------|-----------|-------------------|
-| Corrigir erro EADDRINUSE porta 3000 | Resolver conflito de porta ao iniciar servidor backend | Script `start.sh` criado com verificação e liberação automática de portas. Problema resolvido 100%. | Não |
+| Corrigir erro EADDRINUSE porta 3000 | Resolver conflito de porta ao iniciar servidor backend | Script start.sh criado com verificação e liberação automática de portas. Problema resolvido 100%. | Não |
 | Implementar validações de formulário | Prevenir cadastros com dados inválidos ou incompletos | Validações implementadas no backend com mensagens de erro claras. Testes confirmam funcionamento. | Não |
 | Corrigir logo UNIFEI não carregando | Garantir identidade visual do sistema | Implementado fallback para logo local. Sistema sempre exibe logo corretamente. | Não |
 | Resolver erro 404 no CSS | Garantir carregamento correto da interface | Estrutura de diretórios corrigida. Permissões ajustadas. CSS carrega 100% das vezes. | Não |
-| Implementar busca case-insensitive | Melhorar experiência de busca ignorando acentos e maiúsculas | Função MySQL `remover_acentos()` criada. Busca funciona perfeitamente com qualquer combinação. | Não |
+| Implementar busca case-insensitive | Melhorar experiência de busca ignorando acentos e maiúsculas | Função MySQL remover_acentos() criada. Busca funciona perfeitamente com qualquer combinação. | Não |
 | Corrigir "undefined" em Disciplinas/Tópicos | Exibir informações completas de relacionamentos | JOINs implementados nas queries. Informações de professor, curso, autor e disciplina aparecem corretamente. | Não |
 
 **Tabela 2 - Acompanhamento de Ações Corretivas**
 
 ---
 
-## 3. PENDÊNCIAS DO PERÍODO ANALISADO
+## 3. PENDENCIAS DO PERIODO ANALISADO
 
 | ID | Descrição |
 |----|-----------|
@@ -87,11 +87,11 @@ O projeto Fórum Acadêmico UNIFEI foi concluído com sucesso, superando as expe
 A arquitetura do sistema foi construída utilizando tecnologias modernas e consolidadas no mercado (Node.js, Express, MySQL), garantindo escalabilidade e manutenibilidade. O frontend foi desenvolvido com foco em responsividade e experiência do usuário, utilizando HTML5, CSS3 e JavaScript puro, sem dependência de frameworks pesados.
 
 Todos os requisitos obrigatórios foram atendidos:
-- ✅ 5 CRUDs implementados (Mural, Usuários, Disciplinas, Tópicos, Respostas)
-- ✅ Baseline salvo no Git/GitHub com histórico completo
-- ✅ Testes automatizados (API + Selenium E2E)
-- ✅ Bugs registrados no formato Mantis e Bugzilla
-- ✅ Status Report completo seguindo template profissional
+- 5 CRUDs implementados (Mural, Usuários, Disciplinas, Tópicos, Respostas)
+- Baseline salvo no Git/GitHub com histórico completo
+- Testes automatizados (API + Selenium E2E)
+- Bugs registrados no formato Mantis e Bugzilla
+- Status Report completo seguindo template profissional
 
 O projeto está pronto para apresentação e demonstração, com sistema funcionando 100%, documentação completa e código versionado no GitHub.
 
@@ -103,7 +103,7 @@ O projeto está pronto para apresentação e demonstração, com sistema funcion
 
 - **Cobertura de testes:** 30 testes automatizados no total (15 API + 15 E2E Selenium) com taxa de sucesso de 100%, garantindo confiabilidade do sistema.
 
-- **Documentação exemplar:** README completo, Status Report profissional, registro de bugs nos formatos Mantis e Bugzilla, troubleshooting e guias de instalação.
+- **Documentação exemplar:** README completo, Status Report profissional, registro de bugs nos formatos Mantis e Bugzilla.
 
 - **Gestão de bugs eficiente:** Todos os 5 bugs identificados foram documentados e corrigidos, com taxa de resolução de 100%.
 
@@ -133,7 +133,7 @@ O projeto está pronto para apresentação e demonstração, com sistema funcion
 
 ---
 
-## 5. MÉTRICAS DO PROJETO
+## 5. METRICAS DO PROJETO
 
 ### 5.1 Estatísticas Gerais
 
@@ -169,7 +169,7 @@ O projeto está pronto para apresentação e demonstração, com sistema funcion
 
 ---
 
-## 6. ASSINATURAS E APROVAÇÕES
+## 6. ASSINATURAS E APROVACOES
 
 **Desenvolvedor:**  
 Kelly Reis  
@@ -181,9 +181,9 @@ kelly.reis@unifei.edu.br
 
 ---
 
-**Status do Projeto:** ✅ **CONCLUÍDO COM SUCESSO**
+**Status do Projeto:** CONCLUIDO COM SUCESSO
 
-**Recomendação:** **APROVADO PARA APRESENTAÇÃO E ENTREGA**
+**Recomendação:** APROVADO PARA APRESENTACAO E ENTREGA
 
 ---
 
