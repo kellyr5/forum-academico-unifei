@@ -1,7 +1,7 @@
 
 ---
 
-## 🐛 Rastreamento de Bugs
+## Rastreamento de Bugs
 
 ### Sistemas de Controle de Bugs
 
@@ -53,7 +53,7 @@ Os bugs deste projeto foram registrados e rastreados usando os seguintes sistema
 
 ---
 
-## 🐛 Rastreamento de Bugs
+## Rastreamento de Bugs
 
 ### Sistemas de Controle de Bugs
 
