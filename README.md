@@ -24,6 +24,40 @@ Disciplina: Gerencia de Projeto de Software - 2025
 - Seguranca com criptografia de senhas
 - API REST completa
 
+## CRUDs Implementados
+
+O sistema implementa 5 CRUDs completos (Create, Read, Update, Delete):
+
+### 1. CRUD de Mural de Recados
+- **Create:** Publicar novos recados no mural
+- **Read:** Visualizar todos os recados publicados
+- **Update:** Editar recados existentes
+- **Delete:** Remover recados do mural
+
+### 2. CRUD de Usuarios
+- **Create:** Cadastrar novos usuarios (alunos, professores, monitores)
+- **Read:** Listar e buscar usuarios por nome, email ou tipo
+- **Update:** Atualizar informacoes do perfil
+- **Delete:** Exclusao logica de usuarios
+
+### 3. CRUD de Disciplinas
+- **Create:** Cadastrar novas disciplinas
+- **Read:** Listar disciplinas por curso, professor ou periodo
+- **Update:** Editar informacoes das disciplinas
+- **Delete:** Remover disciplinas do sistema
+
+### 4. CRUD de Topicos
+- **Create:** Criar novos topicos de discussao
+- **Read:** Visualizar topicos com filtros por disciplina e categoria
+- **Update:** Editar titulo e conteudo dos topicos
+- **Delete:** Remover topicos e suas respostas
+
+### 5. CRUD de Respostas
+- **Create:** Responder topicos de discussao
+- **Read:** Visualizar respostas ordenadas por data ou votos
+- **Update:** Editar conteudo das respostas
+- **Delete:** Remover respostas individuais
+
 ## Tecnologias
 
 - Backend: Node.js + Express + MySQL
@@ -90,8 +124,8 @@ Ver detalhes em: docs/REGISTRO_DE_BUGS.md
 
 ## Estatisticas do Projeto
 
-- 5 CRUDs implementados
-- 30 testes (100% sucesso)
+- 5 CRUDs completos (Mural, Usuarios, Disciplinas, Topicos, Respostas)
+- 30 testes automatizados (100% sucesso)
 - 5 bugs identificados e corrigidos
 - 4500 linhas de codigo
 - 42 dias de desenvolvimento
