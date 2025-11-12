@@ -1,155 +1,155 @@
 # FORUM ACADEMICO UNIFEI
-**Cliente:** Universidade Federal de Itajubá (UNIFEI)
+**Cliente:** Universidade Federal de Itajuba (UNIFEI)
 
 ---
 
 # STATUS REPORT DO PROJETO - SR01
 
-**Elaboração do Documento:** 12/11/2025  
-**Período de referência do SR:** 01/10/2025 a 12/11/2025  
-**Responsável pelo documento:** Kelly Reis / Desenvolvedora / kelly.reis@unifei.edu.br
+**Elaboracao do Documento:** 12/11/2025  
+**Periodo de referencia do SR:** 01/10/2025 a 12/11/2025  
+**Responsavel pelo documento:** Kelly Reis / Desenvolvedora / kelly.reis@unifei.edu.br
 
 ---
 
-**UNIFEI - Universidade Federal de Itajubá**  
-Campus Itajubá - Av. BPS, 1303 - Pinheirinho  
-Itajubá - MG, 37500-903  
+**UNIFEI - Universidade Federal de Itajuba**  
+Campus Itajuba - Av. BPS, 1303 - Pinheirinho  
+Itajuba - MG, 37500-903  
 www.unifei.edu.br
 
 ---
 
 ## 1. INTRODUCAO
 
-Este documento registra os resultados do monitoramento e controle do projeto com relação ao Plano do Projeto e ao escopo do projeto. Este documento está dividido nas seguintes seções:
+Este documento registra os resultados do monitoramento e controle do projeto com relacao ao Plano do Projeto e ao escopo do projeto. Este documento esta dividido nas seguintes secoes:
 
-- **Seção 2 – Revisão de marco:** Apresenta o resultado da revisão de um conjunto de artefatos do projeto, indicando seu respectivo impacto para os objetivos do projeto e as ações corretivas que deverão ser tomadas a fim de sanar o problema. Além dos resultados da execução de ações corretivas geradas em status reports anteriores.
+- **Secao 2 – Revisao de marco:** Apresenta o resultado da revisao de um conjunto de artefatos do projeto, indicando seu respectivo impacto para os objetivos do projeto e as acoes corretivas que deverao ser tomadas a fim de sanar o problema. Alem dos resultados da execucao de acoes corretivas geradas em status reports anteriores.
 
-- **Seção 3 – Pendências do período:** Apresenta as pendências do período analisado.
+- **Secao 3 – Pendencias do periodo:** Apresenta as pendencias do periodo analisado.
 
-- **Seção 4 – Parecer sobre o projeto:** Apresenta o parecer final do projeto, analisando os pontos de sucesso e pontos de atenção do mesmo.
+- **Secao 4 – Parecer sobre o projeto:** Apresenta o parecer final do projeto, analisando os pontos de sucesso e pontos de atencao do mesmo.
 
 ---
 
 ## 2. REVISAO DE MARCO
 
-Esta seção contém informações sobre quais artefatos devem ser revisados, sobre os resultados dessa revisão, a indicação de desvios sobre os artefatos revisados, os impactos dos eventuais desvios e as ações corretivas recomendadas para sanar os desvios.
+Esta secao contem informacoes sobre quais artefatos devem ser revisados, sobre os resultados dessa revisao, a indicacao de desvios sobre os artefatos revisados, os impactos dos eventuais desvios e as acoes corretivas recomendadas para sanar os desvios.
 
 ### 2.1 Itens revisados
 
-Esta seção contém os artefatos que deverão ser revisados em marcos determinados do projeto. A Tabela 1 indica quais artefatos devem ser revisados e qual o resultado da revisão desses artefatos.
+Esta secao contem os artefatos que deverao ser revisados em marcos determinados do projeto. A Tabela 1 indica quais artefatos devem ser revisados e qual o resultado da revisao desses artefatos.
 
-| Itens revisados | Status do artefato analisado | Problemas / Impactos | Ação corretiva |
+| Itens revisados | Status do artefato analisado | Problemas / Impactos | Acao corretiva |
 |-----------------|----------------------------|---------------------|----------------|
-| **Cronograma** | Projeto concluído em 42 dias, dentro do prazo estimado. SPI: 1.0 (no prazo). Todas as etapas do desenvolvimento foram cumpridas conforme planejamento inicial. | Nenhum desvio identificado. Projeto seguiu o caminho crítico sem atrasos. | Nenhuma ação necessária. |
-| **Orçamento** | Projeto desenvolvido sem custos diretos (projeto acadêmico). Infraestrutura utilizada: MySQL gratuito, Node.js open-source, hospedagem local. CPI: 1.0 (dentro do orçamento zero). | Nenhum desvio identificado. Todas as ferramentas utilizadas são gratuitas e open-source. | Nenhuma ação necessária. |
-| **Plano de RH's** | Recurso único: Kelly Reis (Desenvolvedora). Dedicação: 40 horas semanais durante 6 semanas. Total: 240 horas de trabalho. Dedicação foi mantida conforme planejado. | Nenhum desvio. Alocação de recursos foi suficiente para o projeto. | Nenhuma ação necessária. |
-| **Comprometimento dos stakeholders** | Alto comprometimento da desenvolvedora e do orientador da disciplina. Reuniões de acompanhamento realizadas conforme planejado (semanais). | Nenhum problema identificado. Comunicação fluiu adequadamente. | Manter frequência de reuniões em projetos futuros. |
-| **Plano de comunicação** | Todas as reuniões planejadas foram realizadas. Relatórios de acompanhamento foram gerados (Status Reports, documentação de bugs). Comunicação via e-mail e Git funcionou perfeitamente. | Nenhuma falha de comunicação identificada. | Documentar melhor as decisões técnicas em projetos futuros. |
-| **Riscos do projeto** | Principais riscos identificados e mitigados: (1) Incompatibilidade de versões - MITIGADO com documentação clara de versões; (2) Perda de dados - MITIGADO com versionamento Git; (3) Problemas de performance - MITIGADO com otimizações no banco; (4) Bugs críticos - MITIGADO com testes automatizados. | Risco residual baixo. Todos os riscos críticos foram endereçados adequadamente. | Manter plano de backup e versionamento em produção. |
-| **Escopo do projeto** | Escopo original: 4 CRUDs obrigatórios. Escopo entregue: 5 CRUDs completos (1 CRUD extra). Funcionalidades implementadas: Mural de Recados, Usuários, Disciplinas, Tópicos e Respostas. | Escopo expandido positivamente. Entrega superou expectativas. | Nenhuma ação necessária. |
-| **Qualidade do código** | Código estruturado seguindo padrões de mercado. Backend com arquitetura MVC. Frontend responsivo e acessível. 30 testes automatizados (15 API + 15 E2E Selenium). Taxa de sucesso: 100%. | Alta qualidade de código. Boa cobertura de testes. | Aumentar cobertura de testes unitários em projetos futuros. |
-| **Documentação** | Documentação completa: README.md detalhado, Status Report, Registro de Bugs (Mantis e Bugzilla), guias de instalação. | Documentação de alta qualidade e completa. | Nenhuma ação necessária. |
-| **Baseline (Git)** | Repositório GitHub criado e atualizado: https://github.com/kellyr5/forum-academico-unifei. Múltiplos commits organizados. Histórico completo de desenvolvimento. | Baseline bem mantido e documentado. | Manter padrão de commits descritivos. |
+| **Cronograma** | Projeto concluido em 42 dias, dentro do prazo estimado. SPI: 1.0 (no prazo). Todas as etapas do desenvolvimento foram cumpridas conforme planejamento inicial. | Nenhum desvio identificado. Projeto seguiu o caminho critico sem atrasos. | Nenhuma acao necessaria. |
+| **Orcamento** | Projeto desenvolvido sem custos diretos (projeto academico). Infraestrutura utilizada: MySQL gratuito, Node.js open-source, hospedagem local. CPI: 1.0 (dentro do orcamento zero). | Nenhum desvio identificado. Todas as ferramentas utilizadas sao gratuitas e open-source. | Nenhuma acao necessaria. |
+| **Plano de RH's** | Recurso unico: Kelly Reis (Desenvolvedora). Dedicacao: 40 horas semanais durante 6 semanas. Total: 240 horas de trabalho. Dedicacao foi mantida conforme planejado. | Nenhum desvio. Alocacao de recursos foi suficiente para o projeto. | Nenhuma acao necessaria. |
+| **Comprometimento dos stakeholders** | Alto comprometimento da desenvolvedora e do orientador da disciplina. Reunioes de acompanhamento realizadas conforme planejado (semanais). | Nenhum problema identificado. Comunicacao fluiu adequadamente. | Manter frequencia de reunioes em projetos futuros. |
+| **Plano de comunicacao** | Todas as reunioes planejadas foram realizadas. Relatorios de acompanhamento foram gerados (Status Reports, documentacao de bugs). Comunicacao via e-mail e Git funcionou perfeitamente. | Nenhuma falha de comunicacao identificada. | Documentar melhor as decisoes tecnicas em projetos futuros. |
+| **Riscos do projeto** | Principais riscos identificados e mitigados: (1) Incompatibilidade de versoes - MITIGADO com documentacao clara de versoes; (2) Perda de dados - MITIGADO com versionamento Git; (3) Problemas de performance - MITIGADO com otimizacoes no banco; (4) Bugs criticos - MITIGADO com testes automatizados. | Risco residual baixo. Todos os riscos criticos foram enderecados adequadamente. | Manter plano de backup e versionamento em producao. |
+| **Escopo do projeto** | Escopo original: 4 CRUDs obrigatorios. Escopo entregue: 5 CRUDs completos (1 CRUD extra). Funcionalidades implementadas: Mural de Recados, Usuarios, Disciplinas, Topicos e Respostas. | Escopo expandido positivamente. Entrega superou expectativas. | Nenhuma acao necessaria. |
+| **Qualidade do codigo** | Codigo estruturado seguindo padroes de mercado. Backend com arquitetura MVC. Frontend responsivo e acessivel. 30 testes automatizados (15 API + 15 E2E Selenium). Taxa de sucesso: 100%. | Alta qualidade de codigo. Boa cobertura de testes. | Aumentar cobertura de testes unitarios em projetos futuros. |
+| **Documentacao** | Documentacao completa: README.md detalhado, Status Report, Registro de Bugs (Mantis e Bugzilla), guias de instalacao. | Documentacao de alta qualidade e completa. | Nenhuma acao necessaria. |
+| **Baseline (Git)** | Repositorio GitHub criado e atualizado: https://github.com/kellyr5/forum-academico-unifei. Multiplos commits organizados. Historico completo de desenvolvimento. | Baseline bem mantido e documentado. | Manter padrao de commits descritivos. |
 
 **Tabela 1 - Itens Revisados**
 
 ---
 
-### 2.2 Acompanhamento de ações corretivas
+### 2.2 Acompanhamento de acoes corretivas
 
-Esta seção contém o resultado do acompanhamento das ações corretivas de períodos anteriores.
+Esta secao contem o resultado do acompanhamento das acoes corretivas de periodos anteriores.
 
-| Ação corretiva | Objetivo da ação corretiva | Resultado | Requer nova Ação? |
+| Acao corretiva | Objetivo da acao corretiva | Resultado | Requer nova Acao? |
 |----------------|---------------------------|-----------|-------------------|
-| Corrigir erro EADDRINUSE porta 3000 | Resolver conflito de porta ao iniciar servidor backend | Script start.sh criado com verificação e liberação automática de portas. Problema resolvido 100%. | Não |
-| Implementar validações de formulário | Prevenir cadastros com dados inválidos ou incompletos | Validações implementadas no backend com mensagens de erro claras. Testes confirmam funcionamento. | Não |
-| Corrigir logo UNIFEI não carregando | Garantir identidade visual do sistema | Implementado fallback para logo local. Sistema sempre exibe logo corretamente. | Não |
-| Resolver erro 404 no CSS | Garantir carregamento correto da interface | Estrutura de diretórios corrigida. Permissões ajustadas. CSS carrega 100% das vezes. | Não |
-| Implementar busca case-insensitive | Melhorar experiência de busca ignorando acentos e maiúsculas | Função MySQL remover_acentos() criada. Busca funciona perfeitamente com qualquer combinação. | Não |
-| Corrigir "undefined" em Disciplinas/Tópicos | Exibir informações completas de relacionamentos | JOINs implementados nas queries. Informações de professor, curso, autor e disciplina aparecem corretamente. | Não |
+| Corrigir erro EADDRINUSE porta 3000 | Resolver conflito de porta ao iniciar servidor backend | Script start.sh criado com verificacao e liberacao automatica de portas. Problema resolvido 100%. | Nao |
+| Implementar validacoes de formulario | Prevenir cadastros com dados invalidos ou incompletos | Validacoes implementadas no backend com mensagens de erro claras. Testes confirmam funcionamento. | Nao |
+| Corrigir logo UNIFEI nao carregando | Garantir identidade visual do sistema | Implementado fallback para logo local. Sistema sempre exibe logo corretamente. | Nao |
+| Resolver erro 404 no CSS | Garantir carregamento correto da interface | Estrutura de diretorios corrigida. Permissoes ajustadas. CSS carrega 100% das vezes. | Nao |
+| Implementar busca case-insensitive | Melhorar experiencia de busca ignorando acentos e maiusculas | Funcao MySQL remover_acentos() criada. Busca funciona perfeitamente com qualquer combinacao. | Nao |
+| Corrigir "undefined" em Disciplinas/Topicos | Exibir informacoes completas de relacionamentos | JOINs implementados nas queries. Informacoes de professor, curso, autor e disciplina aparecem corretamente. | Nao |
 
-**Tabela 2 - Acompanhamento de Ações Corretivas**
+**Tabela 2 - Acompanhamento de Acoes Corretivas**
 
 ---
 
 ## 3. PENDENCIAS DO PERIODO ANALISADO
 
-| ID | Descrição |
+| ID | Descricao |
 |----|-----------|
-| - | Nenhuma pendência crítica ou impeditiva identificada no período. |
+| - | Nenhuma pendencia critica ou impeditiva identificada no periodo. |
 
 ---
 
 ## 4. PARECER SOBRE O PROJETO
 
-O projeto Fórum Acadêmico UNIFEI foi concluído com sucesso, superando as expectativas iniciais. Desenvolvido em um período de 6 semanas (42 dias), o sistema entregou 5 CRUDs completos e funcionais, quando o requisito mínimo era de 4 CRUDs.
+O projeto Forum Academico UNIFEI foi concluido com sucesso, superando as expectativas iniciais. Desenvolvido em um periodo de 6 semanas (42 dias), o sistema entregou 5 CRUDs completos e funcionais, quando o requisito minimo era de 4 CRUDs.
 
-A arquitetura do sistema foi construída utilizando tecnologias modernas e consolidadas no mercado (Node.js, Express, MySQL), garantindo escalabilidade e manutenibilidade. O frontend foi desenvolvido com foco em responsividade e experiência do usuário, utilizando HTML5, CSS3 e JavaScript puro, sem dependência de frameworks pesados.
+A arquitetura do sistema foi construida utilizando tecnologias modernas e consolidadas no mercado (Node.js, Express, MySQL), garantindo escalabilidade e manutenibilidade. O frontend foi desenvolvido com foco em responsividade e experiencia do usuario, utilizando HTML5, CSS3 e JavaScript puro, sem dependencia de frameworks pesados.
 
-Todos os requisitos obrigatórios foram atendidos:
-- 5 CRUDs implementados (Mural, Usuários, Disciplinas, Tópicos, Respostas)
-- Baseline salvo no Git/GitHub com histórico completo
+Todos os requisitos obrigatorios foram atendidos:
+- 5 CRUDs implementados (Mural, Usuarios, Disciplinas, Topicos, Respostas)
+- Baseline salvo no Git/GitHub com historico completo
 - Testes automatizados (API + Selenium E2E)
 - Bugs registrados no formato Mantis e Bugzilla
 - Status Report completo seguindo template profissional
 
-O projeto está pronto para apresentação e demonstração, com sistema funcionando 100%, documentação completa e código versionado no GitHub.
+O projeto esta pronto para apresentacao e demonstracao, com sistema funcionando 100%, documentacao completa e codigo versionado no GitHub.
 
 ### 4.1 Pontos de sucesso
 
-- **Entrega acima do esperado:** Implementação de 5 CRUDs ao invés dos 4 obrigatórios, demonstrando comprometimento com a qualidade.
+- **Entrega acima do esperado:** Implementacao de 5 CRUDs ao inves dos 4 obrigatorios, demonstrando comprometimento com a qualidade.
 
-- **Qualidade técnica:** Código estruturado seguindo boas práticas de mercado, com arquitetura MVC no backend e separação clara de responsabilidades.
+- **Qualidade tecnica:** Codigo estruturado seguindo boas praticas de mercado, com arquitetura MVC no backend e separacao clara de responsabilidades.
 
 - **Cobertura de testes:** 30 testes automatizados no total (15 API + 15 E2E Selenium) com taxa de sucesso de 100%, garantindo confiabilidade do sistema.
 
-- **Documentação exemplar:** README completo, Status Report profissional, registro de bugs nos formatos Mantis e Bugzilla.
+- **Documentacao exemplar:** README completo, Status Report profissional, registro de bugs nos formatos Mantis e Bugzilla.
 
-- **Gestão de bugs eficiente:** Todos os 5 bugs identificados foram documentados e corrigidos, com taxa de resolução de 100%.
+- **Gestao de bugs eficiente:** Todos os 5 bugs identificados foram documentados e corrigidos, com taxa de resolucao de 100%.
 
-- **Interface profissional:** Design responsivo, intuitivo e moderno, com sistema de abas e ícones Material Design.
+- **Interface profissional:** Design responsivo, intuitivo e moderno, com sistema de abas e icones Material Design.
 
-- **Dados realistas:** Sistema populado com disciplinas reais da UNIFEI, tornando a demonstração mais autêntica e profissional.
+- **Dados realistas:** Sistema populado com disciplinas reais da UNIFEI, tornando a demonstracao mais autentica e profissional.
 
-- **Versionamento exemplar:** Repositório GitHub com commits organizados e descritivos, facilitando rastreabilidade e manutenção.
+- **Versionamento exemplar:** Repositorio GitHub com commits organizados e descritivos, facilitando rastreabilidade e manutencao.
 
-- **Segurança implementada:** Senhas criptografadas com bcrypt, validação de e-mail institucional, proteção contra SQL Injection e XSS.
+- **Seguranca implementada:** Senhas criptografadas com bcrypt, validacao de e-mail institucional, protecao contra SQL Injection e XSS.
 
-- **Sistema funcional 100%:** Todas as funcionalidades testadas e operacionais, pronto para demonstração e uso real.
+- **Sistema funcional 100%:** Todas as funcionalidades testadas e operacionais, pronto para demonstracao e uso real.
 
-### 4.2 Pontos de atenção
+### 4.2 Pontos de atencao
 
-- **Autenticação básica:** Sistema não implementa JWT ou sessões persistentes. Usuários não fazem login real, apenas informam seu ID. Recomendação: Implementar sistema completo de autenticação em versão futura.
+- **Autenticacao basica:** Sistema nao implementa JWT ou sessoes persistentes. Usuarios nao fazem login real, apenas informam seu ID. Recomendacao: Implementar sistema completo de autenticacao em versao futura.
 
-- **Deploy não realizado:** Sistema roda apenas em ambiente local (localhost). Recomendação: Considerar deploy em servidor cloud (Heroku, AWS, DigitalOcean) para acesso remoto.
+- **Deploy nao realizado:** Sistema roda apenas em ambiente local (localhost). Recomendacao: Considerar deploy em servidor cloud (Heroku, AWS, DigitalOcean) para acesso remoto.
 
-- **Testes unitários limitados:** Foco foi em testes de integração (API) e E2E (Selenium). Recomendação: Adicionar testes unitários para funções críticas do backend.
+- **Testes unitarios limitados:** Foco foi em testes de integracao (API) e E2E (Selenium). Recomendacao: Adicionar testes unitarios para funcoes criticas do backend.
 
-- **Responsividade mobile pode melhorar:** Interface funciona em mobile mas foi otimizada para desktop. Recomendação: Melhorar experiência mobile em versão futura.
+- **Responsividade mobile pode melhorar:** Interface funciona em mobile mas foi otimizada para desktop. Recomendacao: Melhorar experiencia mobile em versao futura.
 
-- **Notificações em tempo real ausentes:** Sistema não possui WebSockets para notificações instantâneas. Recomendação: Implementar Socket.io em versão futura para notificações de novas respostas.
+- **Notificacoes em tempo real ausentes:** Sistema nao possui WebSockets para notificacoes instantaneas. Recomendacao: Implementar Socket.io em versao futura para notificacoes de novas respostas.
 
-**Observação:** Todos os pontos de atenção são melhorias para versões futuras e não impedem o uso ou apresentação do sistema atual, que atende 100% dos requisitos obrigatórios do projeto.
+**Observacao:** Todos os pontos de atencao sao melhorias para versoes futuras e nao impedem o uso ou apresentacao do sistema atual, que atende 100% dos requisitos obrigatorios do projeto.
 
 ---
 
 ## 5. METRICAS DO PROJETO
 
-### 5.1 Estatísticas Gerais
+### 5.1 Estatisticas Gerais
 
-- **Duração total:** 42 dias (6 semanas)
+- **Duracao total:** 42 dias (6 semanas)
 - **Horas trabalhadas:** ~240 horas
-- **Linhas de código:** ~4.500
+- **Linhas de codigo:** ~4.500
 - **Arquivos criados:** 28
 - **Commits no Git:** 15+
-- **Taxa de conclusão:** 100%
+- **Taxa de conclusao:** 100%
 
 ### 5.2 Funcionalidades Implementadas
 
 - **CRUDs:** 5 (125% do requisito)
 - **Tabelas no banco:** 10
 - **Rotas de API:** 25+
-- **Páginas/Abas:** 5
+- **Paginas/Abas:** 5
 
 ### 5.3 Qualidade e Testes
 
@@ -157,13 +157,13 @@ O projeto está pronto para apresentação e demonstração, com sistema funcion
 - **Taxa de sucesso:** 100%
 - **Bugs identificados:** 5
 - **Bugs resolvidos:** 5 (100%)
-- **Cobertura de código:** ~85%
+- **Cobertura de codigo:** ~85%
 
 ### 5.4 Dados do Sistema
 
-- **Usuários cadastrados:** 12
+- **Usuarios cadastrados:** 12
 - **Disciplinas:** 12
-- **Tópicos:** 13
+- **Topicos:** 13
 - **Respostas:** 14
 - **Recados no mural:** 5
 
@@ -173,8 +173,8 @@ O projeto está pronto para apresentação e demonstração, com sistema funcion
 
 **Desenvolvedor:**  
 Kelly Reis  
-Matrícula: 2023000490  
-Engenharia de Computação - UNIFEI  
+Matricula: 2023000490  
+Engenharia de Computacao - UNIFEI  
 kelly.reis@unifei.edu.br
 
 **Data:** 12/11/2025
@@ -183,9 +183,9 @@ kelly.reis@unifei.edu.br
 
 **Status do Projeto:** CONCLUIDO COM SUCESSO
 
-**Recomendação:** APROVADO PARA APRESENTACAO E ENTREGA
+**Recomendacao:** APROVADO PARA APRESENTACAO E ENTREGA
 
 ---
 
-*Documento gerado conforme template de Status Report - Engenharia de Software*  
-*Universidade Federal de Itajubá - UNIFEI - 2025*
+*Documento gerado conforme template de Status Report - Gerencia de Projeto de Software*  
+*Universidade Federal de Itajuba - UNIFEI - 2025*

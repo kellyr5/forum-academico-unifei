@@ -1,24 +1,24 @@
-# Fórum Acadêmico UNIFEI
+# Forum Academico UNIFEI
 
-Sistema web completo de fórum acadêmico para a Universidade Federal de Itajubá.
+Sistema web completo de forum academico para a Universidade Federal de Itajuba.
 
 **Desenvolvido por:** Kelly Reis  
-**Matrícula:** 2023000490  
-**Disciplina:** Engenharia de Software  
+**Matricula:** 2023000490  
+**Disciplina:** Gerencia de Projeto de Software  
 **Ano:** 2025
 
 ---
 
 ## Sobre o Projeto
 
-O Fórum Acadêmico UNIFEI é uma plataforma web que facilita a comunicação e colaboração entre alunos, professores e monitores. O sistema permite:
+O Forum Academico UNIFEI e uma plataforma web que facilita a comunicacao e colaboracao entre alunos, professores e monitores. O sistema permite:
 
 - Mural de recados institucional
-- Gerenciamento de usuários (alunos, professores, monitores)
+- Gerenciamento de usuarios (alunos, professores, monitores)
 - Cadastro de disciplinas por curso
-- Criação de tópicos de discussão
-- Sistema de respostas com votação
-- Marcação de melhores respostas
+- Criacao de topicos de discussao
+- Sistema de respostas com votacao
+- Marcacao de melhores respostas
 
 ---
 
@@ -31,7 +31,7 @@ O Fórum Acadêmico UNIFEI é uma plataforma web que facilita a comunicação e 
 - bcryptjs (criptografia de senhas)
 
 ### Frontend
-- HTML5 (estrutura semântica)
+- HTML5 (estrutura semantica)
 - CSS3 (design responsivo)
 - JavaScript ES6+ (Fetch API)
 - Material Icons (Google)
@@ -79,15 +79,15 @@ forum-academico/
 
 ---
 
-## Instalação e Configuração
+## Instalacao e Configuracao
 
-### Pré-requisitos
+### Pre-requisitos
 
 - Node.js 18+
 - MySQL 8.0+
 - Python 3.10+
 
-### Passo 1: Clonar o Repositório
+### Passo 1: Clonar o Repositorio
 ```bash
 git clone https://github.com/kellyr5/forum-academico-unifei.git
 cd forum-academico-unifei
@@ -98,15 +98,15 @@ cd forum-academico-unifei
 mysql -u root -p < backend/config/init.sql
 ```
 
-### Passo 3: Instalar Dependências Backend
+### Passo 3: Instalar Dependencias Backend
 ```bash
 cd backend
 npm install
 ```
 
-### Passo 4: Configurar Variáveis de Ambiente
+### Passo 4: Configurar Variaveis de Ambiente
 
-Crie arquivo `.env` no diretório `backend/`:
+Crie arquivo `.env` no diretorio `backend/`:
 ```env
 DB_HOST=localhost
 DB_USER=root
@@ -119,12 +119,12 @@ PORT=3000
 
 ## Como Executar
 
-### Opção 1: Script Automático (Recomendado)
+### Opcao 1: Script Automatico (Recomendado)
 ```bash
 ./start.sh
 ```
 
-### Opção 2: Manual
+### Opcao 2: Manual
 
 **Terminal 1 - Backend:**
 ```bash
@@ -168,45 +168,45 @@ python3 test_selenium.py
 - Update: Editar recados (backend)
 - Delete: Excluir recados
 
-### CRUD 2: Usuários
-- Create: Cadastrar usuários com validação
-- Read: Buscar e listar usuários
+### CRUD 2: Usuarios
+- Create: Cadastrar usuarios com validacao
+- Read: Buscar e listar usuarios
 - Update: Editar perfil
-- Delete: Exclusão lógica
+- Delete: Exclusao logica
 
 ### CRUD 3: Disciplinas
 - Create: Cadastrar disciplinas
 - Read: Listar por curso/professor
-- Update: Editar informações
+- Update: Editar informacoes
 - Delete: Remover disciplinas
 
-### CRUD 4: Tópicos
-- Create: Criar tópicos de discussão
+### CRUD 4: Topicos
+- Create: Criar topicos de discussao
 - Read: Visualizar com filtros
-- Update: Editar conteúdo
-- Delete: Remover tópicos
+- Update: Editar conteudo
+- Delete: Remover topicos
 
 ### CRUD 5: Respostas (BONUS)
-- Create: Responder tópicos
+- Create: Responder topicos
 - Read: Ver respostas ordenadas
 - Update: Editar respostas
 - Delete: Remover respostas
 
 ---
 
-## Segurança
+## Seguranca
 
 - Senhas criptografadas com bcrypt
-- Validação de entrada no backend
-- Proteção contra SQL Injection
-- Proteção contra XSS
-- E-mail institucional obrigatório (@unifei.edu.br)
+- Validacao de entrada no backend
+- Protecao contra SQL Injection
+- Protecao contra XSS
+- E-mail institucional obrigatorio (@unifei.edu.br)
 
 ---
 
-## Estatísticas do Projeto
+## Estatisticas do Projeto
 
-- **Linhas de código:** ~4,500
+- **Linhas de codigo:** ~4,500
 - **Arquivos:** 28
 - **Tabelas no BD:** 10
 - **Testes automatizados:** 30
@@ -215,7 +215,7 @@ python3 test_selenium.py
 
 ---
 
-## Documentação
+## Documentacao
 
 - **Status Report:** `docs/STATUS_REPORT.md`
 - **Registro de Bugs:** `docs/REGISTRO_DE_BUGS.md`
@@ -226,27 +226,27 @@ python3 test_selenium.py
 
 ## Rastreamento de Bugs
 
-Os bugs deste projeto foram registrados e rastreados usando os formatos padrão:
+Os bugs deste projeto foram registrados e rastreados usando os formatos padrao:
 
 ### Mantis Bug Tracker
 **Arquivo:** `docs/BUGS_MANTIS_EXPORT.csv`
-- Formato: CSV (compatível com Mantis)
+- Formato: CSV (compativel com Mantis)
 - Total de bugs: 5
 - Status: Todos resolvidos
 
 ### Bugzilla
 **Arquivo:** `docs/BUGS_BUGZILLA_EXPORT.xml`
-- Formato: XML (formato padrão Bugzilla)
+- Formato: XML (formato padrao Bugzilla)
 - Total de bugs: 5
 - Status: Todos resolvidos (FIXED)
 
-### Estatísticas de Bugs
+### Estatisticas de Bugs
 
 | Severidade | Quantidade | Resolvidos |
 |------------|------------|------------|
-| Crítica    | 1          | 1 (100%)   |
+| Critica    | 1          | 1 (100%)   |
 | Alta       | 2          | 2 (100%)   |
-| Média      | 1          | 1 (100%)   |
+| Media      | 1          | 1 (100%)   |
 | Baixa      | 1          | 1 (100%)   |
 | **TOTAL**  | **5**      | **5 (100%)**|
 
@@ -254,10 +254,10 @@ Os bugs deste projeto foram registrados e rastreados usando os formatos padrão:
 
 ## Melhorias Futuras
 
-1. Sistema de autenticação JWT
-2. Notificações em tempo real (WebSockets)
-3. Upload de arquivos em tópicos
-4. Sistema de busca avançada
+1. Sistema de autenticacao JWT
+2. Notificacoes em tempo real (WebSockets)
+3. Upload de arquivos em topicos
+4. Sistema de busca avancada
 5. Dashboard administrativo
 6. API REST documentada (Swagger)
 
@@ -266,21 +266,21 @@ Os bugs deste projeto foram registrados e rastreados usando os formatos padrão:
 ## Desenvolvedor
 
 **Kelly Reis**  
-Estudante de Engenharia de Computação  
-Universidade Federal de Itajubá (UNIFEI)  
-Matrícula: 2023000490
+Estudante de Engenharia de Computacao  
+Universidade Federal de Itajuba (UNIFEI)  
+Matricula: 2023000490
 
 ---
 
-## Licença
+## Licenca
 
-Este projeto foi desenvolvido para fins acadêmicos como parte da disciplina de Engenharia de Software.
+Este projeto foi desenvolvido para fins academicos como parte da disciplina de Gerencia de Projeto de Software.
 
 ---
 
 ## Agradecimentos
 
-- Prof. Orientador da disciplina - Orientação
+- Professor orientador da disciplina
 - UNIFEI - Infraestrutura
 - Colegas de turma - Feedback e testes
 
