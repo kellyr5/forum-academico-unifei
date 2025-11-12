@@ -5,279 +5,296 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fórum Acadêmico - UNIFEI</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header class="header">
         <div class="container">
-            <h1 class="logo">Fórum Acadêmico UNIFEI</h1>
-            <nav class="nav">
-                <span id="user-info" style="margin-right: 20px; color: white;"></span>
-                <a href="#usuarios" class="nav-link">Usuários</a>
-                <a href="#disciplinas" class="nav-link">Disciplinas</a>
-                <a href="#topicos" class="nav-link">Tópicos</a>
-                <a href="#respostas" class="nav-link">Respostas</a>
-                <a href="#" onclick="logout()" class="nav-link" style="background-color: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 4px;">Sair</a>
-            </nav>
+            <div class="logo-container">
+                <img src="https://www.unifei.edu.br/wp-content/themes/unifei/assets/images/logo.png" alt="UNIFEI" class="logo-img">
+                <h1 class="logo">Fórum Acadêmico UNIFEI</h1>
+            </div>
         </div>
     </header>
 
+    <nav class="tabs-nav">
+        <div class="container">
+            <button class="tab-btn active" data-tab="mural">
+                <i class="material-icons">dashboard</i>
+                <span>Mural</span>
+            </button>
+            <button class="tab-btn" data-tab="usuarios">
+                <i class="material-icons">people</i>
+                <span>Usuários</span>
+            </button>
+            <button class="tab-btn" data-tab="disciplinas">
+                <i class="material-icons">book</i>
+                <span>Disciplinas</span>
+            </button>
+            <button class="tab-btn" data-tab="topicos">
+                <i class="material-icons">forum</i>
+                <span>Tópicos</span>
+            </button>
+            <button class="tab-btn" data-tab="respostas">
+                <i class="material-icons">question_answer</i>
+                <span>Respostas</span>
+            </button>
+        </div>
+    </nav>
+
     <main class="main-content">
         <div class="container">
-            <div class="card" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-left: 5px solid #003366;">
-                <h3 style="color: #003366; margin-bottom: 10px;">👤 Bem-vindo ao Fórum Acadêmico!</h3>
-                <p id="welcome-message" style="font-size: 1.1rem; color: #333;"></p>
+            
+            <!-- MURAL -->
+            <div id="mural" class="tab-content active">
+                <h2 class="section-title">
+                    <i class="material-icons">dashboard</i>
+                    Mural de Recados
+                </h2>
+                
+                <div class="card">
+                    <h3 class="card-title">
+                        <i class="material-icons">add_circle</i>
+                        Criar Recado
+                    </h3>
+                    <form id="form-recado" class="form">
+                        <input type="text" id="rec_titulo" placeholder="Título do recado" required maxlength="150">
+                        <input type="text" id="rec_autor" placeholder="Nome do autor" required maxlength="100">
+                        <textarea id="rec_conteudo" placeholder="Escreva o conteúdo do recado aqui..." required rows="4"></textarea>
+                        <select id="rec_categoria" required>
+                            <option value="Aviso">Aviso Importante</option>
+                            <option value="Evento">Evento</option>
+                            <option value="Oportunidade">Oportunidade</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="material-icons">send</i>
+                            Publicar
+                        </button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3 class="card-title">
+                        <i class="material-icons">view_list</i>
+                        Recados Publicados
+                    </h3>
+                    <button class="btn btn-secondary" onclick="buscarRecados()">
+                        <i class="material-icons">refresh</i>
+                        Atualizar Lista
+                    </button>
+                    <div id="lista-recados"></div>
+                </div>
             </div>
 
             <!-- USUÁRIOS -->
-            <section id="usuarios" class="section">
-                <h2 class="section-title">Gerenciamento de Usuários</h2>
+            <div id="usuarios" class="tab-content">
+                <h2 class="section-title">
+                    <i class="material-icons">people</i>
+                    Gerenciamento de Usuários
+                </h2>
                 
                 <div class="card">
-                    <h3 class="card-title">Cadastrar Novo Usuário</h3>
+                    <h3 class="card-title">
+                        <i class="material-icons">person_add</i>
+                        Cadastrar Novo Usuário
+                    </h3>
                     <form id="form-usuario" class="form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="nome_completo">Nome Completo</label>
-                                <input type="text" id="nome_completo" name="nome_completo" required maxlength="100">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">E-mail Institucional</label>
-                                <input type="email" id="email" name="email" required placeholder="matricula@unifei.edu.br">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="senha">Senha</label>
-                                <input type="password" id="senha" name="senha" required minlength="8">
-                            </div>
-                            <div class="form-group">
-                                <label for="confirmar_senha">Confirmar Senha</label>
-                                <input type="password" id="confirmar_senha" name="confirmar_senha" required>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="curso_id">Curso</label>
-                                <select id="curso_id" name="curso_id" required>
-                                    <option value="">Carregando...</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="periodo">Período</label>
-                                <select id="periodo" name="periodo" required>
-                                    <option value="">Selecione...</option>
-                                    <option value="1">1º Período</option>
-                                    <option value="2">2º Período</option>
-                                    <option value="3">3º Período</option>
-                                    <option value="4">4º Período</option>
-                                    <option value="5">5º Período</option>
-                                    <option value="6">6º Período</option>
-                                    <option value="7">7º Período</option>
-                                    <option value="8">8º Período</option>
-                                    <option value="9">9º Período</option>
-                                    <option value="10">10º Período</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="tipo_usuario">Tipo de Usuário</label>
-                            <select id="tipo_usuario" name="tipo_usuario" required>
-                                <option value="">Selecione...</option>
-                                <option value="Aluno">Aluno</option>
-                                <option value="Professor">Professor</option>
-                                <option value="Monitor">Monitor</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Cadastrar Usuário</button>
+                        <input type="text" id="nome_completo" placeholder="Nome Completo" required>
+                        <input type="email" id="email" placeholder="email@unifei.edu.br" required>
+                        <input type="password" id="senha" placeholder="Senha (mín. 8 caracteres)" required minlength="8">
+                        <input type="password" id="confirmar_senha" placeholder="Confirmar Senha" required>
+                        <select id="curso_id" required>
+                            <option value="">Selecione o Curso</option>
+                        </select>
+                        <select id="periodo" required>
+                            <option value="">Selecione o Período</option>
+                            <option value="1">1º Período</option>
+                            <option value="2">2º Período</option>
+                            <option value="3">3º Período</option>
+                            <option value="4">4º Período</option>
+                            <option value="5">5º Período</option>
+                            <option value="6">6º Período</option>
+                            <option value="7">7º Período</option>
+                            <option value="8">8º Período</option>
+                            <option value="9">9º Período</option>
+                            <option value="10">10º Período</option>
+                        </select>
+                        <select id="tipo_usuario" required>
+                            <option value="">Tipo de Usuário</option>
+                            <option value="Aluno">Aluno</option>
+                            <option value="Professor">Professor</option>
+                            <option value="Monitor">Monitor</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="material-icons">save</i>
+                            Cadastrar Usuário
+                        </button>
                     </form>
                 </div>
 
                 <div class="card">
-                    <h3 class="card-title">Consultar Usuários</h3>
+                    <h3 class="card-title">
+                        <i class="material-icons">search</i>
+                        Buscar Usuários
+                    </h3>
                     <form id="form-buscar-usuario" class="form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="buscar_nome">Nome</label>
-                                <input type="text" id="buscar_nome" name="nome">
-                            </div>
-                            <div class="form-group">
-                                <label for="buscar_tipo">Tipo</label>
-                                <select id="buscar_tipo" name="tipo_usuario">
-                                    <option value="">Todos</option>
-                                    <option value="Aluno">Aluno</option>
-                                    <option value="Professor">Professor</option>
-                                    <option value="Monitor">Monitor</option>
-                                </select>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-secondary">Buscar</button>
+                        <input type="text" id="buscar_nome" placeholder="Buscar por nome">
+                        <select id="buscar_tipo">
+                            <option value="">Todos os Tipos</option>
+                            <option value="Aluno">Alunos</option>
+                            <option value="Professor">Professores</option>
+                            <option value="Monitor">Monitores</option>
+                        </select>
+                        <button type="submit" class="btn btn-secondary">
+                            <i class="material-icons">search</i>
+                            Buscar
+                        </button>
                     </form>
-                    <div id="lista-usuarios" class="lista-resultados"></div>
+                    <div id="lista-usuarios"></div>
                 </div>
-            </section>
+            </div>
 
             <!-- DISCIPLINAS -->
-            <section id="disciplinas" class="section">
-                <h2 class="section-title">Gerenciamento de Disciplinas</h2>
+            <div id="disciplinas" class="tab-content">
+                <h2 class="section-title">
+                    <i class="material-icons">book</i>
+                    Gerenciamento de Disciplinas
+                </h2>
                 
                 <div class="card">
-                    <h3 class="card-title">Cadastrar Nova Disciplina</h3>
+                    <h3 class="card-title">
+                        <i class="material-icons">add_box</i>
+                        Cadastrar Nova Disciplina
+                    </h3>
                     <form id="form-disciplina" class="form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="disc_nome">Nome da Disciplina</label>
-                                <input type="text" id="disc_nome" name="nome" required maxlength="100">
-                            </div>
-                            <div class="form-group">
-                                <label for="disc_codigo">Código</label>
-                                <input type="text" id="disc_codigo" name="codigo" required maxlength="15">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="disc_curso">Curso</label>
-                                <select id="disc_curso" name="curso_id" required>
-                                    <option value="">Carregando...</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="disc_periodo">Período Letivo</label>
-                                <input type="text" id="disc_periodo" name="periodo_letivo" required pattern="^\d{4}\.[12]$" placeholder="2024.2">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="disc_descricao">Descrição</label>
-                            <textarea id="disc_descricao" name="descricao" maxlength="500" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Cadastrar Disciplina</button>
+                        <input type="text" id="disc_nome" placeholder="Nome da Disciplina" required>
+                        <input type="text" id="disc_codigo" placeholder="Código da Disciplina" required>
+                        <select id="disc_curso" required>
+                            <option value="">Selecione o Curso</option>
+                        </select>
+                        <input type="number" id="disc_professor" placeholder="ID do Professor" required min="1">
+                        <input type="text" id="disc_periodo" placeholder="Período Letivo (ex: 2024.2)" required pattern="^\d{4}\.[12]$">
+                        <textarea id="disc_descricao" placeholder="Descrição da disciplina" rows="3"></textarea>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="material-icons">save</i>
+                            Cadastrar Disciplina
+                        </button>
                     </form>
                 </div>
 
                 <div class="card">
-                    <h3 class="card-title">Consultar Disciplinas</h3>
+                    <h3 class="card-title">
+                        <i class="material-icons">search</i>
+                        Buscar Disciplinas
+                    </h3>
                     <form id="form-buscar-disciplina" class="form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="buscar_disc_nome">Nome</label>
-                                <input type="text" id="buscar_disc_nome" name="nome">
-                            </div>
-                            <div class="form-group">
-                                <label for="buscar_disc_periodo">Período Letivo</label>
-                                <input type="text" id="buscar_disc_periodo" name="periodo_letivo">
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-secondary">Buscar</button>
+                        <input type="text" id="buscar_disc_nome" placeholder="Buscar por nome">
+                        <button type="submit" class="btn btn-secondary">
+                            <i class="material-icons">search</i>
+                            Buscar
+                        </button>
                     </form>
-                    <div id="lista-disciplinas" class="lista-resultados"></div>
+                    <div id="lista-disciplinas"></div>
                 </div>
-            </section>
+            </div>
 
             <!-- TÓPICOS -->
-            <section id="topicos" class="section">
-                <h2 class="section-title">Gerenciamento de Tópicos</h2>
+            <div id="topicos" class="tab-content">
+                <h2 class="section-title">
+                    <i class="material-icons">forum</i>
+                    Gerenciamento de Tópicos
+                </h2>
                 
                 <div class="card">
-                    <h3 class="card-title">Criar Novo Tópico</h3>
+                    <h3 class="card-title">
+                        <i class="material-icons">create</i>
+                        Criar Novo Tópico
+                    </h3>
                     <form id="form-topico" class="form">
-                        <div class="form-group">
-                            <label for="top_titulo">Título</label>
-                            <input type="text" id="top_titulo" name="titulo" required maxlength="150">
-                        </div>
-                        <div class="form-group">
-                            <label for="top_conteudo">Conteúdo</label>
-                            <textarea id="top_conteudo" name="conteudo" required maxlength="5000" rows="5"></textarea>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="top_disciplina">Disciplina (ID)</label>
-                                <input type="number" id="top_disciplina" name="disciplina_id" required min="1">
-                            </div>
-                            <div class="form-group">
-                                <label for="top_categoria">Categoria</label>
-                                <select id="top_categoria" name="categoria" required>
-                                    <option value="">Selecione...</option>
-                                    <option value="Dúvida">Dúvida</option>
-                                    <option value="Discussão">Discussão</option>
-                                    <option value="Anúncio">Anúncio</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="top_tags">Tags</label>
-                            <input type="text" id="top_tags" name="tags" maxlength="255">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Criar Tópico</button>
+                        <input type="text" id="top_titulo" placeholder="Título do Tópico" required>
+                        <textarea id="top_conteudo" placeholder="Conteúdo do tópico" required rows="5"></textarea>
+                        <input type="number" id="top_disciplina" placeholder="ID da Disciplina" required min="1">
+                        <input type="number" id="top_usuario" placeholder="ID do Usuário" required min="1">
+                        <select id="top_categoria" required>
+                            <option value="">Selecione a Categoria</option>
+                            <option value="Dúvida">Dúvida</option>
+                            <option value="Discussão">Discussão</option>
+                            <option value="Anúncio">Anúncio</option>
+                        </select>
+                        <input type="text" id="top_tags" placeholder="Tags (separadas por vírgula)">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="material-icons">send</i>
+                            Criar Tópico
+                        </button>
                     </form>
                 </div>
 
                 <div class="card">
-                    <h3 class="card-title">Consultar Tópicos</h3>
+                    <h3 class="card-title">
+                        <i class="material-icons">search</i>
+                        Buscar Tópicos
+                    </h3>
                     <form id="form-buscar-topico" class="form">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="buscar_top_titulo">Título</label>
-                                <input type="text" id="buscar_top_titulo" name="titulo">
-                            </div>
-                            <div class="form-group">
-                                <label for="buscar_top_categoria">Categoria</label>
-                                <select id="buscar_top_categoria" name="categoria">
-                                    <option value="">Todas</option>
-                                    <option value="Dúvida">Dúvida</option>
-                                    <option value="Discussão">Discussão</option>
-                                    <option value="Anúncio">Anúncio</option>
-                                </select>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-secondary">Buscar</button>
+                        <input type="text" id="buscar_top_titulo" placeholder="Buscar por título">
+                        <button type="submit" class="btn btn-secondary">
+                            <i class="material-icons">search</i>
+                            Buscar
+                        </button>
                     </form>
-                    <div id="lista-topicos" class="lista-resultados"></div>
+                    <div id="lista-topicos"></div>
                 </div>
-            </section>
+            </div>
 
             <!-- RESPOSTAS -->
-            <section id="respostas" class="section">
-                <h2 class="section-title">Gerenciamento de Respostas</h2>
+            <div id="respostas" class="tab-content">
+                <h2 class="section-title">
+                    <i class="material-icons">question_answer</i>
+                    Gerenciamento de Respostas
+                </h2>
                 
                 <div class="card">
-                    <h3 class="card-title">Criar Nova Resposta</h3>
+                    <h3 class="card-title">
+                        <i class="material-icons">reply</i>
+                        Criar Nova Resposta
+                    </h3>
                     <form id="form-resposta" class="form">
-                        <div class="form-group">
-                            <label for="resp_conteudo">Conteúdo</label>
-                            <textarea id="resp_conteudo" name="conteudo" required maxlength="3000" rows="4"></textarea>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="resp_topico">Tópico (ID)</label>
-                                <input type="number" id="resp_topico" name="topico_id" required min="1">
-                            </div>
-                            <div class="form-group">
-                                <label for="resp_pai">Resposta Pai (ID - opcional)</label>
-                                <input type="number" id="resp_pai" name="resposta_pai_id" min="1">
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Criar Resposta</button>
+                        <textarea id="resp_conteudo" placeholder="Escreva sua resposta aqui..." required rows="4"></textarea>
+                        <input type="number" id="resp_topico" placeholder="ID do Tópico" required min="1">
+                        <input type="number" id="resp_usuario" placeholder="ID do Usuário" required min="1">
+                        <input type="number" id="resp_pai" placeholder="ID da Resposta Pai (opcional para sub-respostas)" min="1">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="material-icons">send</i>
+                            Enviar Resposta
+                        </button>
                     </form>
                 </div>
 
                 <div class="card">
-                    <h3 class="card-title">Consultar Respostas</h3>
+                    <h3 class="card-title">
+                        <i class="material-icons">search</i>
+                        Buscar Respostas por Tópico
+                    </h3>
                     <form id="form-buscar-resposta" class="form">
-                        <div class="form-group">
-                            <label for="buscar_resp_topico">ID do Tópico</label>
-                            <input type="number" id="buscar_resp_topico" name="topico_id" required min="1">
-                        </div>
-                        <button type="submit" class="btn btn-secondary">Buscar Respostas</button>
+                        <input type="number" id="buscar_resp_topico" placeholder="Digite o ID do Tópico" required min="1">
+                        <button type="submit" class="btn btn-secondary">
+                            <i class="material-icons">search</i>
+                            Buscar Respostas
+                        </button>
                     </form>
-                    <div id="lista-respostas" class="lista-resultados"></div>
+                    <div id="lista-respostas"></div>
                 </div>
-            </section>
+            </div>
+
         </div>
     </main>
 
     <footer class="footer">
         <div class="container">
-            <p>Fórum Acadêmico - UNIFEI &copy; 2024</p>
-            <p>Kelly dos Reis Leite - 2023000490</p>
+            <p>Fórum Acadêmico - Universidade Federal de Itajubá</p>
+            <p>Desenvolvido por Kelly dos Reis Leite - Matrícula: 2023000490</p>
+            <p>Engenharia de Software - 2024</p>
         </div>
     </footer>
 
