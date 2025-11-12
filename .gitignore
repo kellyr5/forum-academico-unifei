@@ -1,0 +1,40 @@
+# Dependências
+node_modules/
+npm-debug.log*
+
+# Ambiente
+.env
+.env.local
+
+# Logs
+*.log
+logs/
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# Build
+dist/
+build/
+
+# Testes
+coverage/
+__pycache__/
+*.pyc
+
+# Temporários
+tmp/
+temp/
+*.tmp
+
+# Uploads
+uploads/
+
+# Banco
+*.sql.backup
