@@ -36,9 +36,17 @@ python3 -m http.server 8000
 Acesse: http://localhost:8000
 
 ## Testes
+
+### Testes de API
 ```bash
 cd tests
 python3 test_api.py
+```
+
+### Testes Selenium (E2E)
+```bash
+cd tests
+python3 test_selenium.py
 ```
 
 ## Estrutura do Projeto

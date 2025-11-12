@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Testes E2E com Selenium - Forum Academico UNIFEI
-Data: Novembro 2025
-"""
-
 import time
 import sys
 
@@ -78,166 +73,158 @@ class TestForumAcademico:
             self.driver.get(self.base_url)
             time.sleep(2)
             assert "Forum" in self.driver.title or "UNIFEI" in self.driver.page_source
-            self.test_resultado("Carregar pagina principal", True)
+            self.test_resultado("Teste 01 - Carregar pagina principal", True)
         except Exception as e:
-            print(f"   Erro: {e}")
-            self.test_resultado("Carregar pagina principal", False)
+            print(f"  Erro: {e}")
+            self.test_resultado("Teste 01 - Carregar pagina principal", False)
     
     def test_02_verificar_header(self):
         try:
             header = self.driver.find_element(By.TAG_NAME, "header")
             assert header.is_displayed()
-            self.test_resultado("Verificar header", True)
+            self.test_resultado("Teste 02 - Verificar header", True)
         except Exception as e:
-            print(f"   Erro: {e}")
-            self.test_resultado("Verificar header", False)
+            print(f"  Erro: {e}")
+            self.test_resultado("Teste 02 - Verificar header", False)
     
     def test_03_verificar_abas(self):
         try:
             abas = self.driver.find_elements(By.CLASS_NAME, "tab-btn")
             assert len(abas) >= 5
-            self.test_resultado("Verificar 5 abas", True)
+            self.test_resultado("Teste 03 - Verificar 5 abas", True)
         except Exception as e:
-            print(f"   Erro: {e}")
-            self.test_resultado("Verificar 5 abas", False)
+            print(f"  Erro: {e}")
+            self.test_resultado("Teste 03 - Verificar 5 abas", False)
     
     def test_04_clicar_aba_usuarios(self):
         try:
             aba = self.driver.find_element(By.CSS_SELECTOR, '[data-tab="usuarios"]')
             aba.click()
             time.sleep(2)
-            self.test_resultado("Clicar aba Usuarios", True)
+            self.test_resultado("Teste 04 - Clicar aba Usuarios", True)
         except Exception as e:
-            print(f"   Erro: {e}")
-            self.test_resultado("Clicar aba Usuarios", False)
+            print(f"  Erro: {e}")
+            self.test_resultado("Teste 04 - Clicar aba Usuarios", False)
     
     def test_05_lista_usuarios_carrega(self):
         try:
             time.sleep(2)
             lista = self.driver.find_element(By.ID, "lista-usuarios")
             assert lista.text != ""
-            self.test_resultado("Lista de usuarios carrega", True)
+            self.test_resultado("Teste 05 - Lista de usuarios carrega", True)
         except Exception as e:
-            print(f"   Erro: {e}")
-            self.test_resultado("Lista de usuarios carrega", False)
+            print(f"  Erro: {e}")
+            self.test_resultado("Teste 05 - Lista de usuarios carrega", False)
     
     def test_06_clicar_aba_disciplinas(self):
         try:
             aba = self.driver.find_element(By.CSS_SELECTOR, '[data-tab="disciplinas"]')
             aba.click()
             time.sleep(2)
-            self.test_resultado("Clicar aba Disciplinas", True)
+            self.test_resultado("Teste 06 - Clicar aba Disciplinas", True)
         except Exception as e:
-            print(f"   Erro: {e}")
-            self.test_resultado("Clicar aba Disciplinas", False)
+            print(f"  Erro: {e}")
+            self.test_resultado("Teste 06 - Clicar aba Disciplinas", False)
     
     def test_07_lista_disciplinas_carrega(self):
         try:
             time.sleep(2)
             lista = self.driver.find_element(By.ID, "lista-disciplinas")
             assert lista.text != ""
-            self.test_resultado("Lista de disciplinas carrega", True)
+            self.test_resultado("Teste 07 - Lista de disciplinas carrega", True)
         except Exception as e:
-            print(f"   Erro: {e}")
-            self.test_resultado("Lista de disciplinas carrega", False)
+            print(f"  Erro: {e}")
+            self.test_resultado("Teste 07 - Lista de disciplinas carrega", False)
     
     def test_08_clicar_aba_topicos(self):
         try:
             aba = self.driver.find_element(By.CSS_SELECTOR, '[data-tab="topicos"]')
             aba.click()
             time.sleep(2)
-            self.test_resultado("Clicar aba Topicos", True)
+            self.test_resultado("Teste 08 - Clicar aba Topicos", True)
         except Exception as e:
-            print(f"   Erro: {e}")
-            self.test_resultado("Clicar aba Topicos", False)
+            print(f"  Erro: {e}")
+            self.test_resultado("Teste 08 - Clicar aba Topicos", False)
     
     def test_09_lista_topicos_carrega(self):
         try:
             time.sleep(2)
             lista = self.driver.find_element(By.ID, "lista-topicos")
             assert lista.text != ""
-            self.test_resultado("Lista de topicos carrega", True)
+            self.test_resultado("Teste 09 - Lista de topicos carrega", True)
         except Exception as e:
-            print(f"   Erro: {e}")
-            self.test_resultado("Lista de topicos carrega", False)
+            print(f"  Erro: {e}")
+            self.test_resultado("Teste 09 - Lista de topicos carrega", False)
     
     def test_10_clicar_ver_respostas(self):
         try:
             botao = self.driver.find_element(By.CSS_SELECTOR, ".topico-card .btn-primary")
             botao.click()
             time.sleep(2)
-            self.test_resultado("Clicar 'Ver Respostas'", True)
+            self.test_resultado("Teste 10 - Clicar Ver Respostas", True)
         except Exception as e:
-            print(f"   Erro: {e}")
-            self.test_resultado("Clicar 'Ver Respostas'", False)
+            print(f"  Erro: {e}")
+            self.test_resultado("Teste 10 - Clicar Ver Respostas", False)
     
     def test_11_lista_respostas_carrega(self):
         try:
             lista = self.driver.find_element(By.ID, "lista-respostas")
             assert lista.text != ""
-            self.test_resultado("Lista de respostas carrega", True)
+            self.test_resultado("Teste 11 - Lista de respostas carrega", True)
         except Exception as e:
-            print(f"   Erro: {e}")
-            self.test_resultado("Lista de respostas carrega", False)
+            print(f"  Erro: {e}")
+            self.test_resultado("Teste 11 - Lista de respostas carrega", False)
     
     def test_12_voltar_mural(self):
         try:
             aba = self.driver.find_element(By.CSS_SELECTOR, '[data-tab="mural"]')
             aba.click()
             time.sleep(1)
-            self.test_resultado("Voltar para Mural", True)
+            self.test_resultado("Teste 12 - Voltar para Mural", True)
         except Exception as e:
-            print(f"   Erro: {e}")
-            self.test_resultado("Voltar para Mural", False)
+            print(f"  Erro: {e}")
+            self.test_resultado("Teste 12 - Voltar para Mural", False)
     
     def test_13_botao_atualizar(self):
         try:
             botao = self.driver.find_element(By.CSS_SELECTOR, "#mural .btn")
             botao.click()
             time.sleep(1)
-            self.test_resultado("Botao Atualizar Lista", True)
+            self.test_resultado("Teste 13 - Botao Atualizar Lista", True)
         except Exception as e:
-            print(f"   Erro: {e}")
-            self.test_resultado("Botao Atualizar Lista", False)
+            print(f"  Erro: {e}")
+            self.test_resultado("Teste 13 - Botao Atualizar Lista", False)
     
     def test_14_verificar_rodape(self):
         try:
             footer = self.driver.find_element(By.TAG_NAME, "footer")
             assert "2025" in footer.text
-            self.test_resultado("Verificar rodape", True)
+            self.test_resultado("Teste 14 - Verificar rodape", True)
         except Exception as e:
-            print(f"   Erro: {e}")
-            self.test_resultado("Verificar rodape", False)
+            print(f"  Erro: {e}")
+            self.test_resultado("Teste 14 - Verificar rodape", False)
     
     def test_15_screenshot(self):
         try:
             self.driver.save_screenshot("screenshot_final.png")
-            print("   Screenshot salvo: tests/screenshot_final.png")
-            self.test_resultado("Capturar screenshot", True)
+            print("  Screenshot salvo: tests/screenshot_final.png")
+            self.test_resultado("Teste 15 - Capturar screenshot", True)
         except Exception as e:
-            print(f"   Erro: {e}")
-            self.test_resultado("Capturar screenshot", False)
+            print(f"  Erro: {e}")
+            self.test_resultado("Teste 15 - Capturar screenshot", False)
     
     def executar_todos_testes(self):
         """Executar todos os testes"""
-        print("=" * 80)
-        print("TESTES E2E COM SELENIUM - FORUM ACADEMICO UNIFEI")
-        print("=" * 80)
-        print(f"URL: {self.base_url}")
-        print("Desenvolvido por: Kelly Reis (2023000490)")
-        print("=" * 80)
-        print()
+        print("TESTES AUTOMATIZADOS SELENIUM - FORUM ACADEMICO UNIFEI")
+        print("Iniciando execucao dos testes Selenium...\n")
         
         if not self.setup():
-            print("\n" + "=" * 80)
-            print("AVISO: Testes Selenium nao puderam ser executados no WSL")
-            print("=" * 80)
+            print("\nAVISO: Testes Selenium nao puderam ser executados no WSL")
             print("\nMotivo: ChromeDriver nao e compativel com WSL")
             print("\nAlternativas:")
             print("  1. Execute os testes no Windows (PowerShell)")
             print("  2. Use os testes de API (que passaram 100%)")
             print("  3. Demonstre o sistema funcionando manualmente")
-            print("\n" + "=" * 80)
             return False
         
         self.test_01_carregar_pagina()
@@ -261,31 +248,53 @@ class TestForumAcademico:
         total = self.tests_passed + self.tests_failed
         taxa_sucesso = (self.tests_passed / total * 100) if total > 0 else 0
         
-        print()
-        print("=" * 80)
-        print("RELATORIO FINAL - TESTES SELENIUM")
-        print("=" * 80)
-        print(f"Testes passaram: {self.tests_passed}")
-        print(f"Testes falharam: {self.tests_failed}")
-        print(f"Total de testes: {total}")
+        print("\nRELATORIO FINAL DOS TESTES")
+        print(f"\nTotal de testes: {total}")
+        print(f"Aprovados: {self.tests_passed}")
+        print(f"Reprovados: {self.tests_failed}")
         print(f"Taxa de sucesso: {taxa_sucesso:.1f}%")
-        print("=" * 80)
+        
+        if self.tests_failed > 0:
+            print("\nTestes que falharam:")
+            print(f"  - Total de falhas: {self.tests_failed}")
+        
+        print("\n")
         
         with open("RELATORIO_SELENIUM.txt", "w") as f:
-            f.write("=" * 80 + "\n")
-            f.write("RELATORIO DE TESTES E2E - SELENIUM\n")
+            f.write("RELATORIO DE TESTES SELENIUM\n")
             f.write("Forum Academico UNIFEI\n")
-            f.write("=" * 80 + "\n\n")
-            f.write(f"Desenvolvido por: Kelly Reis (2023000490)\n")
-            f.write(f"Data: {time.strftime('%d/%m/%Y %H:%M:%S')}\n")
-            f.write(f"URL testada: {self.base_url}\n\n")
-            f.write(f"Testes executados: {total}\n")
-            f.write(f"Testes passaram: {self.tests_passed}\n")
-            f.write(f"Testes falharam: {self.tests_failed}\n")
-            f.write(f"Taxa de sucesso: {taxa_sucesso:.1f}%\n")
-            f.write("=" * 80 + "\n")
+            f.write(f"Data: {time.strftime('%d/%m/%Y %H:%M:%S')}\n\n")
+            
+            f.write("RESULTADOS\n\n")
+            f.write(f"Total de testes: {total}\n")
+            f.write(f"Aprovados: {self.tests_passed}\n")
+            f.write(f"Reprovados: {self.tests_failed}\n")
+            f.write(f"Taxa de sucesso: {taxa_sucesso:.1f}%\n\n")
+            
+            f.write("TESTES REALIZADOS\n\n")
+            f.write("1. Carregar pagina principal\n")
+            f.write("2. Verificar header\n")
+            f.write("3. Verificar 5 abas\n")
+            f.write("4. Clicar aba Usuarios\n")
+            f.write("5. Lista de usuarios carrega\n")
+            f.write("6. Clicar aba Disciplinas\n")
+            f.write("7. Lista de disciplinas carrega\n")
+            f.write("8. Clicar aba Topicos\n")
+            f.write("9. Lista de topicos carrega\n")
+            f.write("10. Clicar Ver Respostas\n")
+            f.write("11. Lista de respostas carrega\n")
+            f.write("12. Voltar para Mural\n")
+            f.write("13. Botao Atualizar Lista\n")
+            f.write("14. Verificar rodape\n")
+            f.write("15. Capturar screenshot\n\n")
+            
+            if self.tests_failed > 0:
+                f.write("TESTES QUE FALHARAM\n\n")
+                f.write(f"Total de falhas: {self.tests_failed}\n")
+            else:
+                f.write("TODOS OS TESTES PASSARAM\n")
         
-        print(f"\nRelatorio salvo em: tests/RELATORIO_SELENIUM.txt\n")
+        print("Relatorio salvo em RELATORIO_SELENIUM.txt")
         
         return taxa_sucesso == 100.0
 
