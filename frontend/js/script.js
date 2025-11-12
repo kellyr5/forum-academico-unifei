@@ -11,16 +11,27 @@ function formatarData(data) {
     return new Date(data).toLocaleString('pt-BR');
 }
 
-// Sistema de Abas
+// Sistema de Abas com AUTO-LOAD
 document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
         const tabId = this.dataset.tab;
         
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
         
         this.classList.add('active');
-        document.getElementById(tabId).classList.add('active');
+        const tabElement = document.getElementById(tabId);
+        if (tabElement) {
+            tabElement.classList.add('active');
+            
+            // AUTO-CARREGAR dados ao abrir aba
+            setTimeout(() => {
+                if (tabId === 'disciplinas') buscarDisciplinas();
+                if (tabId === 'topicos') buscarTopicos();
+                if (tabId === 'usuarios') buscarUsuarios();
+            }, 100);
+        }
     });
 });
 
@@ -45,10 +56,9 @@ async function carregarCursos() {
     }
 }
 
-// RECADOS
+// ===== RECADOS =====
 document.getElementById('form-recado')?.addEventListener('submit', async function(e) {
     e.preventDefault();
-    
     const formData = {
         titulo: document.getElementById('rec_titulo').value,
         conteudo: document.getElementById('rec_conteudo').value,
@@ -56,25 +66,22 @@ document.getElementById('form-recado')?.addEventListener('submit', async functio
         categoria: document.getElementById('rec_categoria').value,
         cor: '#003366'
     };
-    
     try {
         const response = await fetch(`${API_URL}/recados`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         });
-        
         const resultado = await response.json();
-        
         if (resultado.success) {
-            mostrarMensagem('Recado criado com sucesso!', 'sucesso');
+            mostrarMensagem('Recado criado!', 'sucesso');
             this.reset();
             buscarRecados();
         } else {
             mostrarMensagem(resultado.message, 'erro');
         }
     } catch (error) {
-        mostrarMensagem('Erro ao conectar com servidor', 'erro');
+        mostrarMensagem('Erro', 'erro');
     }
 });
 
@@ -82,9 +89,7 @@ async function buscarRecados() {
     try {
         const response = await fetch(`${API_URL}/recados`);
         const resultado = await response.json();
-        
         const lista = document.getElementById('lista-recados');
-        
         if (resultado.success && resultado.data.length > 0) {
             lista.innerHTML = '';
             resultado.data.forEach(rec => {
@@ -100,31 +105,30 @@ async function buscarRecados() {
                 `;
             });
         } else {
-            lista.innerHTML = '<p>Nenhum recado publicado ainda.</p>';
+            lista.innerHTML = '<p>Nenhum recado.</p>';
         }
     } catch (error) {
-        mostrarMensagem('Erro ao buscar recados', 'erro');
+        mostrarMensagem('Erro', 'erro');
     }
 }
 
 async function excluirRecado(id) {
-    if (!confirm('Deseja realmente excluir este recado?')) return;
+    if (!confirm('Excluir?')) return;
     try {
         const response = await fetch(`${API_URL}/recados/${id}`, { method: 'DELETE' });
         const resultado = await response.json();
         if (resultado.success) {
-            mostrarMensagem('Recado excluído!', 'sucesso');
+            mostrarMensagem('Excluído!', 'sucesso');
             buscarRecados();
         }
     } catch (error) {
-        mostrarMensagem('Erro ao excluir recado', 'erro');
+        mostrarMensagem('Erro', 'erro');
     }
 }
 
-// USUÁRIOS
+// ===== USUÁRIOS =====
 document.getElementById('form-usuario')?.addEventListener('submit', async function(e) {
     e.preventDefault();
-    
     const formData = {
         nome_completo: document.getElementById('nome_completo').value,
         email: document.getElementById('email').value,
@@ -135,67 +139,64 @@ document.getElementById('form-usuario')?.addEventListener('submit', async functi
         periodo: parseInt(document.getElementById('periodo').value),
         tipo_usuario: document.getElementById('tipo_usuario').value
     };
-    
     try {
         const response = await fetch(`${API_URL}/usuarios`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         });
-        
         const resultado = await response.json();
-        
         if (resultado.success) {
-            mostrarMensagem(`Usuário cadastrado! ID: ${resultado.usuario_id}`, 'sucesso');
+            mostrarMensagem(`Usuário ID: ${resultado.usuario_id}`, 'sucesso');
             this.reset();
+            buscarUsuarios();
         } else {
             mostrarMensagem(resultado.message, 'erro');
         }
     } catch (error) {
-        mostrarMensagem('Erro ao conectar com servidor', 'erro');
+        mostrarMensagem('Erro', 'erro');
     }
 });
 
-document.getElementById('form-buscar-usuario')?.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const nome = document.getElementById('buscar_nome').value;
-    const tipo = document.getElementById('buscar_tipo').value;
-    
-    let url = `${API_URL}/usuarios?`;
-    if (nome) url += `nome=${encodeURIComponent(nome)}&`;
-    if (tipo) url += `tipo_usuario=${encodeURIComponent(tipo)}`;
-    
+async function buscarUsuarios() {
     try {
+        const nome = document.getElementById('buscar_nome')?.value || '';
+        const tipo = document.getElementById('buscar_tipo')?.value || '';
+        let url = `${API_URL}/usuarios?`;
+        if (nome) url += `nome=${encodeURIComponent(nome)}&`;
+        if (tipo) url += `tipo_usuario=${encodeURIComponent(tipo)}`;
+        
         const response = await fetch(url);
         const resultado = await response.json();
-        
         const lista = document.getElementById('lista-usuarios');
         
         if (resultado.success && resultado.data.length > 0) {
-            lista.innerHTML = `<p><strong>Total encontrado:</strong> ${resultado.total}</p>`;
+            lista.innerHTML = `<p><strong>Total:</strong> ${resultado.total} usuários</p>`;
             resultado.data.forEach(u => {
                 lista.innerHTML += `
                     <div class="resultado-item">
-                        <p><strong>ID:</strong> ${u.id} | <strong>Nome:</strong> ${u.nome_completo}</p>
-                        <p><strong>Email:</strong> ${u.email}</p>
-                        <p><strong>Tipo:</strong> ${u.tipo_usuario} | <strong>Período:</strong> ${u.periodo}º</p>
-                        <p><strong>Curso:</strong> ${u.curso}</p>
+                        <p><strong>ID:</strong> ${u.id} | ${u.nome_completo}</p>
+                        <p>${u.email} | ${u.tipo_usuario} | ${u.periodo}º período</p>
+                        <p>${u.curso}</p>
                     </div>
                 `;
             });
         } else {
-            lista.innerHTML = '<p>Nenhum usuário encontrado.</p>';
+            lista.innerHTML = '<p>Nenhum usuário.</p>';
         }
     } catch (error) {
-        mostrarMensagem('Erro ao buscar usuários', 'erro');
+        mostrarMensagem('Erro', 'erro');
     }
+}
+
+document.getElementById('form-buscar-usuario')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    buscarUsuarios();
 });
 
-// DISCIPLINAS
+// ===== DISCIPLINAS =====
 document.getElementById('form-disciplina')?.addEventListener('submit', async function(e) {
     e.preventDefault();
-    
     const formData = {
         nome: document.getElementById('disc_nome').value,
         codigo: document.getElementById('disc_codigo').value,
@@ -205,64 +206,64 @@ document.getElementById('form-disciplina')?.addEventListener('submit', async fun
         periodo_letivo: document.getElementById('disc_periodo').value,
         descricao: document.getElementById('disc_descricao').value
     };
-    
     try {
         const response = await fetch(`${API_URL}/disciplinas`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         });
-        
         const resultado = await response.json();
-        
         if (resultado.success) {
-            mostrarMensagem(`Disciplina cadastrada! ID: ${resultado.disciplina_id}`, 'sucesso');
+            mostrarMensagem(`Disciplina ID: ${resultado.disciplina_id}`, 'sucesso');
             this.reset();
+            buscarDisciplinas();
         } else {
             mostrarMensagem(resultado.message, 'erro');
         }
     } catch (error) {
-        mostrarMensagem('Erro ao conectar com servidor', 'erro');
+        mostrarMensagem('Erro', 'erro');
     }
 });
 
-document.getElementById('form-buscar-disciplina')?.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const nome = document.getElementById('buscar_disc_nome').value;
-    let url = `${API_URL}/disciplinas?`;
-    if (nome) url += `nome=${encodeURIComponent(nome)}`;
-    
+async function buscarDisciplinas() {
     try {
+        const nome = document.getElementById('buscar_disc_nome')?.value || '';
+        let url = `${API_URL}/disciplinas`;
+        if (nome) url += `?nome=${encodeURIComponent(nome)}`;
+        
         const response = await fetch(url);
         const resultado = await response.json();
-        
         const lista = document.getElementById('lista-disciplinas');
         
         if (resultado.success && resultado.data.length > 0) {
-            lista.innerHTML = `<p><strong>Total:</strong> ${resultado.total}</p>`;
+            lista.innerHTML = `<p><strong>Total:</strong> ${resultado.total} disciplinas</p>`;
             resultado.data.forEach(d => {
                 lista.innerHTML += `
                     <div class="resultado-item">
-                        <p><strong>ID:</strong> ${d.id} | <strong>Nome:</strong> ${d.nome}</p>
+                        <p><strong>ID:</strong> ${d.id} | <strong>${d.nome}</strong></p>
                         <p><strong>Código:</strong> ${d.codigo} | <strong>Período:</strong> ${d.periodo_letivo}</p>
                         <p><strong>Professor:</strong> ${d.professor} | <strong>Curso:</strong> ${d.curso}</p>
-                        ${d.descricao ? `<p><strong>Descrição:</strong> ${d.descricao}</p>` : ''}
+                        ${d.descricao ? `<p>${d.descricao}</p>` : ''}
                     </div>
                 `;
             });
         } else {
-            lista.innerHTML = '<p>Nenhuma disciplina encontrada.</p>';
+            lista.innerHTML = '<p>Nenhuma disciplina.</p>';
         }
     } catch (error) {
+        console.error(error);
         mostrarMensagem('Erro ao buscar disciplinas', 'erro');
     }
+}
+
+document.getElementById('form-buscar-disciplina')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    buscarDisciplinas();
 });
 
-// TÓPICOS
+// ===== TÓPICOS =====
 document.getElementById('form-topico')?.addEventListener('submit', async function(e) {
     e.preventDefault();
-    
     const formData = {
         titulo: document.getElementById('top_titulo').value,
         conteudo: document.getElementById('top_conteudo').value,
@@ -271,49 +272,48 @@ document.getElementById('form-topico')?.addEventListener('submit', async functio
         categoria: document.getElementById('top_categoria').value,
         tags: document.getElementById('top_tags').value
     };
-    
     try {
         const response = await fetch(`${API_URL}/topicos`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         });
-        
         const resultado = await response.json();
-        
         if (resultado.success) {
-            mostrarMensagem(`Tópico criado! ID: ${resultado.topico_id}`, 'sucesso');
+            mostrarMensagem(`Tópico ID: ${resultado.topico_id}`, 'sucesso');
             this.reset();
+            buscarTopicos();
         } else {
             mostrarMensagem(resultado.message, 'erro');
         }
     } catch (error) {
-        mostrarMensagem('Erro ao conectar com servidor', 'erro');
+        mostrarMensagem('Erro', 'erro');
     }
 });
 
-document.getElementById('form-buscar-topico')?.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    const titulo = document.getElementById('buscar_top_titulo').value;
-    let url = `${API_URL}/topicos?`;
-    if (titulo) url += `titulo=${encodeURIComponent(titulo)}`;
-    
+async function buscarTopicos() {
     try {
+        const titulo = document.getElementById('buscar_top_titulo')?.value || '';
+        let url = `${API_URL}/topicos`;
+        if (titulo) url += `?titulo=${encodeURIComponent(titulo)}`;
+        
         const response = await fetch(url);
         const resultado = await response.json();
-        
         const lista = document.getElementById('lista-topicos');
         
         if (resultado.success && resultado.data.length > 0) {
-            lista.innerHTML = `<p><strong>Total:</strong> ${resultado.total}</p>`;
+            lista.innerHTML = `<p><strong>Total:</strong> ${resultado.total} tópicos</p>`;
             resultado.data.forEach(t => {
                 lista.innerHTML += `
-                    <div class="resultado-item">
-                        <p><strong>ID:</strong> ${t.id} | <strong>Título:</strong> ${t.titulo}</p>
+                    <div class="resultado-item topico-card">
+                        <h4>${t.titulo}</h4>
                         <p>${t.conteudo}</p>
                         <p><strong>Categoria:</strong> ${t.categoria} | <strong>Status:</strong> ${t.status}</p>
                         <p><strong>Autor:</strong> ${t.autor} | <strong>Disciplina:</strong> ${t.disciplina}</p>
+                        ${t.tags ? `<p><strong>Tags:</strong> ${t.tags}</p>` : ''}
+                        <button class="btn btn-primary" onclick="verRespostas(${t.id})">
+                            <i class="material-icons">question_answer</i> Ver Respostas
+                        </button>
                     </div>
                 `;
             });
@@ -321,20 +321,54 @@ document.getElementById('form-buscar-topico')?.addEventListener('submit', async 
             lista.innerHTML = '<p>Nenhum tópico encontrado.</p>';
         }
     } catch (error) {
+        console.error(error);
         mostrarMensagem('Erro ao buscar tópicos', 'erro');
     }
+}
+
+document.getElementById('form-buscar-topico')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    buscarTopicos();
 });
 
-// RESPOSTAS
+// ===== RESPOSTAS =====
+async function verRespostas(topicoId) {
+    try {
+        const response = await fetch(`${API_URL}/respostas/topico/${topicoId}`);
+        const resultado = await response.json();
+        
+        document.querySelector('button[data-tab="respostas"]').click();
+        const lista = document.getElementById('lista-respostas');
+        
+        if (resultado.success && resultado.data.length > 0) {
+            lista.innerHTML = `<p><strong>Total:</strong> ${resultado.total} respostas</p>`;
+            resultado.data.forEach(r => {
+                const melhor = r.melhor_resposta ? '<span class="badge-melhor">✓ Melhor Resposta</span>' : '';
+                lista.innerHTML += `
+                    <div class="resultado-item resposta-card ${r.melhor_resposta ? 'melhor-resposta' : ''}">
+                        ${melhor}
+                        <p><strong>${r.autor}</strong> <span class="badge">${r.tipo_usuario}</span></p>
+                        <p>${r.conteudo}</p>
+                        <p><i class="material-icons">thumb_up</i> ${r.votos} votos | ${formatarData(r.criado_em)}</p>
+                    </div>
+                `;
+            });
+        } else {
+            lista.innerHTML = '<p>Nenhuma resposta ainda.</p>';
+        }
+        mostrarMensagem(`${resultado.total || 0} respostas`, 'info');
+    } catch (error) {
+        mostrarMensagem('Erro', 'erro');
+    }
+}
+
 document.getElementById('form-resposta')?.addEventListener('submit', async function(e) {
     e.preventDefault();
-    
     const formData = {
         conteudo: document.getElementById('resp_conteudo').value,
         topico_id: parseInt(document.getElementById('resp_topico').value),
         usuario_id: parseInt(document.getElementById('resp_usuario').value),
     };
-    
     const pai = document.getElementById('resp_pai').value;
     if (pai) formData.resposta_pai_id = parseInt(pai);
     
@@ -344,52 +378,27 @@ document.getElementById('form-resposta')?.addEventListener('submit', async funct
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         });
-        
         const resultado = await response.json();
-        
         if (resultado.success) {
-            mostrarMensagem(`Resposta criada! ID: ${resultado.resposta_id}`, 'sucesso');
+            mostrarMensagem(`Resposta ID: ${resultado.resposta_id}`, 'sucesso');
             this.reset();
         } else {
             mostrarMensagem(resultado.message, 'erro');
         }
     } catch (error) {
-        mostrarMensagem('Erro ao conectar com servidor', 'erro');
+        mostrarMensagem('Erro', 'erro');
     }
 });
 
 document.getElementById('form-buscar-resposta')?.addEventListener('submit', async function(e) {
     e.preventDefault();
-    
     const topico = document.getElementById('buscar_resp_topico').value;
-    
-    try {
-        const response = await fetch(`${API_URL}/respostas/topico/${topico}`);
-        const resultado = await response.json();
-        
-        const lista = document.getElementById('lista-respostas');
-        
-        if (resultado.success && resultado.data.length > 0) {
-            lista.innerHTML = `<p><strong>Total:</strong> ${resultado.total}</p>`;
-            resultado.data.forEach(r => {
-                lista.innerHTML += `
-                    <div class="resultado-item">
-                        <p><strong>ID:</strong> ${r.id} | <strong>Autor:</strong> ${r.autor} (${r.tipo_usuario})</p>
-                        <p>${r.conteudo}</p>
-                        <p><strong>Votos:</strong> ${r.votos} | <strong>Data:</strong> ${formatarData(r.criado_em)}</p>
-                    </div>
-                `;
-            });
-        } else {
-            lista.innerHTML = '<p>Nenhuma resposta encontrada.</p>';
-        }
-    } catch (error) {
-        mostrarMensagem('Erro ao buscar respostas', 'erro');
-    }
+    verRespostas(topico);
 });
 
+// INICIALIZAR
 document.addEventListener('DOMContentLoaded', function() {
     carregarCursos();
     buscarRecados();
-    mostrarMensagem('Sistema carregado com sucesso!', 'info');
+    mostrarMensagem('Sistema carregado! Clique nas abas para ver os dados.', 'info');
 });

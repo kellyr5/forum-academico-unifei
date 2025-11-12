@@ -1,40 +1,98 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
-require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Middlewares
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Rotas
-app.use('/api/health', require('./routes/health'));
-app.use('/api/usuarios', require('./routes/usuarios'));
-app.use('/api/disciplinas', require('./routes/disciplinas'));
-app.use('/api/topicos', require('./routes/topicos'));
-app.use('/api/respostas', require('./routes/respostas'));
-app.use('/api/recados', require('./routes/recados'));
+// Log de requisições
+app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+    next();
+});
 
-app.use((err, req, res, next) => {
-    console.error('❌ Erro:', err.stack);
-    res.status(500).json({ 
-        success: false, 
-        message: 'Erro interno do servidor'
+// Importar rotas
+const healthRoutes = require('./routes/health');
+const authRoutes = require('./routes/auth');
+const usuariosRoutes = require('./routes/usuarios');
+const disciplinasRoutes = require('./routes/disciplinas');
+const topicosRoutes = require('./routes/topicos');
+const respostasRoutes = require('./routes/respostas');
+const recadosRoutes = require('./routes/recados');
+
+// Usar rotas
+app.use('/api/health', healthRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/usuarios', usuariosRoutes);
+app.use('/api/disciplinas', disciplinasRoutes);
+app.use('/api/topicos', topicosRoutes);
+app.use('/api/respostas', respostasRoutes);
+app.use('/api/recados', recadosRoutes);
+
+// Rota raiz
+app.get('/', (req, res) => {
+    res.json({
+        message: 'API do Fórum Acadêmico UNIFEI',
+        version: '1.0.0',
+        endpoints: [
+            '/api/health',
+            '/api/auth',
+            '/api/usuarios',
+            '/api/disciplinas',
+            '/api/topicos',
+            '/api/respostas',
+            '/api/recados'
+        ]
     });
 });
 
-app.listen(PORT, () => {
-    console.log('');
-    console.log('╔════════════════════════════════════════════════════════════════╗');
-    console.log('║           FÓRUM ACADÊMICO - API INICIADA                       ║');
-    console.log('╚════════════════════════════════════════════════════════════════╝');
-    console.log('');
-    console.log(`🚀 Servidor: http://localhost:${PORT}`);
-    console.log(`📊 Health: http://localhost:${PORT}/api/health`);
-    console.log('');
+// Tratamento de erros 404
+app.use((req, res) => {
+    res.status(404).json({
+        success: false,
+        message: 'Rota não encontrada'
+    });
 });
+
+// Tratamento de erros gerais
+app.use((err, req, res, next) => {
+    console.error('Erro:', err.stack);
+    res.status(500).json({
+        success: false,
+        message: 'Erro interno do servidor',
+        error: process.env.NODE_ENV === 'development' ? err.message : undefined
+    });
+});
+
+// Iniciar servidor
+const db = require('./config/database');
+
+async function iniciarServidor() {
+    try {
+        // Testar conexão com banco
+        await db.query('SELECT 1');
+        console.log('✓ Conectado ao MySQL com sucesso!');
+        console.log('  Database: forum_academico');
+        
+        app.listen(PORT, () => {
+            console.log('\n╔════════════════════════════════════════════════════════════════╗');
+            console.log('║         FÓRUM ACADÊMICO - API INICIADA                         ║');
+            console.log('╚════════════════════════════════════════════════════════════════╝\n');
+            console.log(`✓ Servidor: http://localhost:${PORT}`);
+            console.log(`✓ Health: http://localhost:${PORT}/api/health\n`);
+        });
+    } catch (error) {
+        console.error('❌ Erro ao conectar com MySQL:', error.message);
+        console.error('   Verifique se o MySQL está rodando: sudo service mysql start');
+        process.exit(1);
+    }
+}
+
+iniciarServidor();
 
 module.exports = app;

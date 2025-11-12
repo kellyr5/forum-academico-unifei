@@ -1,33 +1,23 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/database');
 
 router.get('/', async (req, res) => {
     try {
-        // Testar conexão com banco
-        const [result] = await db.query('SELECT 1 as test');
-        
-        // Contar registros importantes
-        const [usuarios] = await db.query('SELECT COUNT(*) as total FROM usuarios WHERE excluido = FALSE');
-        const [disciplinas] = await db.query('SELECT COUNT(*) as total FROM disciplinas');
-        const [topicos] = await db.query('SELECT COUNT(*) as total FROM topicos');
+        const db = require('../config/database');
+        await db.query('SELECT 1');
         
         res.json({
+            success: true,
             status: 'OK',
-            message: 'Fórum Acadêmico API funcionando',
-            database: 'Conectado',
             timestamp: new Date().toISOString(),
-            stats: {
-                usuarios: usuarios[0].total,
-                disciplinas: disciplinas[0].total,
-                topicos: topicos[0].total
-            }
+            database: 'Conectado',
+            message: 'API funcionando corretamente'
         });
     } catch (error) {
         res.status(500).json({
+            success: false,
             status: 'ERROR',
-            message: 'Erro ao conectar com banco de dados',
-            error: error.message
+            message: error.message
         });
     }
 });

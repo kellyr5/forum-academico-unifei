@@ -28,3 +28,6 @@ temp/
 
 # PIDs
 *.pid
+
+# Banco de dados
+*.sql.backup
