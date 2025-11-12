@@ -1,270 +1,83 @@
 # Forum Academico UNIFEI
 
-Sistema web completo de forum academico para a Universidade Federal de Itajuba.
+Sistema de forum para alunos, professores e monitores.
 
-**Disciplina:** Gerencia de Projeto de Software  
-**Ano:** 2025
+**Desenvolvido por:** Kelly Reis (2023000490)  
+**Disciplina:** Gerencia de Projeto de Software
 
----
+## O que faz
 
-## Sobre o Projeto
+- Mural de recados
+- Cadastro de usuarios, disciplinas, topicos, respostas
+- Busca que ignora acentos
+- Votacao em respostas
 
-O Forum Academico UNIFEI e uma plataforma web que facilita a comunicacao e colaboracao entre alunos, professores e monitores. O sistema permite:
+## Tecnologias
 
-- Mural de recados institucional
-- Gerenciamento de usuarios (alunos, professores, monitores)
-- Cadastro de disciplinas por curso
-- Criacao de topicos de discussao
-- Sistema de respostas com votacao
-- Marcacao de melhores respostas
+- Backend: Node.js + Express + MySQL
+- Frontend: HTML + CSS + JavaScript
+- Testes: Python
 
----
-
-## Tecnologias Utilizadas
+## Como rodar
 
 ### Backend
-- Node.js v18+
-- Express.js 4.18
-- MySQL 8.0
-- bcryptjs (criptografia de senhas)
-
-### Frontend
-- HTML5 (estrutura semantica)
-- CSS3 (design responsivo)
-- JavaScript ES6+ (Fetch API)
-- Material Icons (Google)
-
-### Testes
-- Python 3.10+
-- Requests (testes de API)
-- Selenium (testes E2E)
-
----
-
-## Estrutura do Projeto
-```
-forum-academico/
-├── backend/
-│   ├── config/
-│   │   ├── database.js
-│   │   └── init.sql
-│   ├── routes/
-│   │   ├── auth.js
-│   │   ├── usuarios.js
-│   │   ├── disciplinas.js
-│   │   ├── topicos.js
-│   │   ├── respostas.js
-│   │   └── recados.js
-│   ├── server.js
-│   └── package.json
-├── frontend/
-│   ├── css/
-│   │   └── style.css
-│   ├── js/
-│   │   └── script.js
-│   └── index.html
-├── tests/
-│   ├── test_api.py
-│   └── test_selenium.py
-├── docs/
-│   ├── STATUS_REPORT.md
-│   ├── REGISTRO_DE_BUGS.md
-│   ├── BUGS_MANTIS_EXPORT.csv
-│   └── BUGS_BUGZILLA_EXPORT.xml
-├── start.sh
-└── README.md
-```
-
----
-
-## Instalacao e Configuracao
-
-### Pre-requisitos
-
-- Node.js 18+
-- MySQL 8.0+
-- Python 3.10+
-
-### Passo 1: Clonar o Repositorio
-```bash
-git clone https://github.com/kellyr5/forum-academico-unifei.git
-cd forum-academico-unifei
-```
-
-### Passo 2: Configurar Banco de Dados
-```bash
-mysql -u root -p < backend/config/init.sql
-```
-
-### Passo 3: Instalar Dependencias Backend
 ```bash
 cd backend
 npm install
-```
-
-### Passo 4: Configurar Variaveis de Ambiente
-
-Crie arquivo `.env` no diretorio `backend/`:
-```env
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=sua_senha
-DB_NAME=forum_academico
-PORT=3000
-```
-
----
-
-## Como Executar
-
-### Opcao 1: Script Automatico (Recomendado)
-```bash
-./start.sh
-```
-
-### Opcao 2: Manual
-
-**Terminal 1 - Backend:**
-```bash
-cd backend
 npm start
 ```
 
-**Terminal 2 - Frontend:**
+### Frontend
 ```bash
 cd frontend
 python3 -m http.server 8000
 ```
 
-**Acesse:** http://localhost:8000
+Acesse: http://localhost:8000
 
----
-
-## Executar Testes
-
-### Testes de API
+## Testes
 ```bash
 cd tests
 python3 test_api.py
 ```
 
-### Testes E2E com Selenium
-```bash
-cd tests
-python3 test_selenium.py
+## Estrutura do Projeto
+```
+forum-academico/
+├── backend/       # API Node.js
+├── frontend/      # Interface web
+├── tests/         # Testes automatizados
+├── docs/          # Documentacao
+└── README.md
 ```
 
-**Resultado esperado:** 30 testes, taxa de sucesso 100%
+## Bugs Corrigidos
 
----
+1. Porta 3000 travando
+2. Formulario nao cadastrava
+3. Logo UNIFEI sumindo
+4. CSS nao carregava (404)
+5. Busca com acento
 
-## Funcionalidades Implementadas
-
-### CRUD 1: Mural de Recados
-- Create: Publicar recados
-- Read: Visualizar todos os recados
-- Update: Editar recados (backend)
-- Delete: Excluir recados
-
-### CRUD 2: Usuarios
-- Create: Cadastrar usuarios com validacao
-- Read: Buscar e listar usuarios
-- Update: Editar perfil
-- Delete: Exclusao logica
-
-### CRUD 3: Disciplinas
-- Create: Cadastrar disciplinas
-- Read: Listar por curso/professor
-- Update: Editar informacoes
-- Delete: Remover disciplinas
-
-### CRUD 4: Topicos
-- Create: Criar topicos de discussao
-- Read: Visualizar com filtros
-- Update: Editar conteudo
-- Delete: Remover topicos
-
-### CRUD 5: Respostas (BONUS)
-- Create: Responder topicos
-- Read: Ver respostas ordenadas
-- Update: Editar respostas
-- Delete: Remover respostas
-
----
-
-## Seguranca
-
-- Senhas criptografadas com bcrypt
-- Validacao de entrada no backend
-- Protecao contra SQL Injection
-- Protecao contra XSS
-- E-mail institucional obrigatorio (@unifei.edu.br)
-
----
-
-## Estatisticas do Projeto
-
-- **Linhas de codigo:** ~4,500
-- **Arquivos:** 28
-- **Tabelas no BD:** 10
-- **Testes automatizados:** 30
-- **Taxa de sucesso:** 100%
-- **Bugs corrigidos:** 5
-
----
+Ver detalhes em: docs/REGISTRO_DE_BUGS.md
 
 ## Documentacao
 
-- **Status Report:** `docs/STATUS_REPORT.md`
-- **Registro de Bugs:** `docs/REGISTRO_DE_BUGS.md`
-- **Bugs Mantis:** `docs/BUGS_MANTIS_EXPORT.csv`
-- **Bugs Bugzilla:** `docs/BUGS_BUGZILLA_EXPORT.xml`
+- Status Report: docs/STATUS_REPORT.md
+- Cronograma: docs/CRONOGRAMA_PROJETO.md
+- Bugs (Mantis CSV): docs/BUGS_MANTIS_EXPORT.csv
+- Bugs (Bugzilla XML): docs/BUGS_BUGZILLA_EXPORT.xml
 
----
+## Estatisticas
 
-## Rastreamento de Bugs
+- 5 CRUDs implementados
+- 30 testes (100% sucesso)
+- 5 bugs corrigidos
+- 4500 linhas de codigo
+- 42 dias de desenvolvimento
 
-Os bugs deste projeto foram registrados e rastreados usando os formatos padrao:
+## Sobre o Desenvolvimento
 
-### Mantis Bug Tracker
-**Arquivo:** `docs/BUGS_MANTIS_EXPORT.csv`
-- Formato: CSV (compativel com Mantis)
-- Total de bugs: 5
-- Status: Todos resolvidos
+Este foi meu primeiro projeto full-stack completo. Aprendi muito sobre Node.js, MySQL e testes automatizados. Os principais desafios foram configurar o ambiente, fazer a busca funcionar com acentos e corrigir os bugs de porta travada.
 
-### Bugzilla
-**Arquivo:** `docs/BUGS_BUGZILLA_EXPORT.xml`
-- Formato: XML (formato padrao Bugzilla)
-- Total de bugs: 5
-- Status: Todos resolvidos (FIXED)
-
-### Estatisticas de Bugs
-
-| Severidade | Quantidade | Resolvidos |
-|------------|------------|------------|
-| Critica    | 1          | 1 (100%)   |
-| Alta       | 2          | 2 (100%)   |
-| Media      | 1          | 1 (100%)   |
-| Baixa      | 1          | 1 (100%)   |
-| **TOTAL**  | **5**      | **5 (100%)**|
-
----
-
-## Melhorias Futuras
-
-1. Sistema de autenticacao JWT
-2. Notificacoes em tempo real (WebSockets)
-3. Upload de arquivos em topicos
-4. Sistema de busca avancada
-5. Dashboard administrativo
-6. API REST documentada (Swagger)
-
----
-
-## Licenca
-
-Este projeto foi desenvolvido para fins academicos como parte da disciplina de Gerencia de Projeto de Software.
-
----
-
-**Copyright 2025 Kelly Reis - Todos os direitos reservados**
+Kelly Reis - 2023000490
