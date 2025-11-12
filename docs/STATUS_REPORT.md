@@ -6,14 +6,11 @@
 # STATUS REPORT DO PROJETO - SR01
 
 **Elaboracao do Documento:** 12/11/2025  
-**Periodo de referencia do SR:** 01/10/2025 a 12/11/2025  
-**Responsavel pelo documento:** Kelly Reis / Desenvolvedora / kelly.reis@unifei.edu.br
+**Periodo de referencia:** 01/10/2025 a 12/11/2025  
 
 ---
 
-**UNIFEI - Universidade Federal de Itajuba**  
-Campus Itajuba - Av. BPS, 1303 - Pinheirinho  
-Itajuba - MG, 37500-903  
+**UNIFEI - Universidade Federal de Itajuba**   
 www.unifei.edu.br
 
 ---
@@ -171,19 +168,11 @@ O projeto esta pronto para apresentacao e demonstracao, com sistema funcionando 
 
 ## 6. ASSINATURAS E APROVACOES
 
-**Desenvolvedor:**  
-Kelly Reis  
-Matricula: 2023000490  
-Engenharia de Computacao - UNIFEI  
-kelly.reis@unifei.edu.br
-
 **Data:** 12/11/2025
 
 ---
 
-**Status do Projeto:** CONCLUIDO COM SUCESSO
-
-**Recomendacao:** APROVADO PARA APRESENTACAO E ENTREGA
+**Status do Projeto:** 4 CRUDS CONCLUÍDOS
 
 ---
 
