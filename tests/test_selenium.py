@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Testes E2E com Selenium - Forum Academico UNIFEI
-Desenvolvido por: Kelly Reis (2023000490)
 Data: Novembro 2025
 """
 
