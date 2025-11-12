@@ -9,7 +9,7 @@ Sistema web completo de fórum acadêmico para a Universidade Federal de Itajub�
 
 ---
 
-## 📋 Sobre o Projeto
+## Sobre o Projeto
 
 O Fórum Acadêmico UNIFEI é uma plataforma web que facilita a comunicação e colaboração entre alunos, professores e monitores. O sistema permite:
 
