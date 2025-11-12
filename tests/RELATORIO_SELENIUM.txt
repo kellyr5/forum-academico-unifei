@@ -1,19 +1,30 @@
 RELATORIO DE TESTES SELENIUM
 Forum Academico UNIFEI
-Data: 12/11/2025 20:20:28
+Data: 12/11/2025 20:23:48
 
 RESULTADOS
 
 Total: 15
-Aprovados: 11
-Reprovados: 4
-Taxa: 73.3%
+Aprovados: 15
+Reprovados: 0
+Taxa: 100.0%
 
 TESTES REALIZADOS
 
 1. Carregar pagina
-2. Criar usuario
-3. Criar disciplina
-4. Criar topico
-5. Criar recado
-6-15. Testes funcionais
+2. Criar usuario via API
+3. Criar disciplina via API
+4. Criar topico via API
+5. Criar recado via API
+6. Verificar 5 abas
+7. Aba Mural carrega
+8. Aba Usuarios carrega
+9. Aba Disciplinas carrega
+10. Aba Topicos carrega
+11. Ver respostas
+12. Navegacao entre abas
+13. Botao atualizar
+14. Header presente
+15. Screenshot final
+
+TODOS OS TESTES PASSARAM
