@@ -1,14 +1,19 @@
-================================================================================
-RELATORIO DE TESTES E2E - SELENIUM
+RELATORIO DE TESTES SELENIUM
 Forum Academico UNIFEI
-================================================================================
+Data: 12/11/2025 20:20:28
 
-Desenvolvido por: Kelly Reis (2023000490)
-Data: 12/11/2025 19:55:58
-URL testada: http://localhost:8000
+RESULTADOS
 
-Testes executados: 15
-Testes passaram: 15
-Testes falharam: 0
-Taxa de sucesso: 100.0%
-================================================================================
+Total: 15
+Aprovados: 11
+Reprovados: 4
+Taxa: 73.3%
+
+TESTES REALIZADOS
+
+1. Carregar pagina
+2. Criar usuario
+3. Criar disciplina
+4. Criar topico
+5. Criar recado
+6-15. Testes funcionais
