@@ -1,16 +1,28 @@
 # Forum Academico UNIFEI
 
-Sistema de forum para alunos, professores e monitores.
+Sistema de forum para comunicacao academica entre alunos, professores e monitores da UNIFEI.
 
-**Desenvolvido por:** Kelly Reis (2023000490)  
-**Disciplina:** Gerencia de Projeto de Software
+Disciplina: Gerencia de Projeto de Software - 2025
 
-## O que faz
+## Funcionalidades
 
-- Mural de recados
-- Cadastro de usuarios, disciplinas, topicos, respostas
-- Busca que ignora acentos
-- Votacao em respostas
+### Sistema de Comunicacao
+- **Mural de Recados:** Publicacao de avisos e comunicados institucionais
+- **Topicos de Discussao:** Criacao e participacao em discussoes academicas organizadas por disciplina
+- **Sistema de Respostas:** Resposta a topicos com sistema de votacao
+- **Melhor Resposta:** Marcacao da resposta mais util em cada topico
+
+### Gerenciamento de Dados
+- **Usuarios:** Cadastro completo de alunos, professores e monitores
+- **Disciplinas:** Organizacao de disciplinas por curso e periodo
+- **Busca Inteligente:** Sistema de busca que ignora acentuacao e maiusculas/minusculas
+- **Permissoes:** Controle de acesso baseado no tipo de usuario
+
+### Recursos Tecnicos
+- Interface responsiva e moderna
+- Sistema de validacao de dados
+- Seguranca com criptografia de senhas
+- API REST completa
 
 ## Tecnologias
 
@@ -76,16 +88,15 @@ Ver detalhes em: docs/REGISTRO_DE_BUGS.md
 - Bugs (Mantis CSV): docs/BUGS_MANTIS_EXPORT.csv
 - Bugs (Bugzilla XML): docs/BUGS_BUGZILLA_EXPORT.xml
 
-## Estatisticas
+## Estatisticas do Projeto
 
 - 5 CRUDs implementados
 - 30 testes (100% sucesso)
-- 5 bugs corrigidos
+- 5 bugs identificados e corrigidos
 - 4500 linhas de codigo
 - 42 dias de desenvolvimento
 
-## Sobre o Desenvolvimento
+## Licenca
 
-Este foi meu primeiro projeto full-stack completo. Aprendi muito sobre Node.js, MySQL e testes automatizados. Os principais desafios foram configurar o ambiente, fazer a busca funcionar com acentos e corrigir os bugs de porta travada.
-
-Kelly Reis - 2023000490
+Projeto academico desenvolvido para a disciplina de Gerencia de Projeto de Software.
+Universidade Federal de Itajuba (UNIFEI) - 2025
