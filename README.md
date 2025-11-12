@@ -2,8 +2,6 @@
 
 Sistema web completo de forum academico para a Universidade Federal de Itajuba.
 
-**Desenvolvido por:** Kelly Reis  
-**Matricula:** 2023000490  
 **Disciplina:** Gerencia de Projeto de Software  
 **Ano:** 2025
 
