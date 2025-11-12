@@ -67,7 +67,7 @@ class TestForumAcademico:
         except Exception as e:
             self.test_resultado("Teste 01 - Carregar pagina principal", False, str(e))
     
-    def test_02_criar_usuario_api(self):
+    def test_02_criar_usuario(self):
         try:
             aba = self.driver.find_element(By.CSS_SELECTOR, '[data-tab="usuarios"]')
             aba.click()
@@ -98,11 +98,11 @@ class TestForumAcademico:
             
             lista = self.driver.find_element(By.ID, "lista-usuarios")
             sucesso = len(lista.text) > 100
-            self.test_resultado("Teste 02 - Criar usuario via API", sucesso, "Usuario criado")
+            self.test_resultado("Teste 02 - Criar usuario", sucesso, "Usuario criado")
         except Exception as e:
-            self.test_resultado("Teste 02 - Criar usuario via API", False, str(e))
+            self.test_resultado("Teste 02 - Criar usuario", False, str(e))
     
-    def test_03_criar_disciplina_api(self):
+    def test_03_criar_disciplina(self):
         try:
             aba = self.driver.find_element(By.CSS_SELECTOR, '[data-tab="disciplinas"]')
             aba.click()
@@ -130,11 +130,11 @@ class TestForumAcademico:
             
             lista = self.driver.find_element(By.ID, "lista-disciplinas")
             sucesso = len(lista.text) > 100
-            self.test_resultado("Teste 03 - Criar disciplina via API", sucesso, "Disciplina criada")
+            self.test_resultado("Teste 03 - Criar disciplina", sucesso, "Disciplina criada")
         except Exception as e:
-            self.test_resultado("Teste 03 - Criar disciplina via API", False, str(e))
+            self.test_resultado("Teste 03 - Criar disciplina", False, str(e))
     
-    def test_04_criar_topico_api(self):
+    def test_04_criar_topico(self):
         try:
             aba = self.driver.find_element(By.CSS_SELECTOR, '[data-tab="topicos"]')
             aba.click()
@@ -159,11 +159,11 @@ class TestForumAcademico:
             
             lista = self.driver.find_element(By.ID, "lista-topicos")
             sucesso = len(lista.text) > 100
-            self.test_resultado("Teste 04 - Criar topico via API", sucesso, "Topico criado")
+            self.test_resultado("Teste 04 - Criar topico", sucesso, "Topico criado")
         except Exception as e:
-            self.test_resultado("Teste 04 - Criar topico via API", False, str(e))
+            self.test_resultado("Teste 04 - Criar topico", False, str(e))
     
-    def test_05_criar_recado_api(self):
+    def test_05_criar_recado(self):
         try:
             aba = self.driver.find_element(By.CSS_SELECTOR, '[data-tab="mural"]')
             aba.click()
@@ -187,9 +187,9 @@ class TestForumAcademico:
             
             lista = self.driver.find_element(By.ID, "lista-recados")
             sucesso = len(lista.text) > 50
-            self.test_resultado("Teste 05 - Criar recado via API", sucesso, "Recado criado")
+            self.test_resultado("Teste 05 - Criar recado", sucesso, "Recado criado")
         except Exception as e:
-            self.test_resultado("Teste 05 - Criar recado via API", False, str(e))
+            self.test_resultado("Teste 05 - Criar recado", False, str(e))
     
     def test_06_verificar_abas(self):
         try:
@@ -246,14 +246,11 @@ class TestForumAcademico:
     def test_11_ver_respostas(self):
         try:
             time.sleep(1)
-            # Scroll para garantir visibilidade
             self.driver.execute_script("window.scrollTo(0, 400);")
             time.sleep(1)
             
-            # Encontrar botões visíveis
             botoes = self.driver.find_elements(By.CSS_SELECTOR, ".topico-card button")
             if len(botoes) > 0:
-                # Usar JavaScript para clicar (mais confiável)
                 self.driver.execute_script("arguments[0].click();", botoes[0])
                 time.sleep(2)
                 lista = self.driver.find_element(By.ID, "lista-respostas")
@@ -262,7 +259,6 @@ class TestForumAcademico:
                 sucesso = True
             self.test_resultado("Teste 11 - Ver respostas", sucesso)
         except Exception as e:
-            # Se falhar, não é erro crítico
             self.test_resultado("Teste 11 - Ver respostas", True, "Sem topicos para testar")
     
     def test_12_navegacao_funciona(self):
@@ -312,10 +308,10 @@ class TestForumAcademico:
             return False
         
         self.test_01_carregar_pagina()
-        self.test_02_criar_usuario_api()
-        self.test_03_criar_disciplina_api()
-        self.test_04_criar_topico_api()
-        self.test_05_criar_recado_api()
+        self.test_02_criar_usuario()
+        self.test_03_criar_disciplina()
+        self.test_04_criar_topico()
+        self.test_05_criar_recado()
         self.test_06_verificar_abas()
         self.test_07_aba_mural_carrega()
         self.test_08_aba_usuarios_carrega()
@@ -352,10 +348,10 @@ class TestForumAcademico:
             f.write(f"Taxa: {taxa:.1f}%\n\n")
             f.write("TESTES REALIZADOS\n\n")
             f.write("1. Carregar pagina\n")
-            f.write("2. Criar usuario via API\n")
-            f.write("3. Criar disciplina via API\n")
-            f.write("4. Criar topico via API\n")
-            f.write("5. Criar recado via API\n")
+            f.write("2. Criar usuario\n")
+            f.write("3. Criar disciplina\n")
+            f.write("4. Criar topico\n")
+            f.write("5. Criar recado\n")
             f.write("6. Verificar 5 abas\n")
             f.write("7. Aba Mural carrega\n")
             f.write("8. Aba Usuarios carrega\n")
