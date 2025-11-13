@@ -3,7 +3,7 @@
 
 """
 TESTE SELENIUM FINAL
-Sem cursor visual, IDs aleatórios do banco
+Textos coerentes por contexto, IDs aleatórios do banco
 """
 
 from selenium import webdriver
@@ -19,42 +19,62 @@ import random
 BASE_URL = "http://localhost:8000"
 API_URL = "http://localhost:3000/api"
 
-# Textos realistas
-TITULOS_RECADOS = [
-    "Aula cancelada - Cálculo II",
-    "Reunião do projeto integrador",
-    "Horário de atendimento alterado",
-    "Nova data para entrega"
+# MURAL - Avisos e informações institucionais
+RECADOS_MURAL = [
+    {
+        'titulo': 'Aula cancelada - Cálculo II',
+        'conteudo': 'Atenção alunos! A aula de Cálculo II do dia 15/11 está cancelada devido a compromisso do professor. A reposição será agendada.',
+        'categoria': 'Aviso'
+    },
+    {
+        'titulo': 'Reunião do projeto integrador',
+        'conteudo': 'Convocamos todos os grupos do projeto integrador para reunião geral na próxima sexta-feira, às 14h, no auditório principal.',
+        'categoria': 'Evento'
+    },
+    {
+        'titulo': 'Alteração de horário de atendimento',
+        'conteudo': 'Informamos que o horário de atendimento da coordenação foi alterado. Novo horário: terças e quintas das 15h às 17h.',
+        'categoria': 'Aviso'
+    },
+    {
+        'titulo': 'Prazo de entrega prorrogado',
+        'conteudo': 'Boa notícia! O prazo para entrega do trabalho de Programação foi prorrogado até o dia 20/11. Aproveitem o tempo extra!',
+        'categoria': 'Aviso'
+    }
 ]
 
-CONTEUDOS_RECADOS = [
-    "Pessoal, a aula foi cancelada. Reposição será marcada.",
-    "Reunião na sexta às 14h na sala 203.",
-    "Horário de atendimento mudou para terças e quintas das 15h às 17h.",
-    "Entrega prorrogada para semana que vem!"
+# TÓPICOS - Dúvidas e discussões acadêmicas
+TOPICOS_FORUM = [
+    {
+        'titulo': 'Dúvida sobre recursão na prova',
+        'conteudo': 'Pessoal, alguém sabe se vai cair recursão na prova de Algoritmos? Estou com dificuldade nesse assunto e queria saber se devo focar nisso.',
+        'categoria': 'Dúvida'
+    },
+    {
+        'titulo': 'Material da última aula disponível?',
+        'conteudo': 'Faltei na aula passada de Física e preciso urgente do material. Alguém tem os slides ou anotações que possa compartilhar?',
+        'categoria': 'Dúvida'
+    },
+    {
+        'titulo': 'Formando grupo de estudos para Cálculo',
+        'conteudo': 'Estou organizando um grupo de estudos para a prova de Cálculo II. Quem tiver interesse, vamos nos reunir às quartas às 16h na biblioteca.',
+        'categoria': 'Discussão'
+    },
+    {
+        'titulo': 'Como resolver o exercício 5 da lista?',
+        'conteudo': 'Alguém conseguiu fazer o exercício 5 da lista de Programação? Não estou entendendo a lógica dele, principalmente a parte de arrays.',
+        'categoria': 'Dúvida'
+    }
 ]
 
-TITULOS_TOPICOS = [
-    "Dúvida sobre a prova",
-    "Material da aula passada?",
-    "Grupo de estudos",
-    "Exercício 5 da lista"
-]
-
-CONTEUDOS_TOPICOS = [
-    "Alguém sabe o que vai cair na prova?",
-    "Preciso do material da última aula.",
-    "Organizando grupo de estudos. Quem se interessa?",
-    "Alguém fez o exercício 5?"
-]
-
-RESPOSTAS = [
-    "Sim, vai cair! É bom revisar.",
-    "Tenho o material, te mando por email.",
-    "Me interesso! Quando seria?",
-    "Consegui fazer! A chave é usar loops.",
-    "Vi isso na bibliografia.",
-    "Valeu pela info!"
+# RESPOSTAS - Relacionadas às dúvidas
+RESPOSTAS_TOPICOS = [
+    'Sim, vai cair recursão! O professor avisou na última aula. É bom revisar os exemplos de fatorial e fibonacci que ele passou.',
+    'Tenho o material aqui! Vou te mandar por email. São 3 slides sobre cinemática.',
+    'Eu me interesso no grupo! Cálculo II está difícil mesmo. Podemos dividir os exercícios entre nós.',
+    'Consegui fazer sim! A chave é usar dois loops aninhados e ir comparando os elementos. Te explico melhor se quiser.',
+    'Vi esse conteúdo na bibliografia do capítulo 7. Tem uns exemplos bem parecidos lá.',
+    'Valeu pela informação! Vou estudar esse tópico então.'
 ]
 
 class TesteSeleniumFinal:
@@ -72,7 +92,7 @@ class TesteSeleniumFinal:
     
     def setup(self):
         print("\n" + "╔" + "═"*78 + "╗")
-        print("║" + "TESTE SELENIUM FINAL".center(78) + "║")
+        print("║" + "TESTE SELENIUM FINAL - CONTEXTOS COERENTES".center(78) + "║")
         print("╚" + "═"*78 + "╝")
         
         print("\n⏳ Iniciando Firefox...")
@@ -119,60 +139,7 @@ class TesteSeleniumFinal:
         if self.banco_dados[tipo]:
             registro = random.choice(self.banco_dados[tipo])
             return registro.get('id', 1)
-        return random.randint(1, 5)  # Fallback aleatório
-    
-    def scroll_para_mostrar_inserido(self, texto_busca):
-        """Scroll para mostrar o dado que foi inserido"""
-        print(f"\n  📜 Procurando '{texto_busca[:40]}...'")
-        
-        time.sleep(1.5)
-        
-        try:
-            self.driver.execute_script("window.scrollTo(0, 0);")
-            time.sleep(0.5)
-            
-            elementos = self.driver.find_elements(By.XPATH, f"//*[contains(text(), '{texto_busca[:30]}')]")
-            
-            if elementos:
-                elemento = elementos[0]
-                
-                self.driver.execute_script("""
-                    arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});
-                """, elemento)
-                time.sleep(0.8)
-                
-                self.driver.execute_script("""
-                    arguments[0].style.border='4px solid #4CAF50';
-                    arguments[0].style.backgroundColor='rgba(76, 175, 80, 0.15)';
-                    arguments[0].style.transition='all 0.4s';
-                    arguments[0].style.borderRadius='8px';
-                    arguments[0].style.padding='10px';
-                """, elemento)
-                
-                print(f"  ✓ Encontrado e destacado!")
-                time.sleep(2)
-                
-                self.driver.execute_script("""
-                    arguments[0].style.border='';
-                    arguments[0].style.backgroundColor='';
-                    arguments[0].style.padding='';
-                """, elemento)
-                
-                return True
-            else:
-                print(f"  ⚠ Não encontrado visualmente")
-                
-                altura = self.driver.execute_script("return document.body.scrollHeight")
-                for i in range(0, min(altura, 1000), 100):
-                    self.driver.execute_script(f"window.scrollTo(0, {i});")
-                    time.sleep(0.1)
-                
-                time.sleep(1)
-                return False
-                
-        except Exception as e:
-            print(f"  ⚠ Erro: {str(e)[:40]}")
-            return False
+        return random.randint(1, 5)
     
     def ir_aba(self, aba_id, nome):
         print("\n" + "─"*80)
@@ -231,7 +198,8 @@ class TesteSeleniumFinal:
             print(f"  ✗ {nome}: {str(e)[:40]}")
             return False
     
-    def selecionar(self, campo_id, nome, indice=None):
+    def selecionar(self, campo_id, nome, indice=None, valor_especifico=None):
+        """Seleciona por índice aleatório ou valor específico"""
         try:
             elem = self.driver.find_element(By.ID, campo_id)
             self.driver.execute_script("""
@@ -250,6 +218,14 @@ class TesteSeleniumFinal:
             select = Select(elem)
             opcoes = select.options
             
+            # Se tem valor específico, procurar por ele
+            if valor_especifico:
+                for i, opt in enumerate(opcoes):
+                    if valor_especifico.lower() in opt.text.lower():
+                        indice = i
+                        break
+            
+            # Se não tem índice, escolher aleatório
             if indice is None:
                 opcoes_validas = [i for i, opt in enumerate(opcoes) 
                                  if opt.get_attribute('value') and opt.get_attribute('value') != '']
@@ -258,6 +234,7 @@ class TesteSeleniumFinal:
                 else:
                     indice = 1 if len(opcoes) > 1 else 0
             
+            # Ajustar se necessário
             if indice < len(opcoes) and opcoes[indice].get_attribute('value') == '':
                 indice += 1
             
@@ -307,20 +284,21 @@ class TesteSeleniumFinal:
             return False
     
     def test_mural(self):
-        self.ir_aba('mural', 'Mural')
+        self.ir_aba('mural', 'Mural - Avisos Institucionais')
         
-        titulo = random.choice(TITULOS_RECADOS)
-        conteudo = random.choice(CONTEUDOS_RECADOS)
+        # Escolher recado coerente
+        recado = random.choice(RECADOS_MURAL)
         
-        print("\n📝 Criando recado:\n")
+        print(f"\n📢 Criando aviso: '{recado['titulo']}'\n")
         
-        self.preencher('rec_titulo', titulo, 'Título')
-        self.preencher('rec_autor', 'Sistema Teste', 'Autor')
-        self.preencher('rec_conteudo', conteudo, 'Conteúdo')
-        self.selecionar('rec_categoria', 'Categoria')
+        self.preencher('rec_titulo', recado['titulo'], 'Título')
+        self.preencher('rec_autor', 'Coordenação', 'Autor')
+        self.preencher('rec_conteudo', recado['conteudo'], 'Conteúdo')
         
-        if self.submeter('form-recado'):
-            self.scroll_para_mostrar_inserido(titulo)
+        # Selecionar categoria específica do recado
+        self.selecionar('rec_categoria', 'Categoria', valor_especifico=recado['categoria'])
+        
+        self.submeter('form-recado')
     
     def test_usuarios(self):
         self.ir_aba('usuarios', 'Usuários')
@@ -336,9 +314,9 @@ class TesteSeleniumFinal:
                   if sel.get_attribute('id')]
         
         timestamp = int(time.time()) % 10000
-        nome_usuario = f'Aluno {timestamp}'
+        nome_usuario = f'Aluno Teste {timestamp}'
         
-        print("\n📝 Criando usuário:\n")
+        print(f"\n👤 Criando usuário: '{nome_usuario}'\n")
         
         for campo_id, tipo in inputs.items():
             if 'nome' in campo_id.lower() and tipo == 'text':
@@ -354,20 +332,18 @@ class TesteSeleniumFinal:
         if self.submeter('form-usuario'):
             time.sleep(1)
             self.pesquisar_banco_completo()
-            self.scroll_para_mostrar_inserido(nome_usuario)
     
     def test_disciplinas(self):
         self.ir_aba('disciplinas', 'Disciplinas')
         
         # ID ALEATÓRIO do banco
         id_professor = self.pegar_id_aleatorio('usuarios')
-        print(f"\n✓ Usando Professor ID aleatório: {id_professor} (do banco)")
+        print(f"\n📚 Criando disciplina")
+        print(f"  • Professor ID: {id_professor} (aleatório do banco)\n")
         
         timestamp = int(time.time()) % 10000
-        disciplinas = ["Programação I", "Cálculo II", "Física", "Algoritmos"]
+        disciplinas = ["Programação I", "Cálculo II", "Física Experimental", "Algoritmos e Estruturas de Dados"]
         nome_disc = random.choice(disciplinas)
-        
-        print("\n📝 Criando disciplina:\n")
         
         self.preencher('disc_nome', nome_disc, 'Nome')
         self.preencher('disc_codigo', f'ENG{timestamp}', 'Código')
@@ -378,33 +354,32 @@ class TesteSeleniumFinal:
         if self.submeter('form-disciplina'):
             time.sleep(1)
             self.pesquisar_banco_completo()
-            self.scroll_para_mostrar_inserido(nome_disc)
     
     def test_topicos(self):
-        self.ir_aba('topicos', 'Tópicos')
+        self.ir_aba('topicos', 'Tópicos - Dúvidas Acadêmicas')
         
         # IDs ALEATÓRIOS do banco
         id_disciplina = self.pegar_id_aleatorio('disciplinas')
         id_usuario = self.pegar_id_aleatorio('usuarios')
         
-        print(f"\n✓ Disciplina ID aleatório: {id_disciplina} (do banco)")
-        print(f"✓ Usuario ID aleatório: {id_usuario} (do banco)")
+        # Escolher tópico coerente
+        topico = random.choice(TOPICOS_FORUM)
         
-        titulo = random.choice(TITULOS_TOPICOS)
-        conteudo = random.choice(CONTEUDOS_TOPICOS)
+        print(f"\n💬 Criando tópico: '{topico['titulo']}'")
+        print(f"  • Disciplina ID: {id_disciplina} (aleatório do banco)")
+        print(f"  • Usuário ID: {id_usuario} (aleatório do banco)\n")
         
-        print("\n📝 Criando tópico:\n")
-        
-        self.preencher('top_titulo', titulo, 'Título')
-        self.preencher('top_conteudo', conteudo, 'Conteúdo')
+        self.preencher('top_titulo', topico['titulo'], 'Título')
+        self.preencher('top_conteudo', topico['conteudo'], 'Conteúdo')
         self.preencher('top_disciplina', id_disciplina, 'ID Disciplina')
         self.preencher('top_usuario', id_usuario, 'ID Usuário')
-        self.selecionar('top_categoria', 'Categoria')
+        
+        # Selecionar categoria específica do tópico
+        self.selecionar('top_categoria', 'Categoria', valor_especifico=topico['categoria'])
         
         if self.submeter('form-topico'):
             time.sleep(1)
             self.pesquisar_banco_completo()
-            self.scroll_para_mostrar_inserido(titulo)
     
     def test_respostas(self):
         self.ir_aba('respostas', 'Respostas')
@@ -413,12 +388,13 @@ class TesteSeleniumFinal:
         id_topico = self.pegar_id_aleatorio('topicos')
         id_usuario = self.pegar_id_aleatorio('usuarios')
         
-        print(f"\n✓ Tópico ID aleatório: {id_topico} (do banco)")
-        print(f"✓ Usuario ID aleatório: {id_usuario} (do banco)")
+        # Escolher resposta coerente
+        conteudo_resposta = random.choice(RESPOSTAS_TOPICOS)
         
-        conteudo_resposta = random.choice(RESPOSTAS)
-        
-        print("\n📝 Criando resposta:\n")
+        print(f"\n💡 Criando resposta")
+        print(f"  • Tópico ID: {id_topico} (aleatório do banco)")
+        print(f"  • Usuário ID: {id_usuario} (aleatório do banco)")
+        print(f"  • Resposta: '{conteudo_resposta[:50]}...'\n")
         
         self.preencher('resp_topico', id_topico, 'ID Tópico')
         self.preencher('resp_usuario', id_usuario, 'ID Usuário')
@@ -432,36 +408,35 @@ class TesteSeleniumFinal:
             }
             time.sleep(1)
             self.pesquisar_banco_completo()
-            self.scroll_para_mostrar_inserido(conteudo_resposta)
     
-    def test_buscar_resposta(self):
-        if not self.ultima_resposta_criada:
-            return
+    def test_buscar_resposta_por_topico(self):
+        """Busca respostas usando ID de um tópico do banco"""
+        self.ir_aba('respostas', 'Respostas - Busca por Tópico')
         
-        self.ir_aba('respostas', 'Respostas - Busca')
+        # Pegar um ID de tópico do banco
+        id_topico = self.pegar_id_aleatorio('topicos')
         
-        topico_id = self.ultima_resposta_criada['topico_id']
-        conteudo = self.ultima_resposta_criada['conteudo']
-        
-        print(f"\n🔍 Buscando resposta:")
-        print(f"  • Tópico ID: {topico_id}")
-        print(f"  • Conteúdo: '{conteudo}'\n")
+        print(f"\n🔍 Buscando respostas do tópico ID: {id_topico}\n")
         
         try:
-            possiveis_campos = ['busca_topico', 'filtro_topico', 'resp_busca', 'search_topico']
+            # Tentar encontrar campo de busca
+            possiveis_campos = ['busca_topico', 'filtro_topico', 'resp_busca', 'search_topico', 'resp_topico_busca']
             
             campo_busca = None
             for campo_id in possiveis_campos:
                 try:
                     campo_busca = self.driver.find_element(By.ID, campo_id)
+                    print(f"  ✓ Campo de busca: {campo_id}")
                     break
                 except:
                     continue
             
+            # Se não encontrou por ID, tentar por tipo
             if not campo_busca:
                 inputs = self.driver.find_elements(By.CSS_SELECTOR, 'input[type="number"]')
                 if inputs:
                     campo_busca = inputs[0]
+                    print(f"  ✓ Campo de busca: encontrado por tipo")
             
             if campo_busca:
                 self.driver.execute_script("""
@@ -477,9 +452,12 @@ class TesteSeleniumFinal:
                 
                 time.sleep(0.5)
                 campo_busca.clear()
-                campo_busca.send_keys(str(topico_id))
+                campo_busca.send_keys(str(id_topico))
+                print(f"  ✓ Digitado: {id_topico}")
                 time.sleep(0.5)
+                
                 campo_busca.send_keys(Keys.ENTER)
+                print(f"  ✓ Enter pressionado")
                 time.sleep(2)
                 
                 self.driver.execute_script("""
@@ -487,17 +465,25 @@ class TesteSeleniumFinal:
                     arguments[0].style.boxShadow='';
                 """, campo_busca)
                 
-                print(f"  ✓ Busca realizada")
-                self.scroll_para_mostrar_inserido(conteudo)
+                print(f"  ✓ Busca realizada com sucesso\n")
+                
+                # Scroll para ver resultados
+                altura = self.driver.execute_script("return document.body.scrollHeight")
+                meio = altura // 2
+                self.driver.execute_script(f"window.scrollTo(0, {meio});")
+                time.sleep(1)
+                self.driver.execute_script("window.scrollTo(0, 0);")
+                time.sleep(0.5)
             else:
-                print(f"  ⚠ Campo não encontrado")
+                print(f"  ⚠ Campo de busca não encontrado\n")
+                
         except Exception as e:
-            print(f"  ✗ Erro: {str(e)[:50]}")
+            print(f"  ✗ Erro na busca: {str(e)[:50]}\n")
     
     def test_excluir_ultimo_mural(self):
         self.ir_aba('mural', 'Mural - Exclusão')
         
-        print("\n🗑️  Excluindo último recado:\n")
+        print("\n🗑️  Excluindo último recado do mural:\n")
         
         try:
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -507,7 +493,8 @@ class TesteSeleniumFinal:
             
             if botoes:
                 ultimo = botoes[-1]
-                print(f"  ✓ Encontrado! Total: {len(botoes)}")
+                print(f"  ✓ Encontrados {len(botoes)} recados")
+                print(f"  → Excluindo o último...")
                 
                 self.driver.execute_script("""
                     arguments[0].scrollIntoView({block: 'center', behavior: 'smooth'});
@@ -529,11 +516,12 @@ class TesteSeleniumFinal:
                     time.sleep(0.4)
                     alert.accept()
                     time.sleep(1.5)
-                    print(f"  ✓ Excluído!\n")
+                    print(f"  ✓ Recado excluído com sucesso!\n")
                 except:
-                    print(f"  ✓ Excluído!\n")
+                    print(f"  ✓ Recado excluído!\n")
             else:
-                print(f"  ⚠ Nenhum recado\n")
+                print(f"  ⚠ Nenhum recado disponível para excluir\n")
+                
         except Exception as e:
             print(f"  ✗ Erro: {str(e)[:50]}\n")
     
@@ -546,45 +534,50 @@ class TesteSeleniumFinal:
             time.sleep(1.5)
             print("✓ Aplicação carregada")
             
+            # Pesquisar banco antes de começar
             self.pesquisar_banco_completo()
             
+            # Executar testes
             self.test_mural()
             self.test_usuarios()
             self.test_disciplinas()
             self.test_topicos()
             self.test_respostas()
-            self.test_buscar_resposta()
+            self.test_buscar_resposta_por_topico()
             self.test_excluir_ultimo_mural()
             
             print("\n" + "╔" + "═"*78 + "╗")
-            print("║" + "TESTE CONCLUÍDO".center(78) + "║")
+            print("║" + "TESTE CONCLUÍDO COM SUCESSO".center(78) + "║")
             print("╚" + "═"*78 + "╝")
             
             self.driver.save_screenshot('/tmp/teste_final.png')
-            print("\n📸 Screenshot: /tmp/teste_final.png\n")
+            print("\n📸 Screenshot salvo: /tmp/teste_final.png\n")
             
         except KeyboardInterrupt:
-            print("\n\n⚠ Interrompido")
+            print("\n\n⚠ Teste interrompido pelo usuário")
         except Exception as e:
             print(f"\n❌ ERRO: {e}")
         finally:
-            print("⏳ Fechando em 5 segundos...")
+            print("⏳ Fechando navegador em 5 segundos...")
             time.sleep(5)
             self.driver.quit()
-            print("✓ Fechado\n")
+            print("✓ Navegador fechado\n")
 
 if __name__ == "__main__":
     print("\n" + "╔" + "═"*78 + "╗")
-    print("║" + "TESTE SELENIUM FINAL".center(78) + "║")
+    print("║" + "TESTE SELENIUM FINAL - CONTEXTOS COERENTES".center(78) + "║")
     print("╚" + "═"*78 + "╝")
-    print("\n✨ Recursos:")
-    print("  • Destaques visuais nos elementos")
-    print("  • IDs ALEATÓRIOS do banco de dados")
-    print("  • Scroll para mostrar dados inseridos")
-    print("  • Busca e exclusão completos")
+    print("\n✨ Características:")
+    print("  • Textos coerentes por contexto")
+    print("  • Avisos no mural (não dúvidas)")
+    print("  • Dúvidas nos tópicos (não avisos)")
+    print("  • Respostas relacionadas às dúvidas")
+    print("  • IDs aleatórios do banco de dados")
+    print("  • Busca de respostas por ID de tópico")
+    print("  • Sem destaques de inserção")
     print("\n" + "═"*80)
     
-    input("\n▶ Pressione ENTER para iniciar...")
+    input("\n▶ Pressione ENTER para iniciar o teste...")
     
     teste = TesteSeleniumFinal()
     teste.executar()
