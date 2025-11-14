@@ -3,302 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fórum Acadêmico - UNIFEI</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Forum Academico - UNIFEI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://unifei.edu.br/wp-content/uploads/2021/03/cropped-favicon-unifei-32x32.png">
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="logo-container">
-                <img src="https://www.unifei.edu.br/wp-content/themes/unifei/assets/images/logo.png" alt="UNIFEI" class="logo-img">
-                <h1 class="logo">Fórum Acadêmico UNIFEI</h1>
+    <!-- Header Profissional -->
+    <header class="header-unifei">
+        <div class="header-top">
+            <div class="container-header">
+                <div class="logo-section">
+                    <img src="https://unifei.edu.br/wp-content/uploads/2021/03/logo-unifei-1.png" alt="UNIFEI" class="logo-unifei">
+                </div>
+                <div class="title-section">
+                    <h1>Forum Academico</h1>
+                    <p>Sistema de Discussoes Academicas</p>
+                </div>
             </div>
         </div>
     </header>
 
-    <nav class="tabs-nav">
+    <!-- Navegacao -->
+    <nav class="main-nav">
         <div class="container">
-            <button class="tab-btn active" data-tab="mural">
-                <i class="material-icons">dashboard</i>
-                <span>Mural</span>
-            </button>
-            <button class="tab-btn" data-tab="usuarios">
-                <i class="material-icons">people</i>
-                <span>Usuários</span>
-            </button>
-            <button class="tab-btn" data-tab="disciplinas">
-                <i class="material-icons">book</i>
-                <span>Disciplinas</span>
-            </button>
-            <button class="tab-btn" data-tab="topicos">
-                <i class="material-icons">forum</i>
-                <span>Tópicos</span>
-            </button>
-            <button class="tab-btn" data-tab="respostas">
-                <i class="material-icons">question_answer</i>
-                <span>Respostas</span>
-            </button>
+            <ul class="nav-tabs">
+                <li><a href="#" class="nav-link active" data-tab="mural">Mural de Avisos</a></li>
+                <li><a href="#" class="nav-link" data-tab="usuarios">Usuarios</a></li>
+                <li><a href="#" class="nav-link" data-tab="disciplinas">Disciplinas</a></li>
+                <li><a href="#" class="nav-link" data-tab="topicos">Topicos</a></li>
+                <li><a href="#" class="nav-link" data-tab="respostas">Respostas</a></li>
+            </ul>
         </div>
     </nav>
 
+    <!-- Conteudo Principal -->
     <main class="main-content">
         <div class="container">
             
-            <!-- MURAL -->
-            <div id="mural" class="tab-content active">
-                <h2 class="section-title">
-                    <i class="material-icons">dashboard</i>
-                    Mural de Recados
-                </h2>
-                
-                <div class="card">
-                    <h3 class="card-title">
-                        <i class="material-icons">add_circle</i>
-                        Criar Recado
-                    </h3>
-                    <form id="form-recado" class="form">
-                        <input type="text" id="rec_titulo" placeholder="Título do recado" required maxlength="150">
-                        <input type="text" id="rec_autor" placeholder="Nome do autor" required maxlength="100">
-                        <textarea id="rec_conteudo" placeholder="Escreva o conteúdo do recado aqui..." required rows="4"></textarea>
-                        <select id="rec_categoria" required>
-                            <option value="Aviso">Aviso Importante</option>
-                            <option value="Evento">Evento</option>
-                            <option value="Oportunidade">Oportunidade</option>
-                            <option value="Outro">Outro</option>
-                        </select>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="material-icons">send</i>
-                            Publicar
-                        </button>
-                    </form>
+            <!-- TAB: MURAL -->
+            <section id="mural" class="tab-panel active">
+                <div class="panel-grid">
+                    <aside class="sidebar-form">
+                        <div class="card-form">
+                            <h2 class="section-title">Novo Aviso</h2>
+                            <form id="form-recado">
+                                <div class="form-field">
+                                    <label>Titulo</label>
+                                    <input type="text" id="rec_titulo" required maxlength="150">
+                                </div>
+                                <div class="form-field">
+                                    <label>Autor</label>
+                                    <input type="text" id="rec_autor" required>
+                                </div>
+                                <div class="form-field">
+                                    <label>Conteudo</label>
+                                    <textarea id="rec_conteudo" rows="4" required></textarea>
+                                </div>
+                                <div class="form-field">
+                                    <label>Categoria</label>
+                                    <select id="rec_categoria" required>
+                                        <option value="">Selecione</option>
+                                        <option value="Aviso">Aviso</option>
+                                        <option value="Evento">Evento</option>
+                                        <option value="Urgente">Urgente</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn-primary">Publicar Aviso</button>
+                            </form>
+                        </div>
+                    </aside>
+                    
+                    <div class="content-area">
+                        <h2 class="section-title">Avisos Publicados</h2>
+                        <div id="lista-recados" class="items-list"></div>
+                    </div>
                 </div>
+            </section>
 
-                <div class="card">
-                    <h3 class="card-title">
-                        <i class="material-icons">view_list</i>
-                        Recados Publicados
-                    </h3>
-                    <button class="btn btn-secondary" onclick="buscarRecados()">
-                        <i class="material-icons">refresh</i>
-                        Atualizar Lista
-                    </button>
-                    <div id="lista-recados"></div>
+            <!-- TAB: USUARIOS -->
+            <section id="usuarios" class="tab-panel">
+                <div class="panel-grid">
+                    <aside class="sidebar-form">
+                        <div class="card-form">
+                            <h2 class="section-title">Gerenciar Usuario</h2>
+                            <form id="form-usuario">
+                                <input type="hidden" id="usuario_id">
+                                <div class="form-field">
+                                    <label>Nome Completo</label>
+                                    <input type="text" id="user_nome" required>
+                                </div>
+                                <div class="form-field">
+                                    <label>Email Institucional</label>
+                                    <input type="email" id="user_email" required>
+                                </div>
+                                <div class="form-field">
+                                    <label>Senha</label>
+                                    <input type="password" id="user_senha" required minlength="8">
+                                </div>
+                                <div class="form-field">
+                                    <label>Universidade</label>
+                                    <select id="user_universidade" required>
+                                        <option value="">Selecione</option>
+                                        <option value="UNIFEI">UNIFEI</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label>Curso</label>
+                                    <select id="user_curso" required>
+                                        <option value="">Selecione</option>
+                                        <option value="Engenharia da Computacao">Eng. Computacao</option>
+                                        <option value="Sistemas de Informacao">Sistemas de Informacao</option>
+                                        <option value="Engenharia Eletrica">Eng. Eletrica</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label>Periodo</label>
+                                    <select id="user_periodo" required>
+                                        <option value="">Selecione</option>
+                                        <option value="1">1º Periodo</option>
+                                        <option value="2">2º Periodo</option>
+                                        <option value="3">3º Periodo</option>
+                                        <option value="4">4º Periodo</option>
+                                        <option value="5">5º Periodo</option>
+                                        <option value="6">6º Periodo</option>
+                                        <option value="7">7º Periodo</option>
+                                        <option value="8">8º Periodo</option>
+                                        <option value="9">9º Periodo</option>
+                                        <option value="10">10º Periodo</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label>Tipo</label>
+                                    <select id="user_tipo" required>
+                                        <option value="">Selecione</option>
+                                        <option value="Aluno">Aluno</option>
+                                        <option value="Professor">Professor</option>
+                                        <option value="Monitor">Monitor</option>
+                                    </select>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="submit" class="btn-primary" id="btn-salvar-usuario">Cadastrar</button>
+                                    <button type="button" class="btn-secondary" id="btn-cancelar-usuario" style="display:none;">Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </aside>
+                    
+                    <div class="content-area">
+                        <h2 class="section-title">Usuarios Cadastrados</h2>
+                        <div id="lista-usuarios"></div>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- USUÁRIOS -->
-            <div id="usuarios" class="tab-content">
-                <h2 class="section-title">
-                    <i class="material-icons">people</i>
-                    Gerenciamento de Usuários
-                </h2>
-                
-                <div class="card">
-                    <h3 class="card-title">
-                        <i class="material-icons">person_add</i>
-                        Cadastrar Novo Usuário
-                    </h3>
-                    <form id="form-usuario" class="form">
-                        <input type="text" id="nome_completo" placeholder="Nome Completo" required>
-                        <input type="email" id="email" placeholder="email@unifei.edu.br" required>
-                        <input type="password" id="senha" placeholder="Senha (mín. 8 caracteres)" required minlength="8">
-                        <input type="password" id="confirmar_senha" placeholder="Confirmar Senha" required>
-                        <select id="curso_id" required>
-                            <option value="">Selecione o Curso</option>
-                        </select>
-                        <select id="periodo" required>
-                            <option value="">Selecione o Período</option>
-                            <option value="1">1º Período</option>
-                            <option value="2">2º Período</option>
-                            <option value="3">3º Período</option>
-                            <option value="4">4º Período</option>
-                            <option value="5">5º Período</option>
-                            <option value="6">6º Período</option>
-                            <option value="7">7º Período</option>
-                            <option value="8">8º Período</option>
-                            <option value="9">9º Período</option>
-                            <option value="10">10º Período</option>
-                        </select>
-                        <select id="tipo_usuario" required>
-                            <option value="">Tipo de Usuário</option>
-                            <option value="Aluno">Aluno</option>
-                            <option value="Professor">Professor</option>
-                            <option value="Monitor">Monitor</option>
-                        </select>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="material-icons">save</i>
-                            Cadastrar Usuário
-                        </button>
-                    </form>
+            <!-- TAB: DISCIPLINAS -->
+            <section id="disciplinas" class="tab-panel">
+                <div class="panel-grid">
+                    <aside class="sidebar-form">
+                        <div class="card-form">
+                            <h2 class="section-title">Nova Disciplina</h2>
+                            <form id="form-disciplina">
+                                <div class="form-field">
+                                    <label>Nome da Disciplina</label>
+                                    <input type="text" id="disc_nome" required>
+                                </div>
+                                <div class="form-field">
+                                    <label>Codigo</label>
+                                    <input type="text" id="disc_codigo" required>
+                                </div>
+                                <div class="form-field">
+                                    <label>Curso</label>
+                                    <select id="disc_curso" required>
+                                        <option value="">Selecione</option>
+                                        <option value="Engenharia da Computacao">Eng. Computacao</option>
+                                        <option value="Sistemas de Informacao">Sistemas de Informacao</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label>ID Professor</label>
+                                    <input type="number" id="disc_professor" required min="1">
+                                </div>
+                                <div class="form-field">
+                                    <label>Periodo Letivo</label>
+                                    <input type="text" id="disc_periodo" required placeholder="Ex: 2025.1">
+                                </div>
+                                <button type="submit" class="btn-primary">Cadastrar</button>
+                            </form>
+                        </div>
+                    </aside>
+                    
+                    <div class="content-area">
+                        <h2 class="section-title">Disciplinas Cadastradas</h2>
+                        <div id="lista-disciplinas"></div>
+                    </div>
                 </div>
+            </section>
 
-                <div class="card">
-                    <h3 class="card-title">
-                        <i class="material-icons">search</i>
-                        Buscar Usuários
-                    </h3>
-                    <form id="form-buscar-usuario" class="form">
-                        <input type="text" id="buscar_nome" placeholder="Buscar por nome">
-                        <select id="buscar_tipo">
-                            <option value="">Todos os Tipos</option>
-                            <option value="Aluno">Alunos</option>
-                            <option value="Professor">Professores</option>
-                            <option value="Monitor">Monitores</option>
-                        </select>
-                        <button type="submit" class="btn btn-secondary">
-                            <i class="material-icons">search</i>
-                            Buscar
-                        </button>
-                    </form>
-                    <div id="lista-usuarios"></div>
+            <!-- TAB: TOPICOS -->
+            <section id="topicos" class="tab-panel">
+                <div class="panel-grid">
+                    <aside class="sidebar-form">
+                        <div class="card-form">
+                            <h2 class="section-title">Novo Topico</h2>
+                            <form id="form-topico">
+                                <div class="form-field">
+                                    <label>Titulo</label>
+                                    <input type="text" id="top_titulo" required>
+                                </div>
+                                <div class="form-field">
+                                    <label>Conteudo</label>
+                                    <textarea id="top_conteudo" rows="4" required></textarea>
+                                </div>
+                                <div class="form-field">
+                                    <label>ID Disciplina</label>
+                                    <input type="number" id="top_disciplina" required min="1">
+                                </div>
+                                <div class="form-field">
+                                    <label>ID Usuario</label>
+                                    <input type="number" id="top_usuario" required min="1">
+                                </div>
+                                <div class="form-field">
+                                    <label>Categoria</label>
+                                    <select id="top_categoria" required>
+                                        <option value="">Selecione</option>
+                                        <option value="Duvida">Duvida</option>
+                                        <option value="Discussao">Discussao</option>
+                                        <option value="Anuncio">Anuncio</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn-primary">Criar Topico</button>
+                            </form>
+                        </div>
+                    </aside>
+                    
+                    <div class="content-area">
+                        <h2 class="section-title">Topicos Criados</h2>
+                        <div id="lista-topicos" class="items-list"></div>
+                    </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- DISCIPLINAS -->
-            <div id="disciplinas" class="tab-content">
-                <h2 class="section-title">
-                    <i class="material-icons">book</i>
-                    Gerenciamento de Disciplinas
-                </h2>
-                
-                <div class="card">
-                    <h3 class="card-title">
-                        <i class="material-icons">add_box</i>
-                        Cadastrar Nova Disciplina
-                    </h3>
-                    <form id="form-disciplina" class="form">
-                        <input type="text" id="disc_nome" placeholder="Nome da Disciplina" required>
-                        <input type="text" id="disc_codigo" placeholder="Código da Disciplina" required>
-                        <select id="disc_curso" required>
-                            <option value="">Selecione o Curso</option>
-                        </select>
-                        <input type="number" id="disc_professor" placeholder="ID do Professor" required min="1">
-                        <input type="text" id="disc_periodo" placeholder="Período Letivo (ex: 2025.2)" required pattern="^\d{4}\.[12]$">
-                        <textarea id="disc_descricao" placeholder="Descrição da disciplina" rows="3"></textarea>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="material-icons">save</i>
-                            Cadastrar Disciplina
-                        </button>
-                    </form>
+            <!-- TAB: RESPOSTAS -->
+            <section id="respostas" class="tab-panel">
+                <div class="panel-grid">
+                    <aside class="sidebar-form">
+                        <div class="card-form">
+                            <h2 class="section-title">Nova Resposta</h2>
+                            <form id="form-resposta">
+                                <div class="form-field">
+                                    <label>ID Topico</label>
+                                    <input type="number" id="resp_topico" required min="1">
+                                </div>
+                                <div class="form-field">
+                                    <label>ID Usuario</label>
+                                    <input type="number" id="resp_usuario" required min="1">
+                                </div>
+                                <div class="form-field">
+                                    <label>Resposta</label>
+                                    <textarea id="resp_conteudo" rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="btn-primary">Enviar</button>
+                            </form>
+                            
+                            <div class="search-box">
+                                <h3>Buscar Respostas</h3>
+                                <div class="search-field">
+                                    <input type="number" id="busca_topico" placeholder="ID do Topico" min="1">
+                                    <button onclick="buscarRespostasPorTopico()" class="btn-secondary">Buscar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                    
+                    <div class="content-area">
+                        <h2 class="section-title">Respostas</h2>
+                        <div id="lista-respostas" class="items-list"></div>
+                    </div>
                 </div>
-
-                <div class="card">
-                    <h3 class="card-title">
-                        <i class="material-icons">search</i>
-                        Buscar Disciplinas
-                    </h3>
-                    <form id="form-buscar-disciplina" class="form">
-                        <input type="text" id="buscar_disc_nome" placeholder="Buscar por nome">
-                        <button type="submit" class="btn btn-secondary">
-                            <i class="material-icons">search</i>
-                            Buscar
-                        </button>
-                    </form>
-                    <div id="lista-disciplinas"></div>
-                </div>
-            </div>
-
-            <!-- TÓPICOS -->
-            <div id="topicos" class="tab-content">
-                <h2 class="section-title">
-                    <i class="material-icons">forum</i>
-                    Gerenciamento de Tópicos
-                </h2>
-                
-                <div class="card">
-                    <h3 class="card-title">
-                        <i class="material-icons">create</i>
-                        Criar Novo Tópico
-                    </h3>
-                    <form id="form-topico" class="form">
-                        <input type="text" id="top_titulo" placeholder="Título do Tópico" required>
-                        <textarea id="top_conteudo" placeholder="Conteúdo do tópico" required rows="5"></textarea>
-                        <input type="number" id="top_disciplina" placeholder="ID da Disciplina" required min="1">
-                        <input type="number" id="top_usuario" placeholder="ID do Usuário" required min="1">
-                        <select id="top_categoria" required>
-                            <option value="">Selecione a Categoria</option>
-                            <option value="Dúvida">Dúvida</option>
-                            <option value="Discussão">Discussão</option>
-                            <option value="Anúncio">Anúncio</option>
-                        </select>
-                        <input type="text" id="top_tags" placeholder="Tags (separadas por vírgula)">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="material-icons">send</i>
-                            Criar Tópico
-                        </button>
-                    </form>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">
-                        <i class="material-icons">search</i>
-                        Buscar Tópicos
-                    </h3>
-                    <form id="form-buscar-topico" class="form">
-                        <input type="text" id="buscar_top_titulo" placeholder="Buscar por título">
-                        <button type="submit" class="btn btn-secondary">
-                            <i class="material-icons">search</i>
-                            Buscar
-                        </button>
-                    </form>
-                    <div id="lista-topicos"></div>
-                </div>
-            </div>
-
-            <!-- RESPOSTAS -->
-            <div id="respostas" class="tab-content">
-                <h2 class="section-title">
-                    <i class="material-icons">question_answer</i>
-                    Gerenciamento de Respostas
-                </h2>
-                
-                <div class="card">
-                    <h3 class="card-title">
-                        <i class="material-icons">reply</i>
-                        Criar Nova Resposta
-                    </h3>
-                    <form id="form-resposta" class="form">
-                        <textarea id="resp_conteudo" placeholder="Escreva sua resposta aqui..." required rows="4"></textarea>
-                        <input type="number" id="resp_topico" placeholder="ID do Tópico" required min="1">
-                        <input type="number" id="resp_usuario" placeholder="ID do Usuário" required min="1">
-                        <input type="number" id="resp_pai" placeholder="ID da Resposta Pai (opcional para sub-respostas)" min="1">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="material-icons">send</i>
-                            Enviar Resposta
-                        </button>
-                    </form>
-                </div>
-
-                <div class="card">
-                    <h3 class="card-title">
-                        <i class="material-icons">search</i>
-                        Buscar Respostas por Tópico
-                    </h3>
-                    <form id="form-buscar-resposta" class="form">
-                        <input type="number" id="buscar_resp_topico" placeholder="Digite o ID do Tópico" required min="1">
-                        <button type="submit" class="btn btn-secondary">
-                            <i class="material-icons">search</i>
-                            Buscar Respostas
-                        </button>
-                    </form>
-                    <div id="lista-respostas"></div>
-                </div>
-            </div>
+            </section>
 
         </div>
     </main>
 
-    <footer class="footer">
+    <!-- Footer -->
+    <footer class="footer-unifei">
         <div class="container">
-            <p>Fórum Acadêmico - Universidade Federal de Itajubá</p>
-            <p>Desenvolvido por Kelly dos Reis Leite - Matrícula: 2023000490</p>
-            <p>Engenharia de Software - 2025</p>
+            <p>&copy; 2025 Universidade Federal de Itajuba - UNIFEI. Todos os direitos reservados.</p>
         </div>
     </footer>
 
-    <div id="mensagem" class="mensagem"></div>
-    <script src="js/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

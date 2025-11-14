@@ -1,0 +1,534 @@
+/* ==================== RESET ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ==================== VARIAVEIS - CORES UNIFEI ==================== */
+:root {
+    --unifei-azul: #003d7a;
+    --unifei-azul-escuro: #002952;
+    --unifei-azul-claro: #0056b3;
+    --unifei-cinza: #6c757d;
+    --unifei-cinza-claro: #f8f9fa;
+    --unifei-branco: #ffffff;
+    
+    --success: #28a745;
+    --danger: #dc3545;
+    --warning: #ffc107;
+    --info: #17a2b8;
+    
+    --border: #dee2e6;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --radius: 4px;
+}
+
+/* ==================== BASE ==================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.container-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ==================== HEADER ==================== */
+.header-unifei {
+    background: var(--unifei-azul);
+    border-bottom: 3px solid #ffd700;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header-top {
+    padding: 20px 0;
+}
+
+.container-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.logo-unifei {
+    height: 60px;
+    background: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.title-section h1 {
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.title-section p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+}
+
+/* ==================== NAVEGACAO ==================== */
+.main-nav {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.nav-tabs {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+}
+
+.nav-tabs li {
+    flex: 1;
+}
+
+.nav-link {
+    display: block;
+    padding: 16px 20px;
+    color: var(--unifei-cinza);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-align: center;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+}
+
+.nav-link:hover {
+    background: var(--unifei-cinza-claro);
+    color: var(--unifei-azul);
+}
+
+.nav-link.active {
+    color: var(--unifei-azul);
+    border-bottom-color: var(--unifei-azul);
+    background: #f8f9fa;
+}
+
+/* ==================== CONTEUDO PRINCIPAL ==================== */
+.main-content {
+    padding: 30px 0;
+    min-height: 60vh;
+}
+
+.tab-panel {
+    display: none;
+    animation: fadeIn 0.3s;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== LAYOUT GRID ==================== */
+.panel-grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+@media (max-width: 1024px) {
+    .panel-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==================== SIDEBAR FORMULARIO ==================== */
+.sidebar-form {
+    position: sticky;
+    top: 20px;
+}
+
+.card-form {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 25px;
+    box-shadow: var(--shadow);
+}
+
+.section-title {
+    font-size: 1.3rem;
+    color: var(--unifei-azul);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--unifei-azul);
+}
+
+/* ==================== FORMULARIOS ==================== */
+.form-field {
+    margin-bottom: 18px;
+}
+
+.form-field label {
+    display: block;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+    transition: border-color 0.3s;
+    font-family: inherit;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    outline: none;
+    border-color: var(--unifei-azul);
+    box-shadow: 0 0 0 2px rgba(0, 61, 122, 0.1);
+}
+
+.form-field textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* ==================== BOTOES ==================== */
+.btn-primary,
+.btn-secondary {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: var(--unifei-azul);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--unifei-azul-escuro);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,61,122,0.3);
+}
+
+.btn-secondary {
+    background: var(--unifei-cinza);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+.btn-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-group button {
+    flex: 1;
+}
+
+/* Botoes pequenos */
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-edit {
+    background: #ffc107;
+    color: #212529;
+}
+
+.btn-delete {
+    background: var(--danger);
+    color: white;
+}
+
+.btn-success {
+    background: var(--success);
+    color: white;
+}
+
+/* ==================== AREA DE CONTEUDO ==================== */
+.content-area {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 25px;
+    box-shadow: var(--shadow);
+}
+
+/* ==================== LISTA DE ITENS ==================== */
+.items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.item-card {
+    background: #fafafa;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    transition: all 0.3s;
+}
+
+.item-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 12px;
+    gap: 15px;
+}
+
+.item-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--unifei-azul);
+    margin-bottom: 4px;
+}
+
+.item-body {
+    color: #495057;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--unifei-cinza);
+}
+
+.item-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* ==================== BADGES ==================== */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.badge-aviso { background: #fff3cd; color: #856404; }
+.badge-evento { background: #d1ecf1; color: #0c5460; }
+.badge-urgente { background: #f8d7da; color: #721c24; }
+.badge-duvida { background: #fff3cd; color: #856404; }
+.badge-discussao { background: #d1ecf1; color: #0c5460; }
+.badge-anuncio { background: #d4edda; color: #155724; }
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-aberto { background: #cce5ff; color: #004085; }
+.status-resolvido { background: #d4edda; color: #155724; }
+
+/* ==================== TABELAS ==================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+thead {
+    background: #f8f9fa;
+}
+
+th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--unifei-azul);
+    border-bottom: 2px solid var(--border);
+    font-size: 0.9rem;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    color: #495057;
+}
+
+tr:hover {
+    background: #f8f9fa;
+}
+
+.table-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* ==================== BUSCA ==================== */
+.search-box {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 2px solid var(--border);
+}
+
+.search-box h3 {
+    font-size: 1.1rem;
+    color: var(--unifei-azul);
+    margin-bottom: 12px;
+}
+
+.search-field {
+    display: flex;
+    gap: 10px;
+}
+
+.search-field input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.search-field button {
+    width: auto;
+    padding: 10px 20px;
+}
+
+/* ==================== MELHOR RESPOSTA ==================== */
+.resposta-melhor {
+    border-left: 4px solid var(--success);
+    background: #f1fdf5;
+}
+
+.badge-melhor {
+    background: var(--success);
+    color: white;
+}
+
+/* ==================== LOADING ==================== */
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--unifei-cinza);
+}
+
+.loading::after {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--border);
+    border-top-color: var(--unifei-azul);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ==================== EMPTY STATE ==================== */
+.empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    color: var(--unifei-cinza);
+}
+
+/* ==================== FOOTER ==================== */
+.footer-unifei {
+    background: var(--unifei-azul-escuro);
+    color: white;
+    padding: 25px 0;
+    margin-top: 40px;
+    text-align: center;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+    .container-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .logo-unifei {
+        height: 50px;
+    }
+    
+    .title-section h1 {
+        font-size: 1.5rem;
+    }
+    
+    .nav-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+    
+    .nav-link {
+        white-space: nowrap;
+        padding: 12px 16px;
+    }
+    
+    .panel-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar-form {
+        position: static;
+    }
+    
+    .item-header {
+        flex-direction: column;
+    }
+    
+    .item-footer {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+}
